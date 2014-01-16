@@ -1,4 +1,4 @@
-Ajax-Stock-UniDao
-=================
+ajax-yield
+==========
 
-Ajax Stock UniDao
+ajax-yield
