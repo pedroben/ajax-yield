@@ -45,7 +45,7 @@ public class ControlJson extends HttpServlet {
             String callop = Character.toUpperCase(ob.charAt(0)) + ob.substring(1) + Character.toUpperCase(op.charAt(0)) + op.substring(1);
             try {
                 try {
-                    GenericOperation operation = (GenericOperation) Class.forName("net.rafaelaznar.operaciones." + callop).newInstance();
+                    GenericOperation operation = (GenericOperation) Class.forName("net.daw.operaciones." + callop).newInstance();
                     String data = operation.execute(request, response);
                     request.setAttribute("contenido", data);
                     getServletContext().getRequestDispatcher("/jsp/messageAjax.jsp").forward(request, response);
