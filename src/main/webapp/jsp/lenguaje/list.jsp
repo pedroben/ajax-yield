@@ -1,7 +1,7 @@
 <%-- 
     Document   : list.jsp
     Created on : Jan 16, 2013, 12:57:09 PM
-    Author     : rafa
+    Author     : Alvaro
 --%>
 <%@page import="net.daw.helper.Conexion"%>
 <%@page import="net.daw.dao.LenguajeDao"%>
@@ -11,7 +11,7 @@
     LenguajeDao oLenguajeDao_Mysql = new LenguajeDao(Conexion.getConection());
     ArrayList<String> alColumnsNames = (ArrayList<String>) oLenguajeDao_Mysql.getColumnsNames();
     Iterator<String> oIterador = alColumnsNames.listIterator();
-    String strNombreMantenimiento = "cliente";
+    String strNombreMantenimiento = "lenguaje";
 %>
 <div id="<%=strNombreMantenimiento%>_list">
     <div class="span12">

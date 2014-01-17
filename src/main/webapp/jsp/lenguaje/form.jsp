@@ -1,7 +1,7 @@
 <%-- 
     Document   : form
     Created on : Jan 21, 2013, 10:24:17 AM
-    Author     : rafa
+    Author     : Alvaro
 --%>
 <form class="form-horizontal" action="#" id="formulario" name="formulario">
     <h2>Lenguaje</h2>
