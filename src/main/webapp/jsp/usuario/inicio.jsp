@@ -1,6 +1,6 @@
 <div class="hero-unit">
-    <h1>Bienvenidos a ajax stock</h1>
-    <h3>Versión (v.01) de 9/1/2014</h3>
+    <h1>Bienvenidos a ajax yield 2014</h1>
+    <h3>Versión (v.01) de 17/1/2014</h3>
     <h5>Desarrollo de aplicaciones web. CPIFP Ausiàs March. Curso 2013-2014.</h5>    
 </div>
 <div class="row-fluid">
@@ -25,8 +25,9 @@
         <div class="row-fluid">    
             <div class="span6">
                 <h3>¿Quién la ha desarrollado?</h3>
-                <p>La ha desarrollado Rafael Aznar, profesor de DES-DEC en el ciclo DAW.                    
-                    Puedes contactar en (raznar at ausiasmarch dot net)</p>
+                <p>La han desarrollado los alumnos de DAW del CPIFP Ausiàs March de Valencia (Spain).
+                    El profesor del módulo es Rafael Aznar.
+                    Puedes contactar en raznar at ausasmarch dot net.</p>
             </div> 
             <div class="span6">
                 <h3>¿Qué licencia tiene?</h3>
@@ -49,5 +50,25 @@
             <li>Ajax Stock soporta Relaciones 1:M</li>
             <li>Ajax Stock soporta Relaciones M:M</li>
         </ul>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span12">
+        <h3>Alumnos que han participado en el proyecto</h3>
+        BENITO SORIA, PEDRO JOSÉ -
+        BONET CEREZUELA, JAVIER -
+        CREGO TAPIA, ÁLVARO -
+        ESLAVA BARRERA, JORGE -
+        GIMENO GILABERT, ENRIQUE -
+        GRANCHA BONORA, JOSÉ -
+        MARTÍN MOLINA, CRISTINA -
+        MARTÍN TÁRRAGA, SERGIO -
+        MEMBRILLAS BELENGUER, EDUARDO -
+        NAVARRO PERIS, ANTONIO -
+        ORTEGA ORTEGA, DIANA -
+        PÉREZ GODESART, JUAN -
+        RODRÍGUEZ SERRA, DANIEL -
+        SEGOVIA LEÓN, JACOBO -
+        TAMARIT MARTÍNEZ, SALVADOR 
     </div>
 </div>
