@@ -101,15 +101,20 @@ public class GenericDaoImplementation<TIPO_OBJETO> implements GenericDao<TIPO_OB
                                 final Class<?> strTipoParamMetodoSet = method.getParameterTypes()[0];
                                 String strValor = oMysql.getOne(strTabla, method.getName().substring(3).toLowerCase(Locale.ENGLISH), (Integer) metodo_getId.invoke(oBean));
                                 if (strValor != null) {
-                                    if (strTipoParamMetodoSet.getName().equals("java.lang.Double")) {
-                                        method.invoke(oBean, Double.parseDouble(strValor));
-                                    } else if (strTipoParamMetodoSet.getName().equals("java.lang.Integer")) {
-                                        method.invoke(oBean, Integer.parseInt(strValor));
-                                    } else if (strTipoParamMetodoSet.getName().equals("java.util.Date")) {
-                                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                                        method.invoke(oBean, format.parse(strValor));
-                                    } else {
-                                        method.invoke(oBean, strValor);
+                                    switch (strTipoParamMetodoSet.getName()) {
+                                        case "java.lang.Double":
+                                            method.invoke(oBean, Double.parseDouble(strValor));
+                                            break;
+                                        case "java.lang.Integer":
+                                            method.invoke(oBean, Integer.parseInt(strValor));
+                                            break;
+                                        case "java.util.Date":
+                                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                                            method.invoke(oBean, format.parse(strValor));
+                                            break;
+                                        default:
+                                            method.invoke(oBean, strValor);
+                                            break;
                                     }
                                 }
                             }
