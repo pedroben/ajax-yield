@@ -110,10 +110,8 @@
         <script src="js/util.js" charset="UTF-8"></script>
         <script src="js/main.js" charset="UTF-8"></script>
 
-        <script src="js/control/cliente.js" charset="UTF-8"></script>
-        <script src="js/control/producto.js" charset="UTF-8"></script>
-        <script src="js/control/tipoproducto.js" charset="UTF-8"></script>
-        <script src="js/control/compra.js" charset="UTF-8"></script>
+        <script src="js/control/lenguaje.js" charset="UTF-8"></script>
+        
 
         <script>
             /* Inicialización en español para la extensión 'UI date picker' para jQuery. */
@@ -148,16 +146,16 @@
                 $(document).off('focusin.modal');
             });
             $(document).ready(function() {
-                $('#lnkCliente').unbind('click');
-                $('#lnkCliente').click(function() {
-                    var cliente = objeto('cliente', '<%=request.getContextPath()%>');
-                    var clienteView = vista(cliente, '<%=request.getContextPath()%>');
+                $('#lnkLenguaje').unbind('click');
+                $('#lnkLenguaje').click(function() {
+                    var lenguaje = objeto('lenguaje', '<%=request.getContextPath()%>');
+                    var lenguajeView = vista(lenguaje, '<%=request.getContextPath()%>');
 
                     $('#indexContenidoJsp').empty();
-                    $('#indexContenido').empty().append(clienteView.getEmptyList());
+                    $('#indexContenido').empty().append(lenguajeView.getEmptyList());
 
-                    var clienteControl = control_cliente_list('<%=request.getContextPath()%>');
-                    clienteControl.inicia(clienteView, 1, null, null, 10, null, null, null, null);
+                    var lenguajeControl = control_lenguaje_list('<%=request.getContextPath()%>');
+                    lenguajeControl.inicia(lenguajeView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
                 $('#lnkProducto').unbind('click');

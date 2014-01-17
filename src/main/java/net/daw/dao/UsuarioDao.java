@@ -26,8 +26,6 @@ public class UsuarioDao extends GenericDaoImplementation<UsuarioBean> {
             } else {
                 oUsuario.setId(Integer.parseInt(strId));
                 oUsuario.setPassword(oMysql.getOne("usuario", "password", oUsuario.getId()));
-                oUsuario.setNombre(oMysql.getOne("usuario", "nombre", oUsuario.getId()));
-                oUsuario.setEmail(oMysql.getOne("usuario", "email", oUsuario.getId()));
             }
             oMysql.desconexion();
             return oUsuario;
