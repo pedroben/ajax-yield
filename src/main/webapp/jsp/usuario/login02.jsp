@@ -11,5 +11,5 @@
     <h4>Ha habido un problema con su autenticación. Revise su login o su password.</h4>
 <% } else { %>
     <h1>Vd. ha entrado en el sistema</h1>
-    <h4>Bienvenido, <%=oUsuario.getNombre() %>. Ahora puede operar con los menús de la aplicación.</h4>
+    <h4>Bienvenido, <%=oUsuario.getLogin() %>. Ahora puede operar con los menús de la aplicación.</h4>
 <% } %>
