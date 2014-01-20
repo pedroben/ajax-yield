@@ -28,19 +28,19 @@ public class EmpresaGet implements GenericOperation{
             if (request.getParameter("id") == null) {
                 data = "{\"error\":\"id is mandatory\"}";
             } else {
-                EmpresaDao oEntradaDAO = new EmpresaDao(Conexion.getConection());
-                EmpresaBean oEntrada = new EmpresaBean();
-                oEntrada.setId(Integer.parseInt(request.getParameter("id")));
-                oEntradaDAO.get(oEntrada);
+                EmpresaDao oEmpresaDAO = new EmpresaDao(Conexion.getConection());
+                EmpresaBean oEmpresa = new EmpresaBean();
+                oEmpresa.setId(Integer.parseInt(request.getParameter("id")));
+                oEmpresaDAO.get(oEmpresa);
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("dd/MM/yyyy");
                 Gson gson = gsonBuilder.create();
-                data = gson.toJson(oEntrada);
+                data = gson.toJson(oEmpresa);
                 
             }
             return data;
         } catch (Exception e) {
-            throw new ServletException("EntradaGetJson: View Error: " + e.getMessage());
+            throw new ServletException("EmpresaGetJson: View Error: " + e.getMessage());
         }
     }
 }

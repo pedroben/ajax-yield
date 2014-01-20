@@ -25,14 +25,14 @@ public class EmpresaRemove implements GenericOperation {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try {
-            EmpresaDao oEntradaDAO = new EmpresaDao(Conexion.getConection());
-            EmpresaBean oEntrada = new EmpresaBean();
-            oEntrada.setId(Integer.parseInt(request.getParameter("id")));
+            EmpresaDao oEmpresaDAO = new EmpresaDao(Conexion.getConection());
+            EmpresaBean oEmpresa = new EmpresaBean();
+            oEmpresa.setId(Integer.parseInt(request.getParameter("id")));
             Map<String, String> data = new HashMap<>();
-            if (oEntrada != null) {
-                oEntradaDAO.remove(oEntrada);
+            if (oEmpresa != null) {
+                oEmpresaDAO.remove(oEmpresa);
                 data.put("status", "200");
-                data.put("message", "se ha eliminado el registro con id=" + oEntrada.getId());
+                data.put("message", "se ha eliminado el registro con id=" + oEmpresa.getId());
             } else {
                 data.put("status", "error");
                 data.put("message", "error");
@@ -41,7 +41,7 @@ public class EmpresaRemove implements GenericOperation {
             String resultado = gson.toJson(data);
             return resultado;
         } catch (Exception e) {
-            throw new ServletException("EntradaRemoveJson: View Error: " + e.getMessage());
+            throw new ServletException("EmpresaRemoveJson: View Error: " + e.getMessage());
         }
     }
 }

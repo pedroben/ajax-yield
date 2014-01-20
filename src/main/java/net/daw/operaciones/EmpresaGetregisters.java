@@ -48,12 +48,12 @@ public class EmpresaGetregisters implements GenericOperation {
                     }
                 }
             }
-            EmpresaDao oEntradaDAO = new EmpresaDao(Conexion.getConection());
-            int pages = oEntradaDAO.getCount(alFilter);
+            EmpresaDao oEmpresaDAO = new EmpresaDao(Conexion.getConection());
+            int pages = oEmpresaDAO.getCount(alFilter);
             data = "{\"data\":\"" + Integer.toString(pages) + "\"}";
             return data;
         } catch (Exception e) {
-            throw new ServletException("EntradaGetregistersJson: View Error: " + e.getMessage());
+            throw new ServletException("EmpresaGetregistersJson: View Error: " + e.getMessage());
         }
     }
 }

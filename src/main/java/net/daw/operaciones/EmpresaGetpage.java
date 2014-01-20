@@ -76,16 +76,16 @@ public class EmpresaGetpage implements GenericOperation {
             } else {
                 hmOrder = null;
             }
-            EmpresaDao oEntradaDAO = new EmpresaDao(Conexion.getConection());
-            List<EmpresaBean> oEntradas = oEntradaDAO.getPage(rpp, page, alFilter, hmOrder);
+            EmpresaDao oEmpresaDAO = new EmpresaDao(Conexion.getConection());
+            List<EmpresaBean> oEmpresas = oEmpresaDAO.getPage(rpp, page, alFilter, hmOrder);
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.setDateFormat("dd/MM/yyyy");
             Gson gson = gsonBuilder.create();
-            data = gson.toJson(oEntradas);
+            data = gson.toJson(oEmpresas);
             data = "{\"list\":" + data + "}";
             return data;
         } catch (Exception e) {
-            throw new ServletException("EntradaGetJson: View Error: " + e.getMessage());
+            throw new ServletException("EmpresaGetJson: View Error: " + e.getMessage());
         }
     }
 }

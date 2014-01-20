@@ -23,13 +23,13 @@ public class EmpresaGetcolumns implements GenericOperation{
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ArrayList<String> alColumns = null;
         try {
-            EmpresaDao oEntradaDAO = new EmpresaDao(Conexion.getConection());
-            alColumns = oEntradaDAO.getColumnsNames();
+            EmpresaDao oEmpresaDAO = new EmpresaDao(Conexion.getConection());
+            alColumns = oEmpresaDAO.getColumnsNames();
             String data = new Gson().toJson(alColumns);
             data = "{\"data\":" + data + "}";
             return data;
         } catch (Exception e) {
-            throw new ServletException("EntradaGetcolumnsJson: View Error: " + e.getMessage());
+            throw new ServletException("EmpresaGetcolumnsJson: View Error: " + e.getMessage());
         }
     }
 }

@@ -27,17 +27,17 @@ public class EmpresaSave implements GenericOperation {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try {
-            EmpresaDao oEntradaDAO = new EmpresaDao(Conexion.getConection());
-            EmpresaBean oEntrada = new EmpresaBean();
+            EmpresaDao oEmpresaDAO = new EmpresaDao(Conexion.getConection());
+            EmpresaBean oEmpresa = new EmpresaBean();
             Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
             String jason = request.getParameter("json");
             jason = EncodingUtil.decodeURIComponent(jason);
-            oEntrada = gson.fromJson(jason, oEntrada.getClass());
+            oEmpresa = gson.fromJson(jason, oEmpresa.getClass());
             Map<String, String> data = new HashMap<>();
-            if (oEntrada != null) {
-                oEntrada = oEntradaDAO.set(oEntrada);
+            if (oEmpresa != null) {
+                oEmpresa = oEmpresaDAO.set(oEmpresa);
                 data.put("status", "200");
-                data.put("message", Integer.toString(oEntrada.getId()));
+                data.put("message", Integer.toString(oEmpresa.getId()));
             } else {
                 data.put("status", "error");
                 data.put("message", "error");
@@ -45,7 +45,7 @@ public class EmpresaSave implements GenericOperation {
             String resultado = gson.toJson(data);
             return resultado;
         } catch (Exception e) {
-            throw new ServletException("EntradaSaveJson: View Error: " + e.getMessage());
+            throw new ServletException("EmpresaSaveJson: View Error: " + e.getMessage());
         }
     }
 }

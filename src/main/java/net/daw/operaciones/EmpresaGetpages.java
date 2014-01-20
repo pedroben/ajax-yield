@@ -65,12 +65,12 @@ public class EmpresaGetpages implements GenericOperation {
             } else {
                 hmOrder = null;
             }
-            EmpresaDao oEntradaDAO = new EmpresaDao(Conexion.getConection());
-            int pages = oEntradaDAO.getPages(rpp, alFilter, hmOrder);
+            EmpresaDao oEmpresaDAO = new EmpresaDao(Conexion.getConection());
+            int pages = oEmpresaDAO.getPages(rpp, alFilter, hmOrder);
             data = "{\"data\":\"" + Integer.toString(pages) + "\"}";
             return data;
         } catch (Exception e) {
-            throw new ServletException("EntradaGetpagesJson: View Error: " + e.getMessage());
+            throw new ServletException("EmpresaGetpagesJson: View Error: " + e.getMessage());
         }
     }
 }
