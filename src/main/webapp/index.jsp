@@ -108,6 +108,7 @@
 
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
+        <script src="js/control/empresa.js" charset="UTF-8"></script>
 
 
         <script>
@@ -136,6 +137,18 @@
 
                     var entradaControl = control_entrada_list('<%=request.getContextPath()%>');
                     entradaControl.inicia(entradaView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnkEmpresa').unbind('click');
+                $('#lnkEmpresa').click(function() {
+                    var empresa = objeto('empresa', '<%=request.getContextPath()%>');
+                    var empresaView = vista(empresa, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(empresaView.getEmptyList());
+
+                    var empresaControl = control_empresa_list('<%=request.getContextPath()%>');
+                    empresaControl.inicia(empresaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
             });
