@@ -155,9 +155,13 @@ var vista = function(objeto, ContextPath) {
                 tabla += '<tr>';
                 $.each(objeto.getPrettyFieldNamesAcciones(), function(index, value) {
                     tabla += '<th>' + value;
-                    tabla += '<a class="orderAsc' + index + '" href="#"><i class="icon-arrow-up"></i></a>';
-                    tabla += '<a class="orderDesc' + index + '" href="#"><i class="icon-arrow-down"></i></a>';
-                    tabla += '</th>';
+                    if (value === "acciones") {
+                        tabla += '</th>';
+                    } else {
+                        tabla += '<a class="orderAsc' + index + '" href="#"><i class="icon-arrow-up"></i></a>';
+                        tabla += '<a class="orderDesc' + index + '" href="#"><i class="icon-arrow-down"></i></a>';
+                        tabla += '</th>';
+                    }
                 });
                 tabla += '</tr>';
             }
