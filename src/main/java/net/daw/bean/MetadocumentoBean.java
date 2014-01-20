@@ -11,9 +11,9 @@ import java.util.Date;
  * @author al037431
  */
 public class MetadocumentoBean {
-    private Integer id;
-    private String titulo;
-    private Date fecha;
+    private Integer id = 0;
+    private String titulo = "";
+    private Date fecha = new Date();
 
     public Integer getId() {
         return id;
@@ -38,5 +38,7 @@ public class MetadocumentoBean {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
+    
     
 }
