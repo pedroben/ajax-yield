@@ -138,6 +138,19 @@
                     entradaControl.inicia(entradaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
+                
+                $('#lnkOpcion').unbind('click');
+                $('#lnkOpcion').click(function() {
+                    var opcion = objeto('opcion', '<%=request.getContextPath()%>');
+                    var opcionView = vista(opcion, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(opcionView.getEmptyList());
+
+                    var opcionControl = control_opcion_list('<%=request.getContextPath()%>');
+                    opcionControl.inicia(entradaView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
             });
 
         </script>
