@@ -15,6 +15,86 @@
     id_usuario nombre cif direccion localidad provincia 
     pais telefono fax actividad nombrecontacto emailcontacto validada
     -->
+    <!--
+    <div class="control-group">
+        <label class="control-label" for="inputId_usuario">Id:</label>
+        <div class="controls">
+            <input type="text" id="id_usuario" name="id_usuario" placeholder="id_usuario" />
+        </div>
+    </div>
+    -->
+    <div class="control-group">
+        <label class="control-label" for="inputNombre">Nombre:</label>
+        <div class="controls">
+            <input type="text" id="nombre" name="nombre" placeholder="nombre" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputCif">Cif:</label>
+        <div class="controls">
+            <input type="text" id="cif" name="cif" placeholder="cif" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputDireccion">Dirección:</label>
+        <div class="controls">
+            <input type="text" id="direccion" name="direccion" placeholder="direccion" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputLocalidad">Localidad:</label>
+        <div class="controls">
+            <input type="text" id="localidad" name="localidad" placeholder="localidad" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputProvincia">Provincia:</label>
+        <div class="controls">
+            <input type="text" id="provincia" name="provincia" placeholder="provincia" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputPais">Pais:</label>
+        <div class="controls">
+            <input type="text" id="pais" name="pais" placeholder="pais" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputTelefono">Teléfono:</label>
+        <div class="controls">
+            <input type="text" id="telefono" name="telefono" placeholder="telefono" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputFax">Fax:</label>
+        <div class="controls">
+            <input type="text" id="fax" name="fax" placeholder="fax" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputActividad">Actividad:</label>
+        <div class="controls">
+            <input type="text" id="actividad" name="actividad" placeholder="actividad" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputNombrecontacto">Nombre de contacto:</label>
+        <div class="controls">
+            <input type="text" id="nombrecontacto" name="nombrecontacto" placeholder="nombrecontacto" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputEmailcontacto">Email:</label>
+        <div class="controls">
+            <input type="text" id="emailcontacto" name="emailcontacto" placeholder="emailcontacto" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputValidada">Validada:</label>
+        <div class="controls">
+            <input type="text" id="validada" name="validada" placeholder="validada" />
+        </div>
+    </div>
 
 
 
