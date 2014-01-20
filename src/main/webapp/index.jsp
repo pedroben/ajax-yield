@@ -108,6 +108,7 @@
 
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
+        <script src="js/control/requerimiento.js" charset="UTF-8"></script>
 
 
         <script>
@@ -136,6 +137,18 @@
 
                     var entradaControl = control_entrada_list('<%=request.getContextPath()%>');
                     entradaControl.inicia(entradaView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnkRequerimiento').unbind('click');
+                $('#lnkRequerimiento').click(function() {
+                    var requerimiento = objeto('requerimiento', '<%=request.getContextPath()%>');
+                    var requerimientoView = vista(requerimiento, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(requerimientoView.getEmptyList());
+
+                    var requerimientoControl = control_requerimiento_list('<%=request.getContextPath()%>');
+                    requerimientoControl.inicia(requerimientoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
             });

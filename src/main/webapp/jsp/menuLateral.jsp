@@ -12,6 +12,7 @@
         <li class="nav-header">Mantenimientos</li>            
         <li><a id="lnkLenguaje" href="#">Lenguaje</a></li>
         <li><a id="lnkEntrada" href="#">Entrada</a></li>
+        <li><a id="lnkRequerimiento" href="#">Requerimiento</a></li>
     </ul>
 </div>
 
