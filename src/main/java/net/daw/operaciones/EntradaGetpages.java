@@ -5,24 +5,31 @@
 package net.daw.operaciones;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.daw.dao.LenguajeDao;
+import net.daw.dao.EntradaDao;
 import net.daw.helper.Conexion;
 import net.daw.helper.FilterBean;
 
 
 /**
  *
- * @author Alvaro
+ * @author rafa
  */
-public class LenguajeGetregisters implements GenericOperation {
+public class EntradaGetpages implements GenericOperation {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String data;
         try {
+            int rpp;
+            if (request.getParameter("rpp") == null) {
+                rpp = 10;
+            } else {
+                rpp = Integer.parseInt(request.getParameter("rpp"));
+            }
             ArrayList<FilterBean> alFilter = new ArrayList<>();
             if (request.getParameter("filter") != null) {
                 if (request.getParameter("filteroperator") != null) {
@@ -47,13 +54,23 @@ public class LenguajeGetregisters implements GenericOperation {
                         alFilter.add(oFilterBean);
                     }
                 }
-            }       
-            LenguajeDao oLenguajeDAO = new LenguajeDao(Conexion.getConection());
-            int pages = oLenguajeDAO.getCount(alFilter);
+            }
+            HashMap<String, String> hmOrder = new HashMap<>();
+            if (request.getParameter("order") != null) {
+                if (request.getParameter("ordervalue") != null) {
+                    hmOrder.put(request.getParameter("order"), request.getParameter("ordervalue"));
+                } else {
+                    hmOrder = null;
+                }
+            } else {
+                hmOrder = null;
+            }
+            EntradaDao oEntradaDAO = new EntradaDao(Conexion.getConection());
+            int pages = oEntradaDAO.getPages(rpp, alFilter, hmOrder);
             data = "{\"data\":\"" + Integer.toString(pages) + "\"}";
             return data;
         } catch (Exception e) {
-            throw new ServletException("LenguajeGetregistersJson: View Error: " + e.getMessage());
+            throw new ServletException("EntradaGetpagesJson: View Error: " + e.getMessage());
         }
     }
 }

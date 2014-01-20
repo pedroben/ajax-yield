@@ -5,39 +5,38 @@
 package net.daw.operaciones;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.daw.bean.LenguajeBean;
-import net.daw.dao.LenguajeDao;
+import net.daw.bean.EntradaBean;
+import net.daw.dao.EntradaDao;
 import net.daw.helper.Conexion;
 import net.daw.helper.EncodingUtil;
 
-
-
 /**
  *
- * @author Alvaro
+ * @author rafa
  */
-public class LenguajeSave implements GenericOperation {
+public class EntradaSave implements GenericOperation {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try {
-            LenguajeDao oLenguajeDAO = new LenguajeDao(Conexion.getConection());
-            LenguajeBean oLenguaje = new LenguajeBean();
-            Gson gson = new Gson();
+            EntradaDao oEntradaDAO = new EntradaDao(Conexion.getConection());
+            EntradaBean oEntrada = new EntradaBean();
+            Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
             String jason = request.getParameter("json");
             jason = EncodingUtil.decodeURIComponent(jason);
-            oLenguaje = gson.fromJson(jason, oLenguaje.getClass());
+            oEntrada = gson.fromJson(jason, oEntrada.getClass());
             Map<String, String> data = new HashMap<>();
-            if (oLenguaje != null) {
-                oLenguaje = oLenguajeDAO.set(oLenguaje);
+            if (oEntrada != null) {
+                oEntrada = oEntradaDAO.set(oEntrada);
                 data.put("status", "200");
-                data.put("message", Integer.toString(oLenguaje.getId()));
+                data.put("message", Integer.toString(oEntrada.getId()));
             } else {
                 data.put("status", "error");
                 data.put("message", "error");
@@ -45,7 +44,7 @@ public class LenguajeSave implements GenericOperation {
             String resultado = gson.toJson(data);
             return resultado;
         } catch (Exception e) {
-            throw new ServletException("LenguajeSaveJson: View Error: " + e.getMessage());
+            throw new ServletException("EntradaSaveJson: View Error: " + e.getMessage());
         }
     }
 }

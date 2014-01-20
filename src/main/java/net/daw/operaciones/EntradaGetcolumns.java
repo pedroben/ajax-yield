@@ -10,27 +10,27 @@ import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.daw.dao.LenguajeDao;
+import net.daw.dao.EntradaDao;
 import net.daw.helper.Conexion;
 
 
 /**
  *
- * @author Alvaro
+ * @author rafa
  */
-public class LenguajeGetcolumns implements GenericOperation {
+public class EntradaGetcolumns implements GenericOperation {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ArrayList<String> alColumns = null;
         try {
-            LenguajeDao oLenguajeDAO = new LenguajeDao(Conexion.getConection());
-            alColumns = oLenguajeDAO.getColumnsNames();
+            EntradaDao oEntradaDAO = new EntradaDao(Conexion.getConection());
+            alColumns = oEntradaDAO.getColumnsNames();
             String data = new Gson().toJson(alColumns);
             data = "{\"data\":" + data + "}";
             return data;
         } catch (Exception e) {
-            throw new ServletException("LenguajeGetcolumnsJson: View Error: " + e.getMessage());
+            throw new ServletException("EntradaGetcolumnsJson: View Error: " + e.getMessage());
         }
     }
 
