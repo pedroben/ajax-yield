@@ -108,6 +108,9 @@ public class GenericDaoImplementation<TIPO_OBJETO> implements GenericDao<TIPO_OB
                                         case "java.lang.Integer":
                                             method.invoke(oBean, Integer.parseInt(strValor));
                                             break;
+                                        case "java.lang.Boolean":
+                                            method.invoke(oBean, Boolean.getBoolean(strValor));
+                                            break;
                                         case "java.util.Date":
                                             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                                             method.invoke(oBean, format.parse(strValor));
@@ -153,8 +156,8 @@ public class GenericDaoImplementation<TIPO_OBJETO> implements GenericDao<TIPO_OB
                             if (strTipoDevueltoMetodoGet.getName().equals("java.util.Date")) {
                                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                                 value = format.format(method.invoke(oBean));
-                            }                                 
-                            String strCampo=method.getName().substring(3).toLowerCase(Locale.ENGLISH);
+                            }
+                            String strCampo = method.getName().substring(3).toLowerCase(Locale.ENGLISH);
                             oMysql.updateOne((Integer) metodo_getId.invoke(oBean), strTabla, strCampo, value);
                         }
                     }

@@ -70,7 +70,7 @@ public class TipodocumentoGetpage implements GenericOperation {
                 } else             hmOrder=null;
             } else             hmOrder=null;
             TipodocumentoDao oTipodocumentoDAO = new TipodocumentoDao(Conexion.getConection());
-            List<TipodocumentoBean> oTipodocumentos = oTipodocumentoDAO.getPage( rpp, page, alFilter,hmOrder );
+            List<TipodocumentoBean> oTipodocumentos = oTipodocumentoDAO.getPage(rpp, page, alFilter, hmOrder );
             data = new Gson().toJson(oTipodocumentos);
             data = "{\"list\":" + data + "}";
             return data;

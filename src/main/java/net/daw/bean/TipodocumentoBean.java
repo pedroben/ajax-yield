@@ -11,7 +11,7 @@ package net.daw.bean;
 public class TipodocumentoBean {
     private Integer id = 0;
     private String descripcion = "";
-    private boolean privado = false;
+    private Boolean privado = false;
 
     public TipodocumentoBean() {
         
@@ -37,11 +37,11 @@ public class TipodocumentoBean {
         this.descripcion = descripcion;
     }
 
-    public boolean getPrivado() {
+    public Boolean getPrivado() {
         return privado;
     }
 
-    public void setPrivado(boolean privado) {
+    public void setPrivado(Boolean privado) {
         this.privado = privado;
     }
     
