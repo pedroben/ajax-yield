@@ -57,15 +57,39 @@ var control_lenguaje_list = function(path) {
                     maxlength: 255
                 }
             },
-            highlight: function(element) {
-                $(element).closest('.control-group').removeClass('success').addClass('error');
-            },
-            success: function(element) {
-                element
-                        .text('OK!').addClass('valid')
-                        .closest('.control-group').removeClass('error').addClass('success');
+            messages: {
+                nombre: {
+                    required: "Introduce un lenguaje",
+                    maxlength: 255
+                },
+                highlight: function(element) {
+                    $(element).closest('.control-group').removeClass('success').addClass('error');
+                },
+                success: function(element) {
+                    element
+                            .text('OK!').addClass('valid')
+                            .closest('.control-group').removeClass('error').addClass('success');
+                }
             }
+
         });
+        $.validator.setDefaults({
+    highlight: function(element) {
+        $(element).closest('.form-group').addClass('has-error');
+    },
+    unhighlight: function(element) {
+        $(element).closest('.form-group').removeClass('has-error');
+    },
+    errorElement: 'span',
+    errorClass: 'help-block',
+    errorPlacement: function(error, element) {
+        if(element.parent('.input-group').length) {
+            error.insertAfter(element.parent());
+        } else {
+            error.insertAfter(element);
+        }
+    }
+});
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
             enviarDatosUpdateForm(view, prefijo_div);
