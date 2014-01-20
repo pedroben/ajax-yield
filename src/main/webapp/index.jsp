@@ -28,6 +28,7 @@
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script src="./js/vendor/jquery.validate.min.js"></script>
 
     </head>
     <body>
@@ -111,7 +112,7 @@
 
 
         <script>
-            
+
             $(document).ready(function() {
                 inicializacion();
                 $('#lnkLenguaje').unbind('click');

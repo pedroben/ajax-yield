@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-var control_lenguaje_list = function(path) {
+var control_documento_list = function(path) {
     //contexto privado
 
-    var prefijo_div = "#lenguaje_list ";
+    var prefijo_div = "#documento_list ";
 
     function cargaBotoneraMantenimiento() {
         var botonera = [
+            {"class": "btn btn-mini action05", "icon": "", "text": "compras"},
             {"class": "btn btn-mini action01", "icon": "icon-eye-open", "text": ""},
             {"class": "btn btn-mini action02", "icon": "icon-zoom-in", "text": ""},
             {"class": "btn btn-mini action03", "icon": "icon-pencil", "text": ""},
@@ -48,27 +48,60 @@ var control_lenguaje_list = function(path) {
             view.doFillForm(id);
         } else {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
-            //$(prefijo_div + '#nombre').focus();
+            $(prefijo_div + '#codigo').focus();
         }
-        $('#formulario').validate({
-            rules: {
-                nombre: {
-                    required: true,
-                    maxlength: 255
-                }
-            },
-            highlight: function(element) {
-                $(element).closest('.control-group').removeClass('success').addClass('error');
-            },
-            success: function(element) {
-                element
-                        .text('OK!').addClass('valid')
-                        .closest('.control-group').removeClass('error').addClass('success');
+        $(prefijo_div + '#id_usuario_desc').empty().html(objeto('usuario', path).getOne($(prefijo_div + '#id_usuario').val()).descripcion);
+//pte incorporar librería https://github.com/jschr/bootstrap-modal
+//ejemplos en http://jschr.github.io/bootstrap-modal/        
+//            $(prefijo_div + '#modal01').css({
+//                'right': '20%',
+//                'left': '20%',
+//                'width': 'auto',
+//                'margin': '0'                
+//            });
+
+//        $(prefijo_div + '#modal01').css({
+//            'width': '612px'
+//        });
+        //en desarrollo: tratamiento de las claves ajenas ...
+        $(prefijo_div + '#id_usuario_button').unbind('click');
+        $(prefijo_div + '#id_usuario_button').click(function() {
+
+            var usuario = objeto('usuario', path);
+            var usuarioView = vista(usuario, path);
+
+            cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' + '<h3 id="myModalLabel">Elección</h3>';
+            pie = '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>';
+            listado = usuarioView.getEmptyList();
+            loadForm('#modal02', cabecera, listado, pie, true);
+
+            $(prefijo_div + '#modal02').css({
+                'right': '20px',
+                'left': '20px',
+                'width': 'auto',
+                'margin': '0',
+                'display': 'block'
+            });
+
+            var usuarioControl = control_usuario_list(path);
+            usuarioControl.inicia(usuarioView, 1, null, null, 10, null, null, null, callbackSearchTipodocumento, null, null, null);
+
+            function callbackSearchTipodocumento(id) {
+                $(prefijo_div + '#modal02').modal('hide');
+                $(prefijo_div + '#modal02').data('modal', null);
+                $(prefijo_div + '#id_usuario').val($(this).attr('id'));
+                $(prefijo_div + '#id_usuario_desc').empty().html(objeto('usuario', path).getOne($(prefijo_div + '#id_usuario').val()).descripcion);
+                return false;
             }
+
+            return false;
+
         });
+
         $(prefijo_div + '#submitForm').unbind('click');
-        $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view, prefijo_div);
+        $(prefijo_div + '#submitForm').click(function(event) {
+            //validaciones...
+            enviarDatosUpdateForm(view,prefijo_div);
             return false;
         });
     }
@@ -94,6 +127,20 @@ var control_lenguaje_list = function(path) {
                 "<h3 id=\"myModalLabel\">Detalle de " + view.getObject().getName() + "</h3>";
         pie = "<button class=\"btn btn-primary\" data-dismiss=\"modal\" aria-hidden=\"true\">Cerrar</button>";
         loadForm(place, cabecera, view.getObjectTable(id), pie, true);
+    }
+
+    function cargaCompras(id) {
+
+        var compra = objeto('compra', path);
+        var compraView = vista(compra, path);
+
+        $('#indexContenidoJsp').empty();
+        $('#indexContenido').empty().append(compraView.getEmptyList());
+
+        var compraControl = control_compra_list(path);
+        compraControl.inicia(compraView, 1, null, null, 10, null, null, null, null, "id_documento", "equals", id);
+        return false;
+
     }
 
     return {
@@ -132,6 +179,7 @@ var control_lenguaje_list = function(path) {
             $(prefijo_div + "#filter").empty().append(view.getLoading()).html(view.getFilterInfo(filter, filteroperator, filtervalue));
 
             //asignación eventos de la botonera de cada línea del listado principal
+
             if (callback) {
                 $(prefijo_div + '.btn.btn-mini.action01').unbind('click');
                 $(prefijo_div + '.btn.btn-mini.action01').click(callback);
@@ -154,6 +202,11 @@ var control_lenguaje_list = function(path) {
                 $(prefijo_div + '.btn.btn-mini.action04').unbind('click');
                 $(prefijo_div + '.btn.btn-mini.action04').click(function() {
                     removeConfirmationModalForm(view, '#modal01', $(this).attr('id'));
+                });
+
+                $(prefijo_div + '.btn.btn-mini.action05').unbind('click');
+                $(prefijo_div + '.btn.btn-mini.action05').click(function() {
+                    cargaCompras($(this).attr('id'));
                 });
 
             }
@@ -191,15 +244,15 @@ var control_lenguaje_list = function(path) {
             //asignación del evento de click para cambiar de página en la botonera de paginación
 
             $(prefijo_div + '.pagination_link').unbind('click');
-            $(prefijo_div + '.pagination_link').click(function() {
+            $(prefijo_div + '.pagination_link').click(function(event) {
                 var id = $(this).attr('id');
                 rpp = $(prefijo_div + "#rpp option:selected").text();
                 thisObject.inicia(view, id, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue);
                 return false;
+
             });
 
             //boton de crear un nuevo elemento
-
             if (callback) {
                 $(prefijo_div + '#crear').css("display", "none");
             } else {
@@ -209,10 +262,13 @@ var control_lenguaje_list = function(path) {
                 });
             }
 
+
+
+
             //asignación del evento de filtrado al boton
 
             $(prefijo_div + '#btnFiltrar').unbind('click');
-            $(prefijo_div + "#btnFiltrar").click(function() {
+            $(prefijo_div + "#btnFiltrar").click(function(event) {
                 filter = $(prefijo_div + "#selectFilter option:selected").text();
                 filteroperator = $(prefijo_div + "#selectFilteroperator option:selected").text();
                 filtervalue = $(prefijo_div + "#inputFiltervalue").val();
@@ -224,9 +280,9 @@ var control_lenguaje_list = function(path) {
 
             $(prefijo_div + '#modal01').unbind('hidden');
             $(prefijo_div + '#modal01').on('hidden', function() {
-
                 rpp = $(prefijo_div + "#rpp option:selected").text();
                 thisObject.inicia(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue);
+
             });
 
             //asignación del evento de cambio del numero de regs por página
@@ -239,4 +295,3 @@ var control_lenguaje_list = function(path) {
         }
     };
 };
-
