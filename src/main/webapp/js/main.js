@@ -168,15 +168,18 @@ var vista = function(objeto, ContextPath) {
                 $.each(objeto.getFieldNames(), function(index, valor) {
                     if (/id_/.test(valor)) {
                         $.when(ajaxCallSync(ContextPath + '/json?ob=' + valor.split("_")[1] + '&op=get&id=' + value[valor], 'GET', '')).done(function(data) {
-                            
+
                             contador = 0;
-                            add_tabla="";
+                            add_tabla = "";
                             for (key in data) {
                                 if (contador == 0)
                                     add_tabla = '<td>id=' + data[key] + '(no existe)</td>';
                                 if (contador == 1)
                                     add_tabla = '<td>' + data[key] + '</td>';
                                 contador++;
+                            }
+                            if (contador == 0) {
+                                add_tabla = '<td>' + value[valor] + ' #error</td>';
                             }
                             tabla += add_tabla;
                         });

@@ -1,8 +1,6 @@
 <%@page import="net.daw.bean.UsuarioBean"%>
 <%UsuarioBean user = (UsuarioBean) request.getSession().getAttribute("usuarioBean");%>
 
-
-
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -13,7 +11,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Ajax Stock</title>
+        <title>Ajax Yield</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -28,11 +26,9 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-
-        
-                <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-        
+
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -110,66 +106,36 @@
         <script src="js/util.js" charset="UTF-8"></script>
         <script src="js/main.js" charset="UTF-8"></script>
 
-        <script src="js/control/cliente.js" charset="UTF-8"></script>
-        <script src="js/control/producto.js" charset="UTF-8"></script>
-        <script src="js/control/tipoproducto.js" charset="UTF-8"></script>
-        <script src="js/control/compra.js" charset="UTF-8"></script>
+        <script src="js/control/lenguaje.js" charset="UTF-8"></script>
+        <script src="js/control/entrada.js" charset="UTF-8"></script>
+
 
         <script>
-            /* Inicialización en español para la extensión 'UI date picker' para jQuery. */
-            /* Traducido por Vester (xvester [en] gmail [punto] com). */
-            jQuery(function($) {
-                $.datepicker.regional['es'] = {
-                    closeText: 'Cerrar',
-                    buttonImage: 'img/calendar.png',
-                    prevText: '<Ant',
-                    nextText: 'Sig>',
-                    currentText: 'Hoy',
-                    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                    dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
-                    dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-                    weekHeader: 'Sm',
-                    dateFormat: 'dd/mm/yy',
-                    firstDay: 1,
-                    isRTL: false,
-                    showMonthAfterYear: false,
-                    yearSuffix: ''};
-                $.datepicker.setDefaults($.datepicker.regional['es']);
-            });
-
-            //para solucionar el bug de la autollamada recursiva 
-            //muy dificil de encontrar y depurar
-            //dos modales a la vez se pasan el foco de una a la otra
-            //https://github.com/twbs/bootstrap/issues/4781
-            //https://github.com/makeusabrew/bootbox/issues/60
-            $(document).on('show', '.modal', function() {
-                $(document).off('focusin.modal');
-            });
+            
             $(document).ready(function() {
-                $('#lnkCliente').unbind('click');
-                $('#lnkCliente').click(function() {
-                    var cliente = objeto('cliente', '<%=request.getContextPath()%>');
-                    var clienteView = vista(cliente, '<%=request.getContextPath()%>');
+                inicializacion();
+                $('#lnkLenguaje').unbind('click');
+                $('#lnkLenguaje').click(function() {
+                    var lenguaje = objeto('lenguaje', '<%=request.getContextPath()%>');
+                    var lenguajeView = vista(lenguaje, '<%=request.getContextPath()%>');
 
                     $('#indexContenidoJsp').empty();
-                    $('#indexContenido').empty().append(clienteView.getEmptyList());
+                    $('#indexContenido').empty().append(lenguajeView.getEmptyList());
 
-                    var clienteControl = control_cliente_list('<%=request.getContextPath()%>');
-                    clienteControl.inicia(clienteView, 1, null, null, 10, null, null, null, null);
+                    var lenguajeControl = control_lenguaje_list('<%=request.getContextPath()%>');
+                    lenguajeControl.inicia(lenguajeView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
-                $('#lnkProducto').unbind('click');
-                $('#lnkProducto').click(function() {
-                    var producto = objeto('producto', '<%=request.getContextPath()%>');
-                    var productoView = vista(producto, '<%=request.getContextPath()%>');
+                $('#lnkEntrada').unbind('click');
+                $('#lnkEntrada').click(function() {
+                    var entrada = objeto('entrada', '<%=request.getContextPath()%>');
+                    var entradaView = vista(entrada, '<%=request.getContextPath()%>');
 
                     $('#indexContenidoJsp').empty();
-                    $('#indexContenido').empty().append(productoView.getEmptyList());
+                    $('#indexContenido').empty().append(entradaView.getEmptyList());
 
-                    var productoControl = control_producto_list('<%=request.getContextPath()%>');
-                    productoControl.inicia(productoView, 1, null, null, 10, null, null, null, null);
+                    var entradaControl = control_entrada_list('<%=request.getContextPath()%>');
+                    entradaControl.inicia(entradaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
             });
