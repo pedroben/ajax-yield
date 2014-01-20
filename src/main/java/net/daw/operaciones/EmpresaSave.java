@@ -29,7 +29,8 @@ public class EmpresaSave implements GenericOperation {
         try {
             EmpresaDao oEmpresaDAO = new EmpresaDao(Conexion.getConection());
             EmpresaBean oEmpresa = new EmpresaBean();
-            Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
+//            Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
+            Gson gson = new Gson();
             String jason = request.getParameter("json");
             jason = EncodingUtil.decodeURIComponent(jason);
             oEmpresa = gson.fromJson(jason, oEmpresa.getClass());
