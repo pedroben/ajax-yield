@@ -11,6 +11,10 @@
             <input type="text" id="id" name="id" placeholder="id" />
         </div>
     </div>
+    <!--
+    id_usuario nombre cif direccion localidad provincia 
+    pais telefono fax actividad nombrecontacto emailcontacto validada
+    -->
 
 
 
