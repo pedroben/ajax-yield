@@ -50,6 +50,7 @@ var control_lenguaje_list = function(path) {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             //$(prefijo_div + '#nombre').focus();
         }
+        //http://alittlecode.com/jquery-form-validation-with-styles-from-twitter-bootstrap/
         $('#formulario').validate({
             rules: {
                 nombre: {
