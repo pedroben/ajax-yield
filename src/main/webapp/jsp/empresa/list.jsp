@@ -1,6 +1,5 @@
 <%-- 
     Document   : list.jsp
-    Created on : Jan 16, 2013, 12:57:09 PM
     Author     : AntonioNP
 --%>
 <%@page import="net.daw.helper.Conexion"%>
