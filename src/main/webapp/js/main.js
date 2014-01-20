@@ -133,7 +133,7 @@ var vista = function(objeto, ContextPath) {
                 vector += ("<li>" + "<a href=\"#\">...</a>" + "</li>");
             for (i = (page_number - neighborhood); i <= (page_number + neighborhood); i++) {
                 if (i >= 1 && i <= total_pages) {
-                    if (page_number == i) {
+                    if (page_number === i) {
                         vector += ("<li class=\"active\"><a class=\"pagination_link\" id=\"" + i + "\" href=\"" + link + i + "\">" + i + "</a></li>");
                     }
                     else
@@ -151,7 +151,7 @@ var vista = function(objeto, ContextPath) {
         },
         getPageTable: function(pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, systemfilter, systemfilteroperator, systemfiltervalue, botonera) {
             var tabla = "<table class=\"table table table-striped table-condensed\">";
-            if (objeto.getPrettyFieldNamesAcciones() != null) {
+            if (objeto.getPrettyFieldNamesAcciones() !== null) {
                 tabla += '<tr>';
                 $.each(objeto.getPrettyFieldNamesAcciones(), function(index, value) {
                     tabla += '<th>' + value;
@@ -172,13 +172,13 @@ var vista = function(objeto, ContextPath) {
                             contador = 0;
                             add_tabla = "";
                             for (key in data) {
-                                if (contador == 0)
+                                if (contador === 0)
                                     add_tabla = '<td>id=' + data[key] + '(no existe)</td>';
-                                if (contador == 1)
+                                if (contador === 1)
                                     add_tabla = '<td>' + data[key] + '</td>';
                                 contador++;
                             }
-                            if (contador == 0) {
+                            if (contador === 0) {
                                 add_tabla = '<td>' + value[valor] + ' #error</td>';
                             }
                             tabla += add_tabla;
@@ -203,8 +203,28 @@ var vista = function(objeto, ContextPath) {
             datos = objeto.getOne(id);
             var tabla = "<table class=\"table table table-bordered table-condensed\">";
             $.each(objeto.getFieldNames(), function(index, valor) {
-                tabla += '<tr><td><strong>' + cabecera[index] + '</strong></td><td>' + datos[valor] + '</td></tr>';
+                tabla += '<tr><td><strong>' + cabecera[index] + '</strong></td>';
+                if (/id_/.test(valor)) {
+                    $.when(ajaxCallSync(ContextPath + '/json?ob=' + valor.split("_")[1] + '&op=get&id=' + datos[valor], 'GET', '')).done(function(data) {
+                        contador = 0;
+                        add_tabla = "";
+                        for (key in data) {
+                            if (contador === 0)
+                                add_tabla = '<td>' + data[key] + '</td>';
+                            if (contador === 1)
+                                //add_tabla = '<td>' + data[key] + ' --> <strong>id: </strong>' + datos[valor] + '</td>';
+                                add_tabla = '<td>' + data[key] + '</td>';
+                            contador++;
+                        }
+                        if (contador === 0) {
+                            add_tabla = '<td>' + datos[valor] + ' #error</td>';
+                        }
+                        tabla += add_tabla;
+                    });
+                }
+                tabla += '<td>' + datos[valor] + '</td></tr>';
             });
+
             tabla += '</table>';
             return tabla;
         },
