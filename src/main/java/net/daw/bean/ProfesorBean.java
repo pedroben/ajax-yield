@@ -16,8 +16,8 @@ public class ProfesorBean {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    private int id = 0;
-    private int id_usuario = 0;
+    private Integer id = 0;
+    private Integer id_usuario = 0;
     private String nombre = "";
     private String ape1 = "";
     private String ape2 = "";
@@ -25,17 +25,12 @@ public class ProfesorBean {
     private String telefono = "";
     private String email = "";
     private String dni = "";
-    private UsuarioBean usuario = null;
 
     public ProfesorBean() {
-        this.usuario = new UsuarioBean();
-        this.usuario.setId(0);
     }
 
-    public ProfesorBean(int id) {
+    public ProfesorBean(Integer id) {
         this.id = id;
-        this.usuario = new UsuarioBean();
-        this.usuario.setId(0);
     }
 
     /**
@@ -48,7 +43,7 @@ public class ProfesorBean {
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -62,7 +57,7 @@ public class ProfesorBean {
     /**
      * @param id_usuario the id_usuario to set
      */
-    public void setId_usuario(int id_usuario) {
+    public void setId_usuario(Integer id_usuario) {
         this.id_usuario = id_usuario;
     }
 
@@ -164,17 +159,4 @@ public class ProfesorBean {
         this.dni = dni;
     }
 
-    /**
-     * @return the usuario
-     */
-    public UsuarioBean getUsuario() {
-        return usuario;
-    }
-
-    /**
-     * @param usuario the usuario to set
-     */
-    public void setUsuario(UsuarioBean usuario) {
-        this.usuario = usuario;
-    }
 }

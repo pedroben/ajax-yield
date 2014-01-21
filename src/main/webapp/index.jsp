@@ -108,11 +108,12 @@
 
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
-        <script src="js/control/empresa.js" charset="UTF-8"></script>
+        <script src="js/control/profesor.js" charset="UTF-8"></script>
+
 
 
         <script>
-            
+
             $(document).ready(function() {
                 inicializacion();
                 $('#lnkLenguaje').unbind('click');
