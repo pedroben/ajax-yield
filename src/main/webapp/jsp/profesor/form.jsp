@@ -54,20 +54,21 @@
                 <input type="text" id="email" name="email" placeholder="email" />
             </div>
         </div>
-        <div class="control-group">
-            <label class="control-label" for="inputDNI">DNI</label>
-            <div class="controls">
-                <input type="text" id="dni" name="dni" placeholder="dni" />
-            </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputDNI">DNI</label>
+        <div class="controls">
+            <input type="text" id="dni" name="dni" placeholder="dni" />
         </div>
+    </div>
 
 
 
 
 
-        <div class="control-group">
-            <div class="controls">
-                <button type="submit" id="submitForm" class="btn submitForm">Submit</button>
-            </div>
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" id="submitForm" class="btn submitForm">Submit</button>
         </div>
+    </div>
 </form>
