@@ -108,6 +108,7 @@
 
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
+        <script src="js/control/empresa.js" charset="UTF-8"></script>
 
 
         <script>
@@ -136,6 +137,18 @@
 
                     var entradaControl = control_entrada_list('<%=request.getContextPath()%>');
                     entradaControl.inicia(entradaView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnkProfesor').unbind('click');
+                $('#lnkProfesor').click(function() {
+                    var profesor = objeto('profesor', '<%=request.getContextPath()%>');
+                    var profesorView = vista(profesor, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(profesorView.getEmptyList());
+
+                    var profesorControl = control_profesor_list('<%=request.getContextPath()%>');
+                    profesorControl.inicia(profesorView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
             });

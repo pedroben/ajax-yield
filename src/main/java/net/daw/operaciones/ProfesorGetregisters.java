@@ -20,7 +20,7 @@ import net.daw.helper.FilterBean;
  */
 public class ProfesorGetregisters implements GenericOperation {
 
-    @Override
+     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String data;
         try {
@@ -34,9 +34,9 @@ public class ProfesorGetregisters implements GenericOperation {
                         oFilterBean.setFilterValue(request.getParameter("filtervalue"));
                         oFilterBean.setFilterOrigin("user");
                         alFilter.add(oFilterBean);
-                    } 
-                } 
-            } 
+                    }
+                }
+            }
             if (request.getParameter("systemfilter") != null) {
                 if (request.getParameter("systemfilteroperator") != null) {
                     if (request.getParameter("systemfiltervalue") != null) {
@@ -48,9 +48,9 @@ public class ProfesorGetregisters implements GenericOperation {
                         alFilter.add(oFilterBean);
                     }
                 }
-            }       
-            ProfesorDao oProfesorDao = new ProfesorDao(Conexion.getConection());
-            int pages = oProfesorDao.getCount(alFilter);
+            }
+            ProfesorDao oProfesorDAO = new ProfesorDao(Conexion.getConection());
+            int pages = oProfesorDAO.getCount(alFilter);
             data = "{\"data\":\"" + Integer.toString(pages) + "\"}";
             return data;
         } catch (Exception e) {

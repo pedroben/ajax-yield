@@ -23,21 +23,22 @@ import net.daw.helper.EncodingUtil;
  */
 public class ProfesorSave implements GenericOperation {
 
-    @Override
+   @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try {
-            ProfesorDao oProfesorDao = new ProfesorDao(Conexion.getConection());
-            ProfesorBean oProfesorBean = new ProfesorBean();
+            ProfesorDao oProfesorDAO = new ProfesorDao(Conexion.getConection());
+            ProfesorBean oProfesor = new ProfesorBean();
+//            Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
             Gson gson = new Gson();
             String jason = request.getParameter("json");
             jason = EncodingUtil.decodeURIComponent(jason);
-            oProfesorBean = gson.fromJson(jason, oProfesorBean.getClass());
+            oProfesor = gson.fromJson(jason, oProfesor.getClass());
             Map<String, String> data = new HashMap<>();
-            if (oProfesorBean != null) {
-                oProfesorBean = oProfesorDao.set(oProfesorBean);
+            if (oProfesor != null) {
+                oProfesor = oProfesorDAO.set(oProfesor);
                 data.put("status", "200");
-                data.put("message", Integer.toString(oProfesorBean.getId()));
+                data.put("message", Integer.toString(oProfesor.getId()));
             } else {
                 data.put("status", "error");
                 data.put("message", "error");

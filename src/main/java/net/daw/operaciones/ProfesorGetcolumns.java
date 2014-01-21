@@ -24,8 +24,8 @@ public class ProfesorGetcolumns implements GenericOperation {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ArrayList<String> alColumns = null;
         try {
-            ProfesorDao oProfesorDao = new ProfesorDao(Conexion.getConection());
-            alColumns = oProfesorDao.getColumnsNames();
+            ProfesorDao oProfesorDAO = new ProfesorDao(Conexion.getConection());
+            alColumns = oProfesorDAO.getColumnsNames();
             String data = new Gson().toJson(alColumns);
             data = "{\"data\":" + data + "}";
             return data;
@@ -35,3 +35,5 @@ public class ProfesorGetcolumns implements GenericOperation {
     }
 
 }
+
+   

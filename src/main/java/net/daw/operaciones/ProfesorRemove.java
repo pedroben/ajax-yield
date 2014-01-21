@@ -21,25 +21,25 @@ import net.daw.helper.Conexion;
  * @author AMPAROYPEDRO
  */
 public class ProfesorRemove implements GenericOperation {
-    @Override
+      @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try {
-            ProfesorDao oProfesorDao = new ProfesorDao(Conexion.getConection());
-            ProfesorBean oProfesorBean = new ProfesorBean();                                           
-            oProfesorBean.setId(Integer.parseInt(request.getParameter("id")));            
+            ProfesorDao oProfesorDAO = new ProfesorDao(Conexion.getConection());
+            ProfesorBean oProfesor = new ProfesorBean();
+            oProfesor.setId(Integer.parseInt(request.getParameter("id")));
             Map<String, String> data = new HashMap<>();
-            if (oProfesorBean != null) {
-                oProfesorDao.remove(oProfesorBean);
+            if (oProfesor != null) {
+                oProfesorDAO.remove(oProfesor);
                 data.put("status", "200");
-                data.put("message", "se ha eliminado el registro con id=" + oProfesorBean.getId());
+                data.put("message", "se ha eliminado el registro con id=" + oProfesor.getId());
             } else {
                 data.put("status", "error");
                 data.put("message", "error");
             }
             Gson gson = new Gson();
             String resultado = gson.toJson(data);
-            return resultado;        
+            return resultado;
         } catch (Exception e) {
             throw new ServletException("ProfesorRemoveJson: View Error: " + e.getMessage());
         }

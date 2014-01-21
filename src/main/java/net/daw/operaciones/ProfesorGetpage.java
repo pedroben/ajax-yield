@@ -6,6 +6,7 @@
 package net.daw.operaciones;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,7 @@ import net.daw.helper.FilterBean;
  */
 public class ProfesorGetpage implements GenericOperation {
 
-    @Override
+   @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String data;
         try {
@@ -75,14 +76,16 @@ public class ProfesorGetpage implements GenericOperation {
             } else {
                 hmOrder = null;
             }
-            ProfesorDao oProfesorDao = new ProfesorDao(Conexion.getConection());
-            List<ProfesorBean> oProfesores = oProfesorDao.getPage(rpp, page, alFilter, hmOrder);
-            data = new Gson().toJson(oProfesores);
+            ProfesorDao oProfesorDAO = new ProfesorDao(Conexion.getConection());
+            List<ProfesorBean> oProfesores = oProfesorDAO.getPage(rpp, page, alFilter, hmOrder);
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.setDateFormat("dd/MM/yyyy");
+            Gson gson = gsonBuilder.create();
+            data = gson.toJson(oProfesores);
             data = "{\"list\":" + data + "}";
             return data;
         } catch (Exception e) {
-            throw new ServletException("ProfesorGetJson: View Error: " + e.getMessage());
+            throw new ServletException("ProfesorGetpageJson: View Error: " + e.getMessage());
         }
     }
-
 }

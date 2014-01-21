@@ -1,15 +1,14 @@
 <%-- 
     Document   : list.jsp
-    Created on : Jan 16, 2013, 12:57:09 PM
-    Author     : Alvaro
+    Author     : Pedro Benito
 --%>
 <%@page import="net.daw.helper.Conexion"%>
 <%@page import="net.daw.dao.ProfesorDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Iterator"%>
 <%
-    ProfesorDao oProfesorDao_Mysql = new ProfesorDao(Conexion.getConection());
-    ArrayList<String> alColumnsNames = (ArrayList<String>) oProfesorDao_Mysql.getColumnsNames();
+    ProfesorDao oProfesorDAO = new ProfesorDao(Conexion.getConection());
+    ArrayList<String> alColumnsNames = (ArrayList<String>) oProfesorDAO.getColumnsNames();
     Iterator<String> oIterador = alColumnsNames.listIterator();
     String strNombreMantenimiento = "profesor";
 %>
@@ -93,4 +92,3 @@
         <div class="modal-footer"></div>
     </div>
 </div>
-
