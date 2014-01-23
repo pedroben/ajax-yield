@@ -32,7 +32,7 @@ public class TipodocumentoSave implements GenericOperation {
             oTipodocumento = gson.fromJson(jason, oTipodocumento.getClass());
             Map<String, String> data = new HashMap<>();
             if (oTipodocumento != null) {
-                oTipodocumento = oTipodocumentoDAO.set(oTipodocumento);
+                oTipodocumentoDAO.set(oTipodocumento);
                 data.put("status", "200");
                 data.put("message", Integer.toString(oTipodocumento.getId()));
             } else {
