@@ -153,15 +153,15 @@
                     opcionControl.inicia(opcionView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
-                $('#lnktipoDocumento').unbind('click');
-                $('#lnktipoDocumento').click(function() {
+                $('#lnkTipoDocumento').unbind('click');
+                $('#lnkTipoDocumento').click(function() {
                     var tipodocumento = objeto('tipodocumento', '<%=request.getContextPath()%>');
                     var tipodocumentoView = vista(tipodocumento, '<%=request.getContextPath()%>');
 
                     $('#indexContenidoJsp').empty();
                     $('#indexContenido').empty().append(tipodocumentoView.getEmptyList());
 
-                    var opcionControl = control_opcion_list('<%=request.getContextPath()%>');
+                    var opcionControl = control_tipodocumento_list('<%=request.getContextPath()%>');
                     opcionControl.inicia(tipodocumentoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
