@@ -1,17 +1,18 @@
 <%-- 
     Document   : list
-    Created on : 17-ene-2014, 11:45:46
-    Author     : al037213
+    Created on : 17-ene-2014, 11:57:57
+    Author     : al037877
 --%>
+
 <%@page import="net.daw.helper.Conexion"%>
-<%@page import="net.daw.dao.OpcionDao"%>
+<%@page import="net.daw.dao.TipodocumentoDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Iterator"%>
 <%
-    OpcionDao oOpcionDao = new OpcionDao(Conexion.getConection());
-    ArrayList<String> alColumnsNames = (ArrayList<String>) oOpcionDao.getColumnsNames();
+    TipodocumentoDao oTipodocumentoDao = new TipodocumentoDao(Conexion.getConection());
+    ArrayList<String> alColumnsNames = (ArrayList<String>) oTipodocumentoDao.getColumnsNames();
     Iterator<String> oIterador = alColumnsNames.listIterator();
-    String strNombreMantenimiento = "opcion";
+    String strNombreMantenimiento = "tipodocumento";
 %>
 <div id="<%=strNombreMantenimiento%>_list">
     <div class="span12">
