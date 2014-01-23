@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.daw.bean.ActividadofflineBean;
 import net.daw.dao.ActividadofflineDao;
 import net.daw.helper.Conexion;
@@ -22,8 +23,7 @@ import net.daw.helper.Conexion;
 
 public class ActividadofflineGet implements GenericOperation{
     
-    
-     @Override
+    @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String data;         
         try {            
@@ -34,16 +34,16 @@ public class ActividadofflineGet implements GenericOperation{
                 ActividadofflineBean oActividadoffline = new ActividadofflineBean();
                 oActividadoffline.setId(Integer.parseInt(request.getParameter("id")));
                 oActividadofflineDAO.get(oActividadoffline);
-                data = new Gson().toJson(oActividadoffline);
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("dd/MM/yyyy");
+                Gson gson = gsonBuilder.create();
+                data = gson.toJson(oActividadoffline);
+                
             }
             return data;
         } catch (Exception e) {
             throw new ServletException("ActividadofflineGetJson: View Error: " + e.getMessage());
         }
     }
-    
-    
-    
-    
     
 }

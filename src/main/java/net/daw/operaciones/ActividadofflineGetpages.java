@@ -76,6 +76,4 @@ public class ActividadofflineGetpages implements GenericOperation {
             throw new ServletException("ActividadofflineGetpagesJson: View Error: " + e.getMessage());
         }
     }
-    
-    
 }

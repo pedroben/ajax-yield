@@ -108,6 +108,7 @@
 
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
+        <script src="js/control/actividadoffline.js" charset="UTF-8"></script>
 
 
         <script>
@@ -138,6 +139,19 @@
                     entradaControl.inicia(entradaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
+                 $('#lnkActividadoffline').unbind('click');
+                $('#lnkActividadoffline').click(function() {
+                    var actividadoffline = objeto('actividadoffline', '<%=request.getContextPath()%>');
+                    var actividadofflineView = vista(actividadoffline, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(actividadofflineView.getEmptyList());
+
+                    var actividadofflineControl = control_actividadoffline_list('<%=request.getContextPath()%>');
+                    actividadofflineControl.inicia(actividadofflineView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                
             });
 
         </script>

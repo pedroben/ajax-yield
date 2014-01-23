@@ -24,7 +24,7 @@ public class ActividadofflineBean {
     }
 
     
-     public ActividadofflineBean(int id) {
+     public ActividadofflineBean(Integer id) {
          this.id = id;
      }
     
@@ -32,7 +32,7 @@ public class ActividadofflineBean {
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -88,35 +88,31 @@ public class ActividadofflineBean {
     /**
      * @return the evaluacion
      */
-    public int getEvaluacion() {
+    public Integer getEvaluacion() {
         return evaluacion;
     }
 
     /**
      * @param evaluacion the evaluacion to set
      */
-    public void setEvaluacion(int evaluacion) {
+    public void setEvaluacion(Integer evaluacion) {
         this.evaluacion = evaluacion;
     }
 
-       /**
-     * @param activo the activo to set
-     */
-    public void setActivo(boolean activo) {
-        this.setActivo(activo);
-    }
+    
+   
 
     /**
      * @return the activo
      */
-    public int getActivo() {
+    public Integer getActivo() {
         return activo;
     }
 
     /**
      * @param activo the activo to set
      */
-    public void setActivo(int activo) {
+    public void setActivo(Integer activo) {
         this.activo = activo;
     }
      

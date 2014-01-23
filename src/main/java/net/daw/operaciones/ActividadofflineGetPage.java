@@ -10,6 +10,7 @@ package net.daw.operaciones;
  */
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,9 +51,9 @@ public class ActividadofflineGetPage implements GenericOperation{
                         oFilterBean.setFilterValue(request.getParameter("filtervalue"));
                         oFilterBean.setFilterOrigin("user");
                         alFilter.add(oFilterBean);
-                    } 
-                } 
-            } 
+                    }
+                }
+            }
             if (request.getParameter("systemfilter") != null) {
                 if (request.getParameter("systemfilteroperator") != null) {
                     if (request.getParameter("systemfiltervalue") != null) {
@@ -68,21 +69,25 @@ public class ActividadofflineGetPage implements GenericOperation{
             HashMap<String, String> hmOrder = new HashMap<>();
 
             if (request.getParameter("order") != null) {
-                if (request.getParameter("ordervalue") != null) {           
-                    hmOrder.put(request.getParameter("order"), request.getParameter("ordervalue"));                  
-                } else             hmOrder=null;
-            } else             hmOrder=null;
-            ActividadofflineDao oActividadofflineDAO = new ActividadofflineDao(Conexion.getConection());
-            List<ActividadofflineBean> oActividadoffline = oActividadofflineDAO.getPage( rpp, page, alFilter,hmOrder );
-            data = new Gson().toJson(oActividadoffline);
+                if (request.getParameter("ordervalue") != null) {
+                    hmOrder.put(request.getParameter("order"), request.getParameter("ordervalue"));
+                } else {
+                    hmOrder = null;
+                }
+            } else {
+                hmOrder = null;
+            }
+             ActividadofflineDao oActividadofflineDAO = new  ActividadofflineDao(Conexion.getConection());
+            List<ActividadofflineBean> oActividadoffline = oActividadofflineDAO.getPage(rpp, page, alFilter, hmOrder);
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.setDateFormat("dd/MM/yyyy");
+            Gson gson = gsonBuilder.create();
+            data = gson.toJson(oActividadoffline);
             data = "{\"list\":" + data + "}";
             return data;
         } catch (Exception e) {
             throw new ServletException("ActividadofflineGetJson: View Error: " + e.getMessage());
         }
     }
-    
-    
-    
     
 }

@@ -3,14 +3,13 @@
     Created on : 23-ene-2014, 9:31:53
     Author     : Javi Bonet
 --%>
-
 <%@page import="net.daw.helper.Conexion"%>
 <%@page import="net.daw.dao.ActividadofflineDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Iterator"%>
 <%
-    ActividadofflineDao oActividadofflineDao_Mysql = new ActividadofflineDao(Conexion.getConection());
-    ArrayList<String> alColumnsNames = (ArrayList<String>) oActividadofflineDao_Mysql.getColumnsNames();
+    ActividadofflineDao oActividadofflineDao = new ActividadofflineDao(Conexion.getConection());
+    ArrayList<String> alColumnsNames = (ArrayList<String>) oActividadofflineDao.getColumnsNames();
     Iterator<String> oIterador = alColumnsNames.listIterator();
     String strNombreMantenimiento = "actividadoffline";
 %>

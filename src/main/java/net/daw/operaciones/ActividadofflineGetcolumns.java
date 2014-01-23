@@ -37,8 +37,7 @@ public class ActividadofflineGetcolumns implements GenericOperation{
             throw new ServletException("ActividadofflineGetcolumnsJson: View Error: " + e.getMessage());
         }
     }
-    
-    
+
     
     
     
