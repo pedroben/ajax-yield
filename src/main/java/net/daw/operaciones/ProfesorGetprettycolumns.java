@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package net.daw.operaciones;
 
 import javax.servlet.ServletException;
@@ -20,6 +19,8 @@ public class ProfesorGetprettycolumns implements GenericOperation {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
             String data = "{\"data\": [\"id\", \"id_usuario\", \"nombre\", \"ape1\", \"ape2\", \"sexo\", \"telefono\", \"email\", \"dni\"]}";
+            // String data = "{\"data\": [\"id\", \"nombre\", \"ape1\", \"ape2\", \"telefono\", \"email\", \"dni\"]}";
+
             return data;
         } catch (Exception e) {
             throw new ServletException("ProfesorGetpagesJson: View Error: " + e.getMessage());

@@ -10,13 +10,32 @@
             <input type="text" id="id" name="id" placeholder="id" />
         </div>
     </div>
-   <!-- <div class="control-group">
+    
+    
+    <div class="control-group">
+            <label class="control-label" for="inputId_usuario">Id Usuario: </label> 
+            <div class="controls"> 
+                <!-- <span id="id_tipoproducto" class="alert alert-info"></span> -->
+                <input readonly="true" id="id_tipoproducto" class="input-mini"
+                       name="id_usuario" type="text" size="5" maxlength="5" />  
+                <a class="btn btn-mini" id="id_tipoproducto_button" href="#"><i class="icon-search"></i></a>
+            </div>
+    </div>
+    
+    
+    
+    <!--
+    <div class="control-group">
         <label class="control-label" for="inputId_usuario">Id usuario:</label>
         <div class="controls">
             <input type="text" id="id_usuario" name="id_usuario" placeholder="id_usuario" />
+            <a class="btn btn-mini" id="id_usuario_button" href="#"><i class="icon-search"></i></a>
         </div>
     </div>
-   -->
+-->
+    
+    
+    
     <div class="control-group">
         <label class="control-label" for="inputNombre">Nombre:</label>
         <div class="controls">
@@ -36,12 +55,16 @@
             <input type="text" id="ape2" name="ape2" placeholder="ape2" />
         </div>
     </div>
+
+
     <div class="control-group">
         <label class="control-label" for="inputSexo">Sexo</label>
         <div class="controls">
             <input type="text" id="sexo" name="sexo" placeholder="sexo" />
         </div>
     </div>
+
+
     <div class="control-group">
         <label class="control-label" for="inputTelefono">Teléfono:</label>
         <div class="controls">
@@ -62,9 +85,6 @@
             <input type="text" id="dni" name="dni" placeholder="dni" />
         </div>
     </div>
-
-
-
 
 
     <div class="control-group">
