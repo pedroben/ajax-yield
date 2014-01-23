@@ -108,6 +108,8 @@
 
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
+        <script src="js/control/opcion.js" charset="UTF-8"></script>
+        <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
 
 
         <script>
@@ -148,7 +150,19 @@
                     $('#indexContenido').empty().append(opcionView.getEmptyList());
 
                     var opcionControl = control_opcion_list('<%=request.getContextPath()%>');
-                    opcionControl.inicia(entradaView, 1, null, null, 10, null, null, null, null);
+                    opcionControl.inicia(opcionView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnktipoDocumento').unbind('click');
+                $('#lnktipoDocumento').click(function() {
+                    var tipodocumento = objeto('tipodocumento', '<%=request.getContextPath()%>');
+                    var tipodocumentoView = vista(tipodocumento, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(tipodocumentoView.getEmptyList());
+
+                    var opcionControl = control_opcion_list('<%=request.getContextPath()%>');
+                    opcionControl.inicia(tipodocumentoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
             });
