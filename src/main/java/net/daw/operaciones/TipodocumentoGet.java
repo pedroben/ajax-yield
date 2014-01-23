@@ -30,7 +30,7 @@ public class TipodocumentoGet implements GenericOperation {
                 TipodocumentoDao oTipodocumentoDAO = new TipodocumentoDao(Conexion.getConection());
                 TipodocumentoBean oTipodocumento = new TipodocumentoBean();
                 oTipodocumento.setId(Integer.parseInt(request.getParameter("id")));
-                oTipodocumentoDAO.get(oTipodocumento);
+                oTipodocumento = oTipodocumentoDAO.get(oTipodocumento);
                 data = new Gson().toJson(oTipodocumento);
             }
             return data;

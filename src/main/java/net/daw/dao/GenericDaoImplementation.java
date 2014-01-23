@@ -109,7 +109,11 @@ public class GenericDaoImplementation<TIPO_OBJETO> implements GenericDao<TIPO_OB
                                             method.invoke(oBean, Integer.parseInt(strValor));
                                             break;
                                         case "java.lang.Boolean":
-                                            method.invoke(oBean, Boolean.getBoolean(strValor));
+                                            if(Integer.parseInt(strValor) == 1){
+                                                method.invoke(oBean, true);
+                                            }else{
+                                                method.invoke(oBean, false);
+                                            }
                                             break;
                                         case "java.util.Date":
                                             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
