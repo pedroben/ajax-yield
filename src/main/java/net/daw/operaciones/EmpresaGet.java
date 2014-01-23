@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package net.daw.operaciones;
 
 import javax.servlet.ServletException;
@@ -19,12 +18,12 @@ import net.daw.helper.Conexion;
  *
  * @author AntonioNP
  */
-public class EmpresaGet implements GenericOperation{
-    
+public class EmpresaGet implements GenericOperation {
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String data;         
-        try {            
+        String data;
+        try {
             if (request.getParameter("id") == null) {
                 data = "{\"error\":\"id is mandatory\"}";
             } else {
@@ -32,11 +31,11 @@ public class EmpresaGet implements GenericOperation{
                 EmpresaBean oEmpresa = new EmpresaBean();
                 oEmpresa.setId(Integer.parseInt(request.getParameter("id")));
                 oEmpresaDAO.get(oEmpresa);
-                GsonBuilder gsonBuilder = new GsonBuilder();
-                gsonBuilder.setDateFormat("dd/MM/yyyy");
-                Gson gson = gsonBuilder.create();
-                data = gson.toJson(oEmpresa);
-                
+                //      GsonBuilder gsonBuilder = new GsonBuilder();
+                //       gsonBuilder.setDateFormat("dd/MM/yyyy");
+                //       Gson gson = gsonBuilder.create();
+                //       data = gson.toJson(oEmpresa);
+                data = new Gson().toJson(oEmpresa);
             }
             return data;
         } catch (Exception e) {

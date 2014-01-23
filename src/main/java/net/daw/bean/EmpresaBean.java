@@ -13,7 +13,9 @@ public class EmpresaBean {
 
     private Integer id = 0;
     private Integer id_usuario = 0;
-    private String nombre = "", cif = "", direccion = "", localidad = "", provincia = "", pais = "", telefono = "", fax = "", actividad = "", nombrecontacto = "", emailcontacto = "", validada = "";
+    private String nombre = "", cif = "", direccion = "", 
+            localidad = "", provincia = "", pais = "", telefono = "", 
+            fax = "", actividad = "", nombrecontacto = "", emailcontacto = "", validada = "";
 
     public EmpresaBean() {
 
