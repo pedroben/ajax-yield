@@ -50,8 +50,8 @@ var control_lenguaje_list = function(path) {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             //$(prefijo_div + '#nombre').focus();
         }
-        //http://alittlecode.com/jquery-form-validation-with-styles-from-twitter-bootstrap/
-        jQuery.validator.setDefaults({
+        //http://jqueryvalidation.org/documentation/
+        $('#formulario').validate({
             rules: {
                 nombre: {
                     required: true,
@@ -71,8 +71,7 @@ var control_lenguaje_list = function(path) {
                 element
                         .text('OK!').addClass('valid')
                         .closest('.control-group').removeClass('error').addClass('success');
-            },
-            debug: true
+            }
         });
 
 

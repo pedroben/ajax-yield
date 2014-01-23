@@ -97,14 +97,75 @@ var control_documento_list = function(path) {
             return false;
 
         });
+        
+        //http://jqueryvalidation.org/documentation/
+        $('#formulario').validate({
+            rules: {
+                titulo: {
+                    required: true,
+                    maxlength: 255
+                },
+                contenido: {
+                    required: true
+                },
+                fecha: {
+                    required: true,
+                    date: true
+                },
+                nota: {
+                    required: true,
+                    maxlength: 6,
+                    digits: true
+                },
+                etiquetas: {
+                    required: true,
+                    maxlength: 255
+                }
+            },
+            messages: {
+                titulo: {
+                    required: "Introduce un titulo",
+                    maxlength: "Tiene que ser menos de 255 caracteres"
+                },
+                contenido: {
+                    required: "Introduce contenido"
+                },
+                fecha: {
+                    required: "Introduce una fecha",
+                    date: "Introduze una fecha valida 'dd/MM/yyyy'"
+                },
+                nota: {
+                    required: "Introduce una nota",
+                    maxlength: "Tiene que ser menos de 6 caracteres",
+                    digits: "Tiene que ser un numero entero"
+                },
+                etiquetas: {
+                    required: "Introduce una/s etiqueta/s",
+                    maxlength: "Tiene que ser menos de 255 caracteres"
+                }
+                
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                        .text('OK!').addClass('valid')
+                        .closest('.control-group').removeClass('error').addClass('success');
+            }
+        });
+
 
         $(prefijo_div + '#submitForm').unbind('click');
-        $(prefijo_div + '#submitForm').click(function(event) {
-            //validaciones...
-            enviarDatosUpdateForm(view,prefijo_div);
+        $(prefijo_div + '#submitForm').click(function() {
+            if ($('#formulario').valid()) {
+                enviarDatosUpdateForm(view, prefijo_div);
+            }
             return false;
         });
     }
+        
+        
 
     function removeConfirmationModalForm(view, place, id) {
         cabecera = "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>" +

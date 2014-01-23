@@ -108,6 +108,7 @@
         <script src="js/main.js" charset="UTF-8"></script>
 
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
+        <script src="js/control/documento.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
 
 
@@ -125,6 +126,18 @@
 
                     var lenguajeControl = control_lenguaje_list('<%=request.getContextPath()%>');
                     lenguajeControl.inicia(lenguajeView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnkDocumento').unbind('click');
+                $('#lnkDocumento').click(function() {
+                    var documento = objeto('documento', '<%=request.getContextPath()%>');
+                    var documentoView = vista(documento, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(documentoView.getEmptyList());
+
+                    var documentoControl = control_documento_list('<%=request.getContextPath()%>');
+                    documentoControl.inicia(documentoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
                 $('#lnkEntrada').unbind('click');
