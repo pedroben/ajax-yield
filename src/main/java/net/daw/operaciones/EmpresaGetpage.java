@@ -78,10 +78,12 @@ public class EmpresaGetpage implements GenericOperation {
             }
             EmpresaDao oEmpresaDAO = new EmpresaDao(Conexion.getConection());
             List<EmpresaBean> oEmpresas = oEmpresaDAO.getPage(rpp, page, alFilter, hmOrder);
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.setDateFormat("dd/MM/yyyy");
-            Gson gson = gsonBuilder.create();
-            data = gson.toJson(oEmpresas);
+       //     GsonBuilder gsonBuilder = new GsonBuilder();
+            //     gsonBuilder.setDateFormat("dd/MM/yyyy");
+            //    Gson gson = gsonBuilder.create();
+            //     data = gson.toJson(oEmpresas);
+            //    data = "{\"list\":" + data + "}";
+            data = new Gson().toJson(oEmpresas);
             data = "{\"list\":" + data + "}";
             return data;
         } catch (Exception e) {
