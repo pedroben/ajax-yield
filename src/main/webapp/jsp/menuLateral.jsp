@@ -12,6 +12,8 @@
         <li class="nav-header">Mantenimientos</li>            
         <li><a id="lnkLenguaje" href="#">Lenguaje</a></li>
         <li><a id="lnkEntrada" href="#">Entrada</a></li>
+        <li><a id="lnkUsuario" href="#">Usuario</a></li>
+        <li><a id="lnkUsuario" href="#">Hilo</a></li>
     </ul>
 </div>
 
