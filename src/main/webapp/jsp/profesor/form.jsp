@@ -10,12 +10,13 @@
             <input type="text" id="id" name="id" placeholder="id" />
         </div>
     </div>
-    <div class="control-group">
+   <!-- <div class="control-group">
         <label class="control-label" for="inputId_usuario">Id usuario:</label>
         <div class="controls">
             <input type="text" id="id_usuario" name="id_usuario" placeholder="id_usuario" />
         </div>
     </div>
+   -->
     <div class="control-group">
         <label class="control-label" for="inputNombre">Nombre:</label>
         <div class="controls">
