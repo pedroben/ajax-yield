@@ -212,7 +212,16 @@ var vista = function(objeto, ContextPath) {
             datos = objeto.getOne(id);
             var tabla = "<table class=\"table table table-bordered table-condensed\">";
             $.each(objeto.getFieldNames(), function(index, valor) {
-                tabla += '<tr><td><strong>' + cabecera[index] + '</strong></td><td>' + datos[valor] + '</td></tr>';
+                switch (datos[valor]) {
+                    case true:
+                        tabla += '<tr><td><strong>' + cabecera[index] + '</strong></td><td><i class="icon-ok"></i></td></tr>';
+                        break;
+                    case false:
+                        tabla += '<tr><td><strong>' + cabecera[index] + '</strong></td><td><i class="icon-remove"></i></td></tr>';
+                        break;
+                    default:
+                        tabla += '<tr><td><strong>' + cabecera[index] + '</strong></td><td>' + datos[valor] + '</td></tr>';
+                }
             });
             tabla += '</table>';
             return tabla;
