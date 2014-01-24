@@ -18,7 +18,7 @@ public class ProfesorGetprettycolumns implements GenericOperation {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
-            String data = "{\"data\": [\"id\", \"id_usuario\", \"nombre\", \"ape1\", \"ape2\", \"sexo\", \"telefono\", \"email\", \"dni\"]}";
+           String data = "{\"data\": [\"id\", \"id_usuario\", \"nombre\", \"ape1\", \"ape2\", \"sexo\", \"telefono\", \"email\", \"dni\"]}";
             // String data = "{\"data\": [\"id\", \"nombre\", \"ape1\", \"ape2\", \"telefono\", \"email\", \"dni\"]}";
 
             return data;

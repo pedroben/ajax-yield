@@ -16,13 +16,16 @@
             <label class="control-label" for="inputId_usuario">Id Usuario: </label> 
             <div class="controls"> 
                 <!-- <span id="id_tipoproducto" class="alert alert-info"></span> -->
-                <input readonly="true" id="id_tipoproducto" class="input-mini"
+               <input readonly="true" id="id_usuario" class="input-mini"
                        name="id_usuario" type="text" size="5" maxlength="5" />  
-                <a class="btn btn-mini" id="id_tipoproducto_button" href="#"><i class="icon-search"></i></a>
+                <a class="btn btn-mini" id="id_usuario_button" href="#"><i class="icon-search"></i></a>
             </div>
     </div>
-    
-    
+          <!--      <div class="control-group">
+            <div class="controls">
+                <span id="id_usuario_desc" class="alert alert-success"></span>                                       
+            </div>
+        </div> -->
     
     <!--
     <div class="control-group">
@@ -32,9 +35,7 @@
             <a class="btn btn-mini" id="id_usuario_button" href="#"><i class="icon-search"></i></a>
         </div>
     </div>
--->
-    
-    
+    -->
     
     <div class="control-group">
         <label class="control-label" for="inputNombre">Nombre:</label>
