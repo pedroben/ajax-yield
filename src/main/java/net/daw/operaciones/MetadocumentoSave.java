@@ -5,6 +5,7 @@
 package net.daw.operaciones;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -28,7 +29,7 @@ public class MetadocumentoSave implements GenericOperation {
         try {
             MetadocumentoDao oMetadocumentoDAO = new MetadocumentoDao(Conexion.getConection());
             MetadocumentoBean oMetadocumento = new MetadocumentoBean();
-            Gson gson = new Gson();
+            Gson gson=  new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
             String jason = request.getParameter("json");
             jason = EncodingUtil.decodeURIComponent(jason);
             oMetadocumento = gson.fromJson(jason, oMetadocumento.getClass());

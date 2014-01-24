@@ -17,7 +17,7 @@
     <div class="control-group">
         <label class="control-label"  for="inputTitulo">Titulo:</label>
         <div class="controls">
-            <input type="text" id="nombre" name="titulo" size="15" placeholder="titulo" />
+            <input type="text" id="titulo" name="titulo" size="15" placeholder="titulo" />
         </div>
     </div>
 
