@@ -55,6 +55,51 @@ var control_empresa_list = function(path) {
             enviarDatosUpdateForm(view, prefijo_div);
             return false;
         });
+        // yo
+        //en desarrollo: tratamiento de las claves ajenas ...
+        $(prefijo_div + '#id_usuario_button').unbind('click');
+        $(prefijo_div + '#id_usuario_button').click(function() {
+
+            var tipoUsuario = objeto('empresa', path);
+            var tipoUsuarioView = vista(tipoUsuario, path);
+
+            cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="myModalLabel">Elección</h3>';
+            pie = '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>';
+            listado = tipoUsuarioView.getEmptyList();
+            loadForm('#modal02', cabecera, listado, pie, true);
+
+            $(prefijo_div + '#modal02').css({
+                'right': '20px',
+                'left': '20px',
+                'width': 'auto',
+                'margin': '0',
+                'display': 'block'
+            });
+
+            var tipoUsuarioControl = control_empresa_list(path);
+            tipoUsuarioControl.inicia(tipoUsuarioView, 1, null, null, 10, null, null, null, callbackSearchTipoUsuario, null, null, null);
+
+            function callbackSearchTipoUsuario(id) {
+                $(prefijo_div + '#modal02').modal('hide');
+                $(prefijo_div + '#modal02').data('modal', null);
+                $(prefijo_div + '#id_usuario_button').val($(this).attr('id'));
+                $(prefijo_div + '#id_usuario_button_desc').empty().html(objeto('empresa', path).getOne($(prefijo_div + '#id_usuario_button').val()).descripcion);
+
+                return false;
+            }
+
+            return false;
+
+        });
+
+        $(prefijo_div + '#submitForm').unbind('click');
+        $(prefijo_div + '#submitForm').click(function(event) {
+            //validaciones...
+            // yo enviarDatosUpdateForm(view, id);
+            enviarDatosUpdateForm(view, prefijo_div);
+            return false;
+        });
+
     }
 
     function removeConfirmationModalForm(view, place, id) {
@@ -79,6 +124,7 @@ var control_empresa_list = function(path) {
         pie = "<button class=\"btn btn-primary\" data-dismiss=\"modal\" aria-hidden=\"true\">Cerrar</button>";
         loadForm(place, cabecera, view.getObjectTable(id), pie, true);
     }
+
 
     return {
         inicia: function(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue) {
@@ -173,7 +219,7 @@ var control_empresa_list = function(path) {
             });
 
             //asignación del evento de click para cambiar de página en la botonera de paginación
-            
+
             $(prefijo_div + '.pagination_link').unbind('click');
             $(prefijo_div + '.pagination_link').click(function() {
                 var id = $(this).attr('id');
@@ -183,7 +229,7 @@ var control_empresa_list = function(path) {
             });
 
             //boton de crear un nuevo elemento
-            
+
             if (callback) {
                 $(prefijo_div + '#crear').css("display", "none");
             } else {
