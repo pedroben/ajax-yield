@@ -5,6 +5,7 @@
 package net.daw.operaciones;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -29,7 +30,7 @@ public class DocumentoSave implements GenericOperation {
         try {
             DocumentoDao oDocumentoDAO = new DocumentoDao(Conexion.getConection());
             DocumentoBean oDocumento = new DocumentoBean();
-            Gson gson = new Gson();
+            Gson gson=  new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
             String jason = request.getParameter("json");
             jason = EncodingUtil.decodeURIComponent(jason);
             oDocumento = gson.fromJson(jason, oDocumento.getClass());

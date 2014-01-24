@@ -17,7 +17,7 @@ public class DocumentoBean {
     private String contenido = "";
     private Date fecha = new Date();
     private Integer nota = 0;
-    //private UsuarioBean usuario = null;
+    private Integer id_usuario = null;
     private String etiquetas = "";
 
     public DocumentoBean() {
@@ -68,14 +68,14 @@ public class DocumentoBean {
         this.nota = nota;
     }
 
-//    public UsuarioBean getUsuario() {
-//        return usuario;
-//    }
-//
-//    public void setUsuario(UsuarioBean usuario) {
-//        this.usuario = usuario;
-//    }
+    public Integer getId_usuario() {
+        return id_usuario;
+    }
 
+    public void setId_usuario(Integer id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+    
     public String getEtiquetas() {
         return etiquetas;
     }
