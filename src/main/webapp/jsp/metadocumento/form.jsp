@@ -20,6 +20,19 @@
             <input type="text" id="nombre" name="titulo" size="15" placeholder="titulo" />
         </div>
     </div>
+
+    <div class="control-group">
+        <label class="control-label" for="descripcion">Fecha: </label> 
+        <div class="controls">
+            <input id="fecha" name="fecha" type="text" size="10" maxlength="50" value="" /> 
+        </div>
+    </div>
+    <script>$("#fecha").datepicker({
+            showOn: 'both',
+            buttonImageOnly: true,
+            changeYear: true,
+            numberOfMonths: 1});
+    </script>
     <div class="control-group">
         <div class="controls">
             <button type="submit" id="submitForm" class="btn submitForm">Submit</button>
