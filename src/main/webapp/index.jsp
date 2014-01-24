@@ -108,7 +108,7 @@
 
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
-        <script src="js/control/requerimiento.js" charset="UTF-8"></script>
+        <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
 
 
         <script>
@@ -139,16 +139,16 @@
                     entradaControl.inicia(entradaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
-                $('#lnkRequerimiento').unbind('click');
-                $('#lnkRequerimiento').click(function() {
-                    var requerimiento = objeto('requerimiento', '<%=request.getContextPath()%>');
-                    var requerimientoView = vista(requerimiento, '<%=request.getContextPath()%>');
+                $('#lnkTipodocumento').unbind('click');
+                $('#lnkTipodocumento').click(function() {
+                    var tipodocumento = objeto('tipodocumento', '<%=request.getContextPath()%>');
+                    var tipodocumentoView = vista(tipodocumento, '<%=request.getContextPath()%>');
 
                     $('#indexContenidoJsp').empty();
-                    $('#indexContenido').empty().append(requerimientoView.getEmptyList());
+                    $('#indexContenido').empty().append(tipodocumentoView.getEmptyList());
 
-                    var requerimientoControl = control_requerimiento_list('<%=request.getContextPath()%>');
-                    requerimientoControl.inicia(requerimientoView, 1, null, null, 10, null, null, null, null);
+                    var tipodocumentoControl = control_tipodocumento_list('<%=request.getContextPath()%>');
+                    tipodocumentoControl.inicia(tipodocumentoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
             });

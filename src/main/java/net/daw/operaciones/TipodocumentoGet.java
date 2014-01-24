@@ -3,22 +3,22 @@
  * and open the template in the editor.
  */
 package net.daw.operaciones;
-
-/**
- *
- * @author Alvaro
- */
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.daw.bean.TipodocumentoBean;
+
 import com.google.gson.Gson;
-import net.daw.bean.LenguajeBean;
-import net.daw.dao.LenguajeDao;
+import net.daw.dao.TipodocumentoDao;
 import net.daw.helper.Conexion;
 
+/**
+ *
+ * @author al037877
+ */
 
-public class LenguajeGet implements GenericOperation {
+public class TipodocumentoGet implements GenericOperation {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -27,15 +27,15 @@ public class LenguajeGet implements GenericOperation {
             if (request.getParameter("id") == null) {
                 data = "{\"error\":\"id is mandatory\"}";
             } else {
-                LenguajeDao oLenguajeDAO = new LenguajeDao(Conexion.getConection());
-                LenguajeBean oLenguaje = new LenguajeBean();
-                oLenguaje.setId(Integer.parseInt(request.getParameter("id")));
-                oLenguajeDAO.get(oLenguaje);
-                data = new Gson().toJson(oLenguaje);
+                TipodocumentoDao oTipodocumentoDAO = new TipodocumentoDao(Conexion.getConection());
+                TipodocumentoBean oTipodocumento = new TipodocumentoBean();
+                oTipodocumento.setId(Integer.parseInt(request.getParameter("id")));
+                oTipodocumento = oTipodocumentoDAO.get(oTipodocumento);
+                data = new Gson().toJson(oTipodocumento);
             }
             return data;
         } catch (Exception e) {
-            throw new ServletException("LenguajeGetJson: View Error: " + e.getMessage());
+            throw new ServletException("TipodocumentoGetJson: View Error: " + e.getMessage());
         }
     }
 }
