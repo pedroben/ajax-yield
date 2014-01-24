@@ -161,7 +161,7 @@
                     $('#indexContenidoJsp').empty();
                     $('#indexContenido').empty().append(metadocumentoView.getEmptyList());
 
-                    var metadocumentoControl = control_tipodocumento_list('<%=request.getContextPath()%>');
+                    var metadocumentoControl = control_metadocumento_list('<%=request.getContextPath()%>');
                     metadocumentoControl.inicia(metadocumentoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
