@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
-var control_lenguaje_list = function(path) {
+var control_tipodocumento_list = function(path) {
     //contexto privado
 
-    var prefijo_div = "#lenguaje_list ";
+    var prefijo_div = "#tipodocumento_list ";
 
     function cargaBotoneraMantenimiento() {
         var botonera = [
@@ -52,7 +52,7 @@ var control_lenguaje_list = function(path) {
         }
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view,prefijo_div);
+            enviarDatosUpdateForm(view, prefijo_div);
             return false;
         });
     }
@@ -223,4 +223,3 @@ var control_lenguaje_list = function(path) {
         }
     };
 };
-

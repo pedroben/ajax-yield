@@ -10,29 +10,29 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.daw.bean.LenguajeBean;
-import net.daw.dao.LenguajeDao;
+import net.daw.bean.EntradaBean;
+import net.daw.dao.EntradaDao;
 import net.daw.helper.Conexion;
 
 
 
 /**
  *
- * @author Alvaro
+ * @author rafa
  */
-public class LenguajeRemove implements GenericOperation {
+public class EntradaRemove implements GenericOperation {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try {
-            LenguajeDao oLenguajeDAO = new LenguajeDao(Conexion.getConection());
-            LenguajeBean oLenguaje = new LenguajeBean();                                           
-            oLenguaje.setId(Integer.parseInt(request.getParameter("id")));            
+            EntradaDao oEntradaDAO = new EntradaDao(Conexion.getConection());
+            EntradaBean oEntrada = new EntradaBean();                                           
+            oEntrada.setId(Integer.parseInt(request.getParameter("id")));            
             Map<String, String> data = new HashMap<>();
-            if (oLenguaje != null) {
-                oLenguajeDAO.remove(oLenguaje);
+            if (oEntrada != null) {
+                oEntradaDAO.remove(oEntrada);
                 data.put("status", "200");
-                data.put("message", "se ha eliminado el registro con id=" + oLenguaje.getId());
+                data.put("message", "se ha eliminado el registro con id=" + oEntrada.getId());
             } else {
                 data.put("status", "error");
                 data.put("message", "error");
@@ -41,7 +41,7 @@ public class LenguajeRemove implements GenericOperation {
             String resultado = gson.toJson(data);
             return resultado;        
         } catch (Exception e) {
-            throw new ServletException("LenguajeRemoveJson: View Error: " + e.getMessage());
+            throw new ServletException("EntradaRemoveJson: View Error: " + e.getMessage());
         }
     }
 }

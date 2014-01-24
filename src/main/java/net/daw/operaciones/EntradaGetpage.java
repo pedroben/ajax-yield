@@ -4,25 +4,41 @@
  */
 package net.daw.operaciones;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.daw.dao.LenguajeDao;
+import net.daw.bean.EntradaBean;
+import net.daw.dao.EntradaDao;
 import net.daw.helper.Conexion;
 import net.daw.helper.FilterBean;
 
-
 /**
  *
- * @author Alvaro
+ * @author rafa
  */
-public class LenguajeGetregisters implements GenericOperation {
+public class EntradaGetpage implements GenericOperation {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String data;
         try {
+            int rpp;
+            if (request.getParameter("rpp") == null) {
+                rpp = 10;
+            } else {
+                rpp = Integer.parseInt(request.getParameter("rpp"));
+            }
+            int page;
+            if (request.getParameter("page") == null) {
+                page = 1;
+            } else {
+                page = Integer.parseInt(request.getParameter("page"));
+            }
             ArrayList<FilterBean> alFilter = new ArrayList<>();
             if (request.getParameter("filter") != null) {
                 if (request.getParameter("filteroperator") != null) {
@@ -33,9 +49,9 @@ public class LenguajeGetregisters implements GenericOperation {
                         oFilterBean.setFilterValue(request.getParameter("filtervalue"));
                         oFilterBean.setFilterOrigin("user");
                         alFilter.add(oFilterBean);
-                    } 
-                } 
-            } 
+                    }
+                }
+            }
             if (request.getParameter("systemfilter") != null) {
                 if (request.getParameter("systemfilteroperator") != null) {
                     if (request.getParameter("systemfiltervalue") != null) {
@@ -47,13 +63,28 @@ public class LenguajeGetregisters implements GenericOperation {
                         alFilter.add(oFilterBean);
                     }
                 }
-            }       
-            LenguajeDao oLenguajeDAO = new LenguajeDao(Conexion.getConection());
-            int pages = oLenguajeDAO.getCount(alFilter);
-            data = "{\"data\":\"" + Integer.toString(pages) + "\"}";
+            }
+            HashMap<String, String> hmOrder = new HashMap<>();
+
+            if (request.getParameter("order") != null) {
+                if (request.getParameter("ordervalue") != null) {
+                    hmOrder.put(request.getParameter("order"), request.getParameter("ordervalue"));
+                } else {
+                    hmOrder = null;
+                }
+            } else {
+                hmOrder = null;
+            }
+            EntradaDao oEntradaDAO = new EntradaDao(Conexion.getConection());
+            List<EntradaBean> oEntradas = oEntradaDAO.getPage(rpp, page, alFilter, hmOrder);
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.setDateFormat("dd/MM/yyyy");
+            Gson gson = gsonBuilder.create();
+            data = gson.toJson(oEntradas);
+            data = "{\"list\":" + data + "}";
             return data;
         } catch (Exception e) {
-            throw new ServletException("LenguajeGetregistersJson: View Error: " + e.getMessage());
+            throw new ServletException("EntradaGetJson: View Error: " + e.getMessage());
         }
     }
 }

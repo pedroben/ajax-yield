@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.daw.dao.LenguajeDao;
+import net.daw.dao.EntradaDao;
 import net.daw.helper.Conexion;
 import net.daw.helper.FilterBean;
 
 
 /**
  *
- * @author Alvaro
+ * @author rafa
  */
-public class LenguajeGetregisters implements GenericOperation {
+public class EntradaGetregisters implements GenericOperation {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -48,12 +48,12 @@ public class LenguajeGetregisters implements GenericOperation {
                     }
                 }
             }       
-            LenguajeDao oLenguajeDAO = new LenguajeDao(Conexion.getConection());
-            int pages = oLenguajeDAO.getCount(alFilter);
+            EntradaDao oEntradaDAO = new EntradaDao(Conexion.getConection());
+            int pages = oEntradaDAO.getCount(alFilter);
             data = "{\"data\":\"" + Integer.toString(pages) + "\"}";
             return data;
         } catch (Exception e) {
-            throw new ServletException("LenguajeGetregistersJson: View Error: " + e.getMessage());
+            throw new ServletException("EntradaGetregistersJson: View Error: " + e.getMessage());
         }
     }
 }
