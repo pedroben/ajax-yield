@@ -107,6 +107,7 @@
         <script src="js/main.js" charset="UTF-8"></script>
 
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
+        <script src="js/control/metadocumento.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
         <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
 
@@ -149,6 +150,19 @@
 
                     var tipodocumentoControl = control_tipodocumento_list('<%=request.getContextPath()%>');
                     tipodocumentoControl.inicia(tipodocumentoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                
+                $('#lnkMetadocumento').unbind('click');
+                $('#lnkMetadocumento').click(function() {
+                    var metadocumento = objeto('metadocumento', '<%=request.getContextPath()%>');
+                    var metadocumentoView = vista(metadocumento, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(metadocumentoView.getEmptyList());
+
+                    var metadocumentoControl = control_tipodocumento_list('<%=request.getContextPath()%>');
+                    metadocumentoControl.inicia(metadocumentoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
             });
