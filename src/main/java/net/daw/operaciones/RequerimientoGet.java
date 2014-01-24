@@ -5,7 +5,7 @@
 package net.daw.operaciones;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+/*import com.google.gson.GsonBuilder;*/
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,10 +30,10 @@ public class RequerimientoGet implements GenericOperation {
                 RequerimientoBean oRequerimiento = new RequerimientoBean();
                 oRequerimiento.setId(Integer.parseInt(request.getParameter("id")));
                 oRequerimientoDAO.get(oRequerimiento);
-                GsonBuilder gsonBuilder = new GsonBuilder();
-                gsonBuilder.setDateFormat("dd/MM/yyyy");
-                Gson gson = gsonBuilder.create();
-                data = gson.toJson(oRequerimiento);
+               // GsonBuilder gsonBuilder = new GsonBuilder();
+             //   gsonBuilder.setDateFormat("dd/MM/yyyy");
+               // Gson gson = gsonBuilder.create();
+                data = new Gson().toJson(oRequerimiento);
                 
             }
             return data;

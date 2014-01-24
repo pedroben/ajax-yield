@@ -77,10 +77,10 @@ public class RequerimientoGetpage implements GenericOperation {
             }
             RequerimientoDao oRequerimientoDAO = new RequerimientoDao(Conexion.getConection());
             List<RequerimientoBean> oRequerimientos = oRequerimientoDAO.getPage(rpp, page, alFilter, hmOrder);
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.setDateFormat("dd/MM/yyyy");
-            Gson gson = gsonBuilder.create();
-            data = gson.toJson(oRequerimientos);
+           // GsonBuilder gsonBuilder = new GsonBuilder();
+           // gsonBuilder.setDateFormat("dd/MM/yyyy");
+           // Gson gson = gsonBuilder.create();
+            data = new Gson().toJson(oRequerimientos);
             data = "{\"list\":" + data + "}";
             return data;
         } catch (Exception e) {

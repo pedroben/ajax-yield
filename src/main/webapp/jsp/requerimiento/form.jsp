@@ -17,11 +17,10 @@
             <input type="text" id="nombre" name="enunciado" size="15" placeholder="enunciado" />
         </div>
     </div>
-     <div class="control-group">
-            <label class="control-label" for="descripcion">Fecha: </label> 
-            <div class="controls">
-                <input id="fecha" name="fecha" type="text" size="10" maxlength="50" value="" /> 
-            </div>
+    <div class="control-group">
+        <label class="control-label" for="descripcion">Fecha: </label> 
+        <div class="controls">
+            <input id="fecha" name="fecha" type="text" size="10" maxlength="50" value="" /> 
         </div>
         <script>$("#fecha").datepicker({
                 showOn: 'both',
@@ -29,15 +28,11 @@
                 changeYear: true,
                 numberOfMonths: 1});
         </script>
-
+    </div>
     <div class="control-group">
         <div class="controls">
             <button type="submit" id="submitForm" class="btn submitForm">Submit</button>
         </div>
     </div>
 </form>
-<script>
-    $(function() {
-        $("#datepicker").datepicker();
-    });
-</script>
+
