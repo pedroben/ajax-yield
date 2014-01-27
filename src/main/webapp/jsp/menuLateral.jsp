@@ -14,6 +14,7 @@
         <li><a id="lnkEntrada" href="#">Entrada</a></li>
         <li><a id="lnkTipodocumento" href="#">Tipodocumento</a></li>
         <li><a id="lnkMetadocumento" href="#">Metadocumento</a></li>
+        <li><a id="lnkRepositorio" href="#">Repositorio</a></li>
     </ul>
 </div>
 

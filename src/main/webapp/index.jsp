@@ -108,6 +108,7 @@
 
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
         <script src="js/control/metadocumento.js" charset="UTF-8"></script>
+         <script src="js/control/repositorio.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
         <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
 
@@ -163,6 +164,19 @@
 
                     var metadocumentoControl = control_metadocumento_list('<%=request.getContextPath()%>');
                     metadocumentoControl.inicia(metadocumentoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                
+                 $('#lnkRepositorio').unbind('click');
+                $('#lnkRepositorio').click(function() {
+                    var repositorio = objeto('repositorio', '<%=request.getContextPath()%>');
+                    var metadocumentoView = vista(repositorio, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(metadocumentoView.getEmptyList());
+
+                    var repositorioControl = control_repositorio_list('<%=request.getContextPath()%>');
+                    repositorioControl.inicia(repositorioView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
             });
