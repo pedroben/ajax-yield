@@ -9,7 +9,7 @@
         <div class="control-group">
             <label class="control-label" for="id">Id: </label>
             <div class="controls">
-                <input id="id" name="id" type="text" size="30" maxlength="50" disabled="true" />
+                <input id="id" name="id" type="text" size="30" maxlength="50" />
             </div>
         </div>        
         <div class="control-group">
@@ -37,9 +37,8 @@
                 <span id="id_usuario_desc" class="alert alert-success"></span>                                       
             </div>
         </div> 
-
         <div class="control-group">
-            <label class="control-label" for="id_producto">Hilo: </label> 
+            <label class="control-label" for="id_hilo">Hilo: </label> 
             <div class="controls">                
                 <input readonly="true" id="id_hilo" class="input-mini"
                        name="id_hilo" type="text" size="5" maxlength="5" disabled="true"/>  
