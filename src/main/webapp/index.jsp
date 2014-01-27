@@ -133,6 +133,18 @@
                     lenguajeControl.inicia(lenguajeView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
+                $('#lnkDocumento').unbind('click');
+                $('#lnkDocumento').click(function() {
+                    var documento = objeto('documento', '<%=request.getContextPath()%>');
+                    var documentoView = vista(documento, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(documentoView.getEmptyList());
+
+                    var documentoControl = control_documento_list('<%=request.getContextPath()%>');
+                    documentoControl.inicia(documentoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
                 $('#lnkEntrada').unbind('click');
                 $('#lnkEntrada').click(function() {
                     var entrada = objeto('entrada', '<%=request.getContextPath()%>');
