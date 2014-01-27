@@ -28,6 +28,7 @@
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script src="./js/vendor/jquery.validate.min.js"></script>
 
     </head>
     <body>
@@ -107,13 +108,14 @@
         <script src="js/main.js" charset="UTF-8"></script>
 
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
+        <script src="js/control/documento.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
         <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
         <script src="js/control/actividad.js" charset="UTF-8"></script>
 
 
         <script>
-            
+
             $(document).ready(function() {
                 inicializacion();
                 $('#lnkLenguaje').unbind('click');
@@ -126,6 +128,18 @@
 
                     var lenguajeControl = control_lenguaje_list('<%=request.getContextPath()%>');
                     lenguajeControl.inicia(lenguajeView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnkDocumento').unbind('click');
+                $('#lnkDocumento').click(function() {
+                    var documento = objeto('documento', '<%=request.getContextPath()%>');
+                    var documentoView = vista(documento, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(documentoView.getEmptyList());
+
+                    var documentoControl = control_documento_list('<%=request.getContextPath()%>');
+                    documentoControl.inicia(documentoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
                 $('#lnkEntrada').unbind('click');

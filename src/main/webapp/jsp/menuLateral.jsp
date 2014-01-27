@@ -11,7 +11,8 @@
         <li><a id="lnkLogout" href="jsp?ob=usuario&op=logout">Logout</a></li>
         <li class="nav-header">Mantenimientos</li>            
         <li><a id="lnkLenguaje" href="#">Lenguaje</a></li>
-        <li><a id="lnkEntrada" href="#">Entrada</a></li>
+        <li><a id="lnkDocumento" href="#">Documento</a></li>
+        <li><a id="lnkEntrada" href="#">Entrada</a></li>        
         <li><a id="lnkTipodocumento" href="#">Tipodocumento</a></li>
         <li><a id="lnkActividad" href="#">Actividad</a></li>
     </ul>
