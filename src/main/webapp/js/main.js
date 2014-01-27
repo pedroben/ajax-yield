@@ -239,7 +239,7 @@ var vista = function(objeto, ContextPath) {
                         tabla += add_tabla;
                     });
                 }
-                tabla += '<td>' + datos[valor] + '</td></tr>';
+                tabla += '<td colspan="2">' + datos[valor] + '</td></tr>';
             });
 
             tabla += '</table>';
