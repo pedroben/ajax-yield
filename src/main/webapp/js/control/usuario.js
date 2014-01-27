@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
-var control_entrada_list = function(path) {
+var control_usuario_list = function(path) {
     //contexto privado
 
-    var prefijo_div = "#entrada_list ";
+    var prefijo_div = "#usuario_list ";
 
     function cargaBotoneraMantenimiento() {
         var botonera = [
@@ -52,7 +52,7 @@ var control_entrada_list = function(path) {
         }
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view, prefijo_div);
+            enviarDatosUpdateForm(view,prefijo_div);
             return false;
         });
     }

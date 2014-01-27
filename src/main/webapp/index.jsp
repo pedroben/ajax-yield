@@ -108,12 +108,14 @@
 
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
+        <script src="js/control/usuario.js" charset="UTF-8"></script>
+        <script src="js/control/hilo.js" charset="UTF-8"></script>
         <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
         <script src="js/control/empresa.js" charset="UTF-8"></script>
 
 
         <script>
-            
+
             $(document).ready(function() {
                 inicializacion();
                 $('#lnkLenguaje').unbind('click');
@@ -140,6 +142,31 @@
                     entradaControl.inicia(entradaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
+                $('#lnkUsuario').unbind('click');
+                $('#lnkUsuario').click(function() {
+                    var usuario = objeto('usuario', '<%=request.getContextPath()%>');
+                    var usuarioView = vista(usuario, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(usuarioView.getEmptyList());
+
+                    var usuarioControl = control_usuario_list('<%=request.getContextPath()%>');
+                    usuarioControl.inicia(usuarioView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+
+                $('#lnkHilo').unbind('click');
+                $('#lnkHilo').click(function() {
+                    var hilo = objeto('hilo', '<%=request.getContextPath()%>');
+                    var hiloView = vista(hilo, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(hiloView.getEmptyList());
+
+                    var hiloControl = control_hilo_list('<%=request.getContextPath()%>');
+                    hiloControl.inicia(hiloView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
                 $('#lnkTipodocumento').unbind('click');
                 $('#lnkTipodocumento').click(function() {
                     var tipodocumento = objeto('tipodocumento', '<%=request.getContextPath()%>');
@@ -163,7 +190,7 @@
                     var empresaControl = control_empresa_list('<%=request.getContextPath()%>');
                     empresaControl.inicia(empresaView, 1, null, null, 10, null, null, null, null);
                     return false;
-                });         
+                });
             });
 
         </script>

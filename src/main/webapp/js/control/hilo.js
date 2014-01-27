@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
-var control_entrada_list = function(path) {
+var control_hilo_list = function(path) {
     //contexto privado
 
-    var prefijo_div = "#entrada_list ";
+    var prefijo_div = "#hilo_list ";
 
     function cargaBotoneraMantenimiento() {
         var botonera = [
