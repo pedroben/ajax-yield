@@ -170,10 +170,10 @@
                  $('#lnkRepositorio').unbind('click');
                 $('#lnkRepositorio').click(function() {
                     var repositorio = objeto('repositorio', '<%=request.getContextPath()%>');
-                    var metadocumentoView = vista(repositorio, '<%=request.getContextPath()%>');
+                    var repositorioView = vista(repositorio, '<%=request.getContextPath()%>');
 
                     $('#indexContenidoJsp').empty();
-                    $('#indexContenido').empty().append(metadocumentoView.getEmptyList());
+                    $('#indexContenido').empty().append(repositorioView.getEmptyList());
 
                     var repositorioControl = control_repositorio_list('<%=request.getContextPath()%>');
                     repositorioControl.inicia(repositorioView, 1, null, null, 10, null, null, null, null);
