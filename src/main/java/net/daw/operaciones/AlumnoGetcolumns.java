@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.daw.dao.EntradaDao;
+import net.daw.dao.AlumnoDao;
 import net.daw.helper.Conexion;
 
 
@@ -24,13 +24,13 @@ public class AlumnoGetcolumns implements GenericOperation {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ArrayList<String> alColumns = null;
         try {
-            EntradaDao oEntradaDAO = new EntradaDao(Conexion.getConection());
-            alColumns = oEntradaDAO.getColumnsNames();
+            AlumnoDao oAlumnoDAO = new AlumnoDao(Conexion.getConection());
+            alColumns = oAlumnoDAO.getColumnsNames();
             String data = new Gson().toJson(alColumns);
             data = "{\"data\":" + data + "}";
             return data;
         } catch (Exception e) {
-            throw new ServletException("EntradaGetcolumnsJson: View Error: " + e.getMessage());
+            throw new ServletException("AlumnoGetcolumnsJson: View Error: " + e.getMessage());
         }
     }
 

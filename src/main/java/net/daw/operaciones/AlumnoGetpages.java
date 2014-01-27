@@ -9,7 +9,7 @@ import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.daw.dao.EntradaDao;
+import net.daw.dao.AlumnoDao;
 import net.daw.helper.Conexion;
 import net.daw.helper.FilterBean;
 
@@ -65,12 +65,12 @@ public class AlumnoGetpages implements GenericOperation {
             } else {
                 hmOrder = null;
             }
-            EntradaDao oEntradaDAO = new EntradaDao(Conexion.getConection());
-            int pages = oEntradaDAO.getPages(rpp, alFilter, hmOrder);
+            AlumnoDao oAlumnoDAO = new AlumnoDao(Conexion.getConection());
+            int pages = oAlumnoDAO.getPages(rpp, alFilter, hmOrder);
             data = "{\"data\":\"" + Integer.toString(pages) + "\"}";
             return data;
         } catch (Exception e) {
-            throw new ServletException("EntradaGetpagesJson: View Error: " + e.getMessage());
+            throw new ServletException("AlumnoGetpagesJson: View Error: " + e.getMessage());
         }
     }
 }

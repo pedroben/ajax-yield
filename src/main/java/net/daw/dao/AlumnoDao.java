@@ -4,17 +4,17 @@
  */
 package net.daw.dao;
 
-import net.daw.bean.EntradaBean;
+import net.daw.bean.AlumnoBean;
 import net.daw.helper.Conexion;
 
 /**
  *
  * @author José
  */
-public class AlumnoDao extends GenericDaoImplementation<EntradaBean> {
+public class AlumnoDao extends GenericDaoImplementation<AlumnoBean> {
 
     public AlumnoDao(Conexion.Tipo_conexion tipoConexion) throws Exception {
-        super(tipoConexion, "entrada");
+        super(tipoConexion, "alumno");
     }
 
 }

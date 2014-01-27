@@ -10,8 +10,8 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.daw.bean.EntradaBean;
-import net.daw.dao.EntradaDao;
+import net.daw.bean.AlumnoBean;
+import net.daw.dao.AlumnoDao;
 import net.daw.helper.Conexion;
 
 
@@ -25,14 +25,14 @@ public class AlumnoRemove implements GenericOperation {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try {
-            EntradaDao oEntradaDAO = new EntradaDao(Conexion.getConection());
-            EntradaBean oEntrada = new EntradaBean();                                           
-            oEntrada.setId(Integer.parseInt(request.getParameter("id")));            
+            AlumnoDao oAlumnoDAO = new AlumnoDao(Conexion.getConection());
+            AlumnoBean oAlumno = new AlumnoBean();                                           
+            oAlumno.setId(Integer.parseInt(request.getParameter("id")));            
             Map<String, String> data = new HashMap<>();
-            if (oEntrada != null) {
-                oEntradaDAO.remove(oEntrada);
+            if (oAlumno != null) {
+                oAlumnoDAO.remove(oAlumno);
                 data.put("status", "200");
-                data.put("message", "se ha eliminado el registro con id=" + oEntrada.getId());
+                data.put("message", "se ha eliminado el registro con id=" + oAlumno.getId());
             } else {
                 data.put("status", "error");
                 data.put("message", "error");
@@ -41,7 +41,7 @@ public class AlumnoRemove implements GenericOperation {
             String resultado = gson.toJson(data);
             return resultado;        
         } catch (Exception e) {
-            throw new ServletException("EntradaRemoveJson: View Error: " + e.getMessage());
+            throw new ServletException("AlumnoRemoveJson: View Error: " + e.getMessage());
         }
     }
 }

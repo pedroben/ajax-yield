@@ -14,14 +14,22 @@ import java.util.Date;
 public class AlumnoBean {
 
     private Integer id = 0;
-    private String titulo = "";
-    private String contenido = "";
     private Integer id_usuario = 0;
-    private Integer id_hilo = 0;
-    private Date fecha = new Date();
+    private String dni = "";
+    private String numexpediente = "";
+    private String nombre = "";
+    private String ape1 = "";
+    private String ape2 = "";
+    private String sexo = "";
+    private String domicilio = "";
+    private String codpostal = "";
+    private String poblacion = "";
+    private String provincia = "";
+    private String telefono = "";
+    private String email = "";
+    private String validado = "";
 
     public AlumnoBean() {
-
     }
 
     public AlumnoBean(Integer id) {
@@ -43,34 +51,6 @@ public class AlumnoBean {
     }
 
     /**
-     * @return the titulo
-     */
-    public String getTitulo() {
-        return titulo;
-    }
-
-    /**
-     * @param titulo the titulo to set
-     */
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    /**
-     * @return the contenido
-     */
-    public String getContenido() {
-        return contenido;
-    }
-
-    /**
-     * @param contenido the contenido to set
-     */
-    public void setContenido(String contenido) {
-        this.contenido = contenido;
-    }
-
-    /**
      * @return the id_usuario
      */
     public Integer getId_usuario() {
@@ -85,30 +65,184 @@ public class AlumnoBean {
     }
 
     /**
-     * @return the id_hilo
+     * @return the numexpediente
      */
-    public Integer getId_hilo() {
-        return id_hilo;
+    public String getNumexpediente() {
+        return numexpediente;
     }
 
     /**
-     * @param id_hilo the id_hilo to set
+     * @param numexpediente the numexpediente to set
      */
-    public void setId_hilo(Integer id_hilo) {
-        this.id_hilo = id_hilo;
+    public void setNumexpediente(String numexpediente) {
+        this.numexpediente = numexpediente;
     }
 
     /**
-     * @return the fecha
+     * @return the nombre
      */
-    public Date getFecha() {
-        return fecha;
+    public String getNombre() {
+        return nombre;
     }
 
     /**
-     * @param fecha the fecha to set
+     * @param nombre the nombre to set
      */
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @return the ape1
+     */
+    public String getApe1() {
+        return ape1;
+    }
+
+    /**
+     * @param ape1 the ape1 to set
+     */
+    public void setApe1(String ape1) {
+        this.ape1 = ape1;
+    }
+
+    /**
+     * @return the ape2
+     */
+    public String getApe2() {
+        return ape2;
+    }
+
+    /**
+     * @param ape2 the ape2 to set
+     */
+    public void setApe2(String ape2) {
+        this.ape2 = ape2;
+    }
+
+    /**
+     * @return the sexo
+     */
+    public String getSexo() {
+        return sexo;
+    }
+
+    /**
+     * @param sexo the sexo to set
+     */
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    /**
+     * @return the domicilio
+     */
+    public String getDomicilio() {
+        return domicilio;
+    }
+
+    /**
+     * @param domicilio the domicilio to set
+     */
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
+    }
+
+    /**
+     * @return the codpostal
+     */
+    public String getCodpostal() {
+        return codpostal;
+    }
+
+    /**
+     * @param codpostal the codpostal to set
+     */
+    public void setCodpostal(String codpostal) {
+        this.codpostal = codpostal;
+    }
+
+    /**
+     * @return the poblacion
+     */
+    public String getPoblacion() {
+        return poblacion;
+    }
+
+    /**
+     * @param poblacion the poblacion to set
+     */
+    public void setPoblacion(String poblacion) {
+        this.poblacion = poblacion;
+    }
+
+    /**
+     * @return the provincia
+     */
+    public String getProvincia() {
+        return provincia;
+    }
+
+    /**
+     * @param provincia the provincia to set
+     */
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
+    /**
+     * @return the telefono
+     */
+    public String getTelefono() {
+        return telefono;
+    }
+
+    /**
+     * @param telefono the telefono to set
+     */
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the validado
+     */
+    public String getValidado() {
+        return validado;
+    }
+
+    /**
+     * @param validado the validado to set
+     */
+    public void setValidado(String validado) {
+        this.validado = validado;
+    }
+
+    /**
+     * @return the dni
+     */
+    public String getDni() {
+        return dni;
+    }
+
+    /**
+     * @param dni the dni to set
+     */
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 }

@@ -11,8 +11,8 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.daw.bean.EntradaBean;
-import net.daw.dao.EntradaDao;
+import net.daw.bean.AlumnoBean;
+import net.daw.dao.AlumnoDao;
 import net.daw.helper.Conexion;
 import net.daw.helper.EncodingUtil;
 
@@ -26,17 +26,17 @@ public class AlumnoSave implements GenericOperation {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try {
-            EntradaDao oEntradaDAO = new EntradaDao(Conexion.getConection());
-            EntradaBean oEntrada = new EntradaBean();
+            AlumnoDao oAlumnoDAO = new AlumnoDao(Conexion.getConection());
+            AlumnoBean oAlumno = new AlumnoBean();
             Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
             String jason = request.getParameter("json");
             jason = EncodingUtil.decodeURIComponent(jason);
-            oEntrada = gson.fromJson(jason, oEntrada.getClass());
+            oAlumno = gson.fromJson(jason, oAlumno.getClass());
             Map<String, String> data = new HashMap<>();
-            if (oEntrada != null) {
-                oEntrada = oEntradaDAO.set(oEntrada);
+            if (oAlumno != null) {
+                oAlumno = oAlumnoDAO.set(oAlumno);
                 data.put("status", "200");
-                data.put("message", Integer.toString(oEntrada.getId()));
+                data.put("message", Integer.toString(oAlumno.getId()));
             } else {
                 data.put("status", "error");
                 data.put("message", "error");
@@ -44,7 +44,7 @@ public class AlumnoSave implements GenericOperation {
             String resultado = gson.toJson(data);
             return resultado;
         } catch (Exception e) {
-            throw new ServletException("EntradaSaveJson: View Error: " + e.getMessage());
+            throw new ServletException("AlumnoSaveJson: View Error: " + e.getMessage());
         }
     }
 }

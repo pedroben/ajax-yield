@@ -11,7 +11,7 @@
     AlumnoDao oAlumnoDao = new AlumnoDao(Conexion.getConection());
     ArrayList<String> alColumnsNames = (ArrayList<String>) oAlumnoDao.getColumnsNames();
     Iterator<String> oIterador = alColumnsNames.listIterator();
-    String strNombreMantenimiento = "Alumno";
+    String strNombreMantenimiento = "alumno";
 %>
 <div id="<%=strNombreMantenimiento%>_list">
     <div class="span12">

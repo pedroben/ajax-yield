@@ -12,8 +12,8 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.daw.bean.EntradaBean;
-import net.daw.dao.EntradaDao;
+import net.daw.bean.AlumnoBean;
+import net.daw.dao.AlumnoDao;
 import net.daw.helper.Conexion;
 import net.daw.helper.FilterBean;
 
@@ -75,16 +75,16 @@ public class AlumnoGetpage implements GenericOperation {
             } else {
                 hmOrder = null;
             }
-            EntradaDao oEntradaDAO = new EntradaDao(Conexion.getConection());
-            List<EntradaBean> oEntradas = oEntradaDAO.getPage(rpp, page, alFilter, hmOrder);
+            AlumnoDao oAlumnoDAO = new AlumnoDao(Conexion.getConection());
+            List<AlumnoBean> oAlumnos = oAlumnoDAO.getPage(rpp, page, alFilter, hmOrder);
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.setDateFormat("dd/MM/yyyy");
             Gson gson = gsonBuilder.create();
-            data = gson.toJson(oEntradas);
+            data = gson.toJson(oAlumnos);
             data = "{\"list\":" + data + "}";
             return data;
         } catch (Exception e) {
-            throw new ServletException("EntradaGetJson: View Error: " + e.getMessage());
+            throw new ServletException("AlumnoGetJson: View Error: " + e.getMessage());
         }
     }
 }

@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.daw.bean.EntradaBean;
-import net.daw.dao.EntradaDao;
+import net.daw.bean.AlumnoBean;
+import net.daw.dao.AlumnoDao;
 import net.daw.helper.Conexion;
 
 
@@ -28,19 +28,19 @@ public class AlumnoGet implements GenericOperation {
             if (request.getParameter("id") == null) {
                 data = "{\"error\":\"id is mandatory\"}";
             } else {
-                EntradaDao oEntradaDAO = new EntradaDao(Conexion.getConection());
-                EntradaBean oEntrada = new EntradaBean();
-                oEntrada.setId(Integer.parseInt(request.getParameter("id")));
-                oEntradaDAO.get(oEntrada);
+                AlumnoDao oAlumnoDAO = new AlumnoDao(Conexion.getConection());
+                AlumnoBean oAlumno = new AlumnoBean();
+                oAlumno.setId(Integer.parseInt(request.getParameter("id")));
+                oAlumnoDAO.get(oAlumno);
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("dd/MM/yyyy");
                 Gson gson = gsonBuilder.create();
-                data = gson.toJson(oEntrada);
+                data = gson.toJson(oAlumno);
                 
             }
             return data;
         } catch (Exception e) {
-            throw new ServletException("EntradaGetJson: View Error: " + e.getMessage());
+            throw new ServletException("AlumnoGetJson: View Error: " + e.getMessage());
         }
     }
 }

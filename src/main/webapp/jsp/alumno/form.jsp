@@ -6,45 +6,96 @@
 <form class="form-horizontal" action="#" id="formulario" name="formulario">
     <h2>Entrada</h2>
     <div class="control-group">
-        <label class="control-label" for="inputId">Id:</label>
+        <label class="control-label" for="inputId">ID:</label>
         <div class="controls">
             <input type="text" id="id" name="id" placeholder="id" />
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label"  for="inputTitulo">Título:</label>
+        <label class="control-label" for="inputId_usuario">ID Usuario:</label>
         <div class="controls">
-            <input type="text" id="titulo" name="tiulo" size="15" placeholder="Título" />
+            <input type="text" id="id_usuario" name="id_usuario" placeholder="Id usuario" />
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label"  for="inputContenido">Contenido:</label>
+        <label class="control-label"  for="inputDni">DNI:</label>
         <div class="controls">
-            <input type="text" id="contenido" name="contenido" size="15" placeholder="Contenido" />
+            <input type="text" id="dni" name="dni" size="15" placeholder="Documento identidad" />
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label" for="id_usuario">Usuario: </label> 
-        <div class="controls">           
-            <input readonly="true" id="id_usuario" class="input-mini"
-                   name="id_usuario" type="text" size="5" maxlength="5" />  
-            <a class="btn btn-mini" id="id_usuario_button" href="#"><i class="icon-search"></i></a>
+        <label class="control-label"  for="inputNumexpediente">Número Expediente:</label>
+        <div class="controls">
+            <input type="text" id="numexpiente" name="numexpediente" size="15" placeholder="Número expediente" />
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label"  for="inputNombre">Nombre:</label>
+        <div class="controls">
+            <input type="text" id="nombre" name="nombre" size="15" placeholder="Nombre" />
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label" for="id_hilo">Hilo </label> 
-        <div class="controls">                
-            <input readonly="true" id="id_hilo" class="input-mini"
-                   name="id_hilo" type="text" size="5" maxlength="5" />  
-            <a class="btn btn-mini" id="id_hilo_button" href="#"><i class="icon-search"></i></a>
+        <label class="control-label"  for="inputApe1">Primer Apellido:</label>
+        <div class="controls">
+            <input type="text" id="ape1" name="ape1" size="15" placeholder="Primer apellido" />
         </div>
     </div>
-     <div class="control-group">
-            <label class="control-label" for="fecha">Fecha: </label> 
-            <div class="controls">
-                <input id="fecha" name="fecha" type="date" size="30" maxlength="50" value="" /> 
-            </div>
+    <div class="control-group">
+        <label class="control-label"  for="inputApe2">Segundo Apellido:</label>
+        <div class="controls">
+            <input type="text" id="ape2" name="ape2" size="15" placeholder="Segundo Apellido" />
         </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label"  for="inputSexo">Sexo:</label>
+        <div class="controls">
+            <input type="text" id="sexo" name="sexo" size="15" placeholder="Hombre o Mujer" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label"  for="inputDomicilio">Domicilio:</label>
+        <div class="controls">
+            <input type="text" id="domicilio" name="domicilio" size="15" placeholder="Domicilio" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label"  for="inputCodpostal">Código Postal:</label>
+        <div class="controls">
+            <input type="text" id="codpostal" name="codpostal" size="15" placeholder="Código postal" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label"  for="inputPoblacion">Población:</label>
+        <div class="controls">
+            <input type="text" id="poblacion" name="poblacion" size="15" placeholder="Población" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label"  for="inputProvincia">Provincia:</label>
+        <div class="controls">
+            <input type="text" id="provincia" name="provincia" size="15" placeholder="Provincia" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label"  for="inputTelefono">Teléfono:</label>
+        <div class="controls">
+            <input type="text" id="telefono" name="telefono" size="15" placeholder="Móvil o fijo" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label"  for="inputEmail">Em@il:</label>
+        <div class="controls">
+            <input type="text" id="email" name="email" size="15" placeholder="Email" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label"  for="inputValidado">Validado:</label>
+        <div class="controls">
+            <input type="text" id="validado" name="validado" size="15" placeholder="Si o No" />
+        </div>
+    </div>
     <div class="control-group">
         <div class="controls">
             <button type="submit" id="submitForm" class="btn submitForm">Submit</button>
