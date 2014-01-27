@@ -1,8 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 var control_profesor_list = function(path) {
     //contexto privado
 
@@ -47,31 +42,24 @@ var control_profesor_list = function(path) {
             view.doFillForm(id);
         } else {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
-            $(prefijo_div + '#codigo').focus();
+            //$(prefijo_div + '#nombre').focus();
         }
-        $(prefijo_div + '#id_tipoprofesor_desc').empty().html(objeto('tipoprofesor', path).getOne($(prefijo_div + '#id_tipoprofesor').val()).descripcion);
-//pte incorporar librería https://github.com/jschr/bootstrap-modal
-//ejemplos en http://jschr.github.io/bootstrap-modal/        
-//            $(prefijo_div + '#modal01').css({
-//                'right': '20%',
-//                'left': '20%',
-//                'width': 'auto',
-//                'margin': '0'                
-//            });
-
-//        $(prefijo_div + '#modal01').css({
-//            'width': '612px'
-//        });
+        $(prefijo_div + '#submitForm').unbind('click');
+        $(prefijo_div + '#submitForm').click(function() {
+            enviarDatosUpdateForm(view, prefijo_div);
+            return false;
+        });
+        // yo
         //en desarrollo: tratamiento de las claves ajenas ...
-        $(prefijo_div + '#id_tipoprofesor_button').unbind('click');
-        $(prefijo_div + '#id_tipoprofesor_button').click(function() {
+        $(prefijo_div + '#id_usuario_button').unbind('click');
+        $(prefijo_div + '#id_usuario_button').click(function() {
 
-            var tipoprofesor = objeto('tipoprofesor', path);
-            var tipoprofesorView = vista(tipoprofesor, path);
+            var tipoUsuario = objeto('profesor', path);
+            var tipoUsuarioView = vista(tipoUsuario, path);
 
-            cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>" + "<h3 id="myModalLabel">Elección</h3>';
+            cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="myModalLabel">Elección</h3>';
             pie = '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>';
-            listado = tipoprofesorView.getEmptyList();
+            listado = tipoUsuarioView.getEmptyList();
             loadForm('#modal02', cabecera, listado, pie, true);
 
             $(prefijo_div + '#modal02').css({
@@ -82,14 +70,15 @@ var control_profesor_list = function(path) {
                 'display': 'block'
             });
 
-            var tipoprofesorControl = control_tipoprofesor_list(path);
-            tipoprofesorControl.inicia(tipoprofesorView, 1, null, null, 10, null, null, null, callbackSearchTipoprofesor, null, null, null);
+            var tipoUsuarioControl = control_profesor_list(path);
+            tipoUsuarioControl.inicia(tipoUsuarioView, 1, null, null, 10, null, null, null, callbackSearchTipoUsuario, null, null, null);
 
-            function callbackSearchTipoprofesor(id) {
+            function callbackSearchTipoUsuario(id) {
                 $(prefijo_div + '#modal02').modal('hide');
                 $(prefijo_div + '#modal02').data('modal', null);
-                $(prefijo_div + '#id_tipoprofesor').val($(this).attr('id'));
-                $(prefijo_div + '#id_tipoprofesor_desc').empty().html(objeto('tipoprofesor', path).getOne($(prefijo_div + '#id_tipoprofesor').val()).descripcion);
+                $(prefijo_div + '#id_usuario_button').val($(this).attr('id'));
+                $(prefijo_div + '#id_usuario_button_desc').empty().html(objeto('profesor', path).getOne($(prefijo_div + '#id_usuario_button').val()).descripcion);
+
                 return false;
             }
 
@@ -100,9 +89,11 @@ var control_profesor_list = function(path) {
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function(event) {
             //validaciones...
-            enviarDatosUpdateForm(view, id);
+            // yo enviarDatosUpdateForm(view, id);
+            enviarDatosUpdateForm(view, prefijo_div);
             return false;
         });
+
     }
 
     function removeConfirmationModalForm(view, place, id) {
@@ -128,52 +119,6 @@ var control_profesor_list = function(path) {
         loadForm(place, cabecera, view.getObjectTable(id), pie, true);
     }
 
-    function enviarDatosUpdateForm(view, id) {
-        $.fn.serializeObject = function()
-        {
-            // http://jsfiddle.net/davidhong/gP9bh/
-            var o = {};
-            var a = this.serializeArray();
-            $.each(a, function() {
-                if (o[this.name] !== undefined) {
-                    if (!o[this.name].push) {
-                        o[this.name] = [o[this.name]];
-                    }
-                    o[this.name].push(this.value || '');
-                } else {
-                    o[this.name] = encodeURIComponent(this.value) || '';
-                }
-            });
-            return o;
-        };
-        var jsonObj = [];
-        jsonObj = $(prefijo_div + '#formulario').serializeObject();
-        jsonfile = {json: JSON.stringify(jsonObj)};
-        cabecera = "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>" + "<h3 id=\"myModalLabel\">Respuesta del servidor</h3>";
-        pie = "<button class=\"btn btn-primary\" data-dismiss=\"modal\" aria-hidden=\"true\">Cerrar</button>";
-        resultado = view.getObject().saveOne(jsonfile);
-        if (resultado["status"] = "200") {
-            mensaje = 'valores actualizados correctamente para el registro con id=' + resultado["message"];
-            loadForm('#modal02', cabecera, "Código: " + resultado["status"] + "<br />" + mensaje + "<br />" + view.getObjectTable(resultado["message"]), pie, true);
-        } else {
-            mensaje = 'el servidor ha retornado el mensaje de error=' + resultado["message"];
-            loadForm('#modal02', cabecera, "Código: " + resultado["status"] + "<br />" + mensaje + "<br />" + view.getObjectTable(resultado["message"]), pie, true);
-        }
-    }
-
-    function cargaCompras(id) {
-
-        var compra = objeto('compra', path);
-        var compraView = vista(compra, path);
-
-        $('#indexContenidoJsp').empty();
-        $('#indexContenido').empty().append(compraView.getEmptyList());
-
-        var compraControl = control_compra_list(path);
-        compraControl.inicia(compraView, 1, null, null, 10, null, null, null, null, "id_profesor", "equals", id);
-        return false;
-
-    }
 
     return {
         inicia: function(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue) {
@@ -211,8 +156,6 @@ var control_profesor_list = function(path) {
             $(prefijo_div + "#filter").empty().append(view.getLoading()).html(view.getFilterInfo(filter, filteroperator, filtervalue));
 
             //asignación eventos de la botonera de cada línea del listado principal
-
-          //asignación eventos de la botonera de cada línea del listado principal
             if (callback) {
                 $(prefijo_div + '.btn.btn-mini.action01').unbind('click');
                 $(prefijo_div + '.btn.btn-mini.action01').click(callback);
@@ -236,11 +179,6 @@ var control_profesor_list = function(path) {
                 $(prefijo_div + '.btn.btn-mini.action04').click(function() {
                     removeConfirmationModalForm(view, '#modal01', $(this).attr('id'));
                 });
-
-//                $(prefijo_div + '.btn.btn-mini.action05').unbind('click');
-//                $(prefijo_div + '.btn.btn-mini.action05').click(function() {
-//                    cargaCompras($(this).attr('id'));
-//                });
 
             }
 
@@ -277,15 +215,15 @@ var control_profesor_list = function(path) {
             //asignación del evento de click para cambiar de página en la botonera de paginación
 
             $(prefijo_div + '.pagination_link').unbind('click');
-            $(prefijo_div + '.pagination_link').click(function(event) {
+            $(prefijo_div + '.pagination_link').click(function() {
                 var id = $(this).attr('id');
                 rpp = $(prefijo_div + "#rpp option:selected").text();
                 thisObject.inicia(view, id, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue);
                 return false;
-
             });
 
             //boton de crear un nuevo elemento
+
             if (callback) {
                 $(prefijo_div + '#crear').css("display", "none");
             } else {
@@ -295,13 +233,10 @@ var control_profesor_list = function(path) {
                 });
             }
 
-
-
-
             //asignación del evento de filtrado al boton
 
             $(prefijo_div + '#btnFiltrar').unbind('click');
-            $(prefijo_div + "#btnFiltrar").click(function(event) {
+            $(prefijo_div + "#btnFiltrar").click(function() {
                 filter = $(prefijo_div + "#selectFilter option:selected").text();
                 filteroperator = $(prefijo_div + "#selectFilteroperator option:selected").text();
                 filtervalue = $(prefijo_div + "#inputFiltervalue").val();
@@ -313,9 +248,9 @@ var control_profesor_list = function(path) {
 
             $(prefijo_div + '#modal01').unbind('hidden');
             $(prefijo_div + '#modal01').on('hidden', function() {
+
                 rpp = $(prefijo_div + "#rpp option:selected").text();
                 thisObject.inicia(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue);
-
             });
 
             //asignación del evento de cambio del numero de regs por página
