@@ -222,12 +222,29 @@ var control_lenguaje_list = function(path) {
 
             //asignación del evento de filtrado al boton
 
+            $('#empresaForm').validate({
+                rules: {
+                    filtervalue: {
+                        required: true
+                    }
+                },
+                messages: {
+                    filtervalue: {
+                        required: "Introduce un valor"
+                    }
+                },
+                highlight: function(element) {
+                    $(element).closest('.control-group').removeClass('success').addClass('error');
+                }
+            });
             $(prefijo_div + '#btnFiltrar').unbind('click');
             $(prefijo_div + "#btnFiltrar").click(function() {
-                filter = $(prefijo_div + "#selectFilter option:selected").text();
-                filteroperator = $(prefijo_div + "#selectFilteroperator option:selected").text();
-                filtervalue = $(prefijo_div + "#inputFiltervalue").val();
-                thisObject.inicia(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue);
+                if ($('#empresaForm').valid()) {
+                    filter = $(prefijo_div + "#selectFilter option:selected").text();
+                    filteroperator = $(prefijo_div + "#selectFilteroperator option:selected").text();
+                    filtervalue = $(prefijo_div + "#inputFiltervalue").val();
+                    thisObject.inicia(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue);
+                }
                 return false;
             });
 
