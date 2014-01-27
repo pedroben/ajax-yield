@@ -13,8 +13,8 @@ import java.util.Date;
 public class RepositorioBean {
 
     private Integer id = 0;
-    private String titulo;
-    private String contenido;
+    private String titulo="";
+    private String contenido="";
     private Integer id_usuario = 0;
     private Integer id_lenguaje = 0;
     private Integer id_documento = 0;

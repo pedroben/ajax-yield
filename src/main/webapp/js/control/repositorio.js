@@ -73,32 +73,49 @@ var control_repositorio_list = function(path) {
             $(prefijo_div + '#codigo').focus();
         }
 
-        //clave ajena cliente
-        cargaClaveAjena('#id_cliente', '#id_cliente_desc', 'cliente')
+        //clave ajena usuario
+        cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario')
 
-        $(prefijo_div + '#id_cliente_button').unbind('click');
-        $(prefijo_div + '#id_cliente_button').click(function() {
-            loadForeign('cliente', '#modal02', control_cliente_list, callbackSearchCliente);
+        $(prefijo_div + '#id_usuario_button').unbind('click');
+        $(prefijo_div + '#id_usuario_button').click(function() {
+            loadForeign('usuario', '#modal02', control_usuario_list, callbackSearchCliente);
             function callbackSearchCliente(id) {
                 $(prefijo_div + '#modal02').modal('hide');
                 $(prefijo_div + '#modal02').data('modal', null);
-                $(prefijo_div + '#id_cliente').val($(this).attr('id'));
-                cargaClaveAjena('#id_cliente', '#id_cliente_desc', 'cliente');
+                $(prefijo_div + '#id_usuario').val($(this).attr('id'));
+                cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario');
                 return false;
             }
             return false;
         });
 
-        //clave ajena producto
-        cargaClaveAjena('#id_producto', '#id_producto_desc', 'producto')
-        $(prefijo_div + '#id_producto_button').unbind('click');
-        $(prefijo_div + '#id_producto_button').click(function() {
-            loadForeign('producto', '#modal02', control_producto_list, callbackSearchProducto);
-            function callbackSearchProducto(id) {
+        //clave ajena lenguaje
+        cargaClaveAjena('#id_lenguaje', '#id_lenguaje_desc', 'lenguaje')
+
+        $(prefijo_div + '#id_lenguaje_button').unbind('click');
+        $(prefijo_div + '#id_lenguaje_button').click(function() {
+            loadForeign('lenguaje', '#modal02', control_lenguaje_list, callbackSearchCliente);
+            function callbackSearchCliente(id) {
                 $(prefijo_div + '#modal02').modal('hide');
                 $(prefijo_div + '#modal02').data('modal', null);
-                $(prefijo_div + '#id_producto').val($(this).attr('id'));
-                cargaClaveAjena('#id_producto', '#id_producto_desc', 'producto');
+                $(prefijo_div + '#id_lenguaje').val($(this).attr('id'));
+                cargaClaveAjena('#id_lenguaje', '#id_lenguaje_desc', 'lenguaje');
+                return false;
+            }
+            return false;
+        });
+        
+        //clave ajena documento
+        cargaClaveAjena('#id_documento', '#id_documento_desc', 'documento')
+
+        $(prefijo_div + '#id_documento_button').unbind('click');
+        $(prefijo_div + '#id_documento_button').click(function() {
+            loadForeign('documento', '#modal02', control_documento_list, callbackSearchCliente);
+            function callbackSearchCliente(id) {
+                $(prefijo_div + '#modal02').modal('hide');
+                $(prefijo_div + '#modal02').data('modal', null);
+                $(prefijo_div + '#id_documento').val($(this).attr('id'));
+                cargaClaveAjena('#id_documento', '#id_documento_desc', 'documento');
                 return false;
             }
             return false;
