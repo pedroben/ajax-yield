@@ -28,7 +28,7 @@
             <label class="control-label" for="id_usuario">Usuario: </label> 
             <div class="controls">           
                 <input readonly="true" id="id_usuario" class="input-mini"
-                       name="id_usuario" type="text" size="5" maxlength="5" disabled="true"/>  
+                       name="id_usuario" type="text" size="5" maxlength="5" />  
                 <a class="btn btn-mini" id="id_usuario_button" href="#"><i class="icon-search"></i></a>
             </div>
         </div>
@@ -41,7 +41,7 @@
             <label class="control-label" for="id_hilo">Hilo: </label> 
             <div class="controls">                
                 <input readonly="true" id="id_hilo" class="input-mini"
-                       name="id_hilo" type="text" size="5" maxlength="5" disabled="true"/>  
+                       name="id_hilo" type="text" size="5" maxlength="5" />  
                 <a class="btn btn-mini" id="id_hilo_button" href="#"><i class="icon-search"></i></a>
             </div>
         </div>
