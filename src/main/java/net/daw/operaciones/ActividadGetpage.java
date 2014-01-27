@@ -5,6 +5,7 @@
 package net.daw.operaciones;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,8 +71,12 @@ public class ActividadGetpage implements GenericOperation {
                 } else             hmOrder=null;
             } else             hmOrder=null;
             ActividadDao oActividadDAO = new ActividadDao(Conexion.getConection());
-            List<ActividadBean> oActividads = oActividadDAO.getPage(rpp, page, alFilter, hmOrder );
-            data = new Gson().toJson(oActividads);
+            List<ActividadBean> oActividads = oActividadDAO.getPage(rpp, page, alFilter, hmOrder);
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.setDateFormat("dd/MM/yyyy");
+            Gson gson = gsonBuilder.create();
+            data = gson.toJson(oActividads);
             data = "{\"list\":" + data + "}";
             return data;
         } catch (Exception e) {

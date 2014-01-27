@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.daw.bean.ActividadBean;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.daw.dao.ActividadDao;
 import net.daw.helper.Conexion;
 
@@ -30,8 +31,11 @@ public class ActividadGet implements GenericOperation {
                 ActividadDao oActividadDAO = new ActividadDao(Conexion.getConection());
                 ActividadBean oActividad = new ActividadBean();
                 oActividad.setId(Integer.parseInt(request.getParameter("id")));
-                oActividad = oActividadDAO.get(oActividad);
-                data = new Gson().toJson(oActividad);
+                oActividadDAO.get(oActividad);                                
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("dd/MM/yyyy");
+                Gson gson = gsonBuilder.create();
+                data = gson.toJson(oActividad);     
             }
             return data;
         } catch (Exception e) {

@@ -51,7 +51,7 @@ public class ActividadBean {
         this.evaluacion = evaluacion;
     }
 
-    public Boolean isActivo() {
+    public Boolean getActivo() {
         return activo;
     }
 
