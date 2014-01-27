@@ -167,49 +167,52 @@ var vista = function(objeto, ContextPath) {
                 tabla += '</tr>';
             }
             page = objeto.getPage(pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, systemfilter, systemfilteroperator, systemfiltervalue)['list'];
-            $.each(page, function(index, value) {
-                tabla += '<tr>';
+            if (page != 0) {
 
-                $.each(objeto.getFieldNames(), function(index, valor) {
-                    if (/id_/.test(valor)) {
-                        $.when(ajaxCallSync(ContextPath + '/json?ob=' + valor.split("_")[1] + '&op=get&id=' + value[valor], 'GET', '')).done(function(data) {
+                $.each(page, function(index, value) {
+                    tabla += '<tr>';
 
-                            contador = 0;
-                            add_tabla = "";
-                            for (key in data) {
-                                if (contador === 0)
-                                    add_tabla = '<td>id=' + data[key] + '(no existe)</td>';
-                                if (contador === 1)
-                                    add_tabla = '<td>' + data[key] + '</td>';
-                                contador++;
+                    $.each(objeto.getFieldNames(), function(index, valor) {
+                        if (/id_/.test(valor)) {
+                            $.when(ajaxCallSync(ContextPath + '/json?ob=' + valor.split("_")[1] + '&op=get&id=' + value[valor], 'GET', '')).done(function(data) {
+                                contador = 0;
+                                add_tabla = "";
+                                for (key in data) {
+                                    if (contador == 0)
+                                        add_tabla = '<td>id=' + data[key] + '(no existe)</td>';
+                                    if (contador == 1)
+                                        add_tabla = '<td>' + data[key] + '</td>';
+                                    contador++;
+                                }
+                                if (contador == 0) {
+                                    add_tabla = '<td>' + value[valor] + ' #error</td>';
+                                }
+                                tabla += add_tabla;
+                            });
+                        } else {
+                            switch (value[valor]) {
+                                case true:
+                                    tabla += '<td><i class="icon-ok"></i></td>';
+                                    break;
+                                case false:
+                                    tabla += '<td><i class="icon-remove"></i></td>';
+                                    break;
+                                default:
+                                    tabla += '<td>' + value[valor] + '</td>';
                             }
-                            if (contador === 0) {
-                                add_tabla = '<td>' + value[valor] + ' #error</td>';
-                            }
-                            tabla += add_tabla;
-                        });
-                    } else {
-                        switch (value[valor]) {
-                            case true:
-                                tabla += '<td><i class="icon-ok"></i></td>';
-                                break;
-                            case false:
-                                tabla += '<td><i class="icon-remove"></i></td>';
-                                break;
-                            default:
-                                tabla += '<td>' + value[valor] + '</td>';
                         }
-                    }
+                    });
+                    tabla += '<td><div class="btn-toolbar"><div class="btn-group">';
+                    $.each(botonera, function(indice, valor) {
+                        tabla += '<a class="' + valor.class + '" id=' + value.id + ' href="#"><i class="' + valor.icon + '"></i> ' + valor.text + '</a>';
+                    });
+                    tabla += '</div></div></td>';
+                    tabla += '</tr>';
                 });
-                tabla += '<td><div class="btn-toolbar"><div class="btn-group">';
-
-                $.each(botonera, function(indice, valor) {
-                    tabla += '<a class="' + valor.class + '" id=' + value.id + ' href="#"><i class="' + valor.icon + '"></i> ' + valor.text + '</a>';
-                });
-                tabla += '</div></div></td>';
-                tabla += '</tr>';
-            });
-            tabla += "</table>";
+                tabla += "</table>";
+            } else {
+                tabla = "<div class=\"alert alert-info\"><h4>Ha habido un problema con la base de datos</h4><br/>El probema puede ser:<ul><li>La tabla está vacia.</li><li>Tu busqueda no tubo resultados.</li></ul></div>";
+            }
             return tabla;
         },
         getObjectTable: function(id) {

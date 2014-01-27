@@ -206,7 +206,7 @@ function inicializacion() {
     };
 }
 
-/* function enviarDatosUpdateForm(view,prefijo_div) { */
+
 function enviarDatosUpdateForm(view, prefijo_div) {
     var jsonObj = [];
 //    jsonObj = $(prefijo_div + '#formulario').serializeObject();
