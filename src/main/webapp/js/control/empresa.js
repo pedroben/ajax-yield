@@ -47,12 +47,15 @@ var control_empresa_list = function(path) {
         if (action == "edit") {
             view.doFillForm(id);
         } else {
+//            $(prefijo_div + '#id').val('0').attr("disabled", true);
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             //$(prefijo_div + '#nombre').focus();
         }
+
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view, prefijo_div);
+//            enviarDatosUpdateForm(view, prefijo_div);
+            enviarDatosUpdateForm(view, prefijo_div + '#id_usuario');
             return false;
         });
         // yo
@@ -82,8 +85,10 @@ var control_empresa_list = function(path) {
             function callbackSearchTipoUsuario(id) {
                 $(prefijo_div + '#modal02').modal('hide');
                 $(prefijo_div + '#modal02').data('modal', null);
-                $(prefijo_div + '#id_usuario_button').val($(this).attr('id'));
-                $(prefijo_div + '#id_usuario_button_desc').empty().html(objeto('empresa', path).getOne($(prefijo_div + '#id_usuario_button').val()).descripcion);
+//                $(prefijo_div + '#id_usuario_button').val($(this).attr('id'));
+                $(prefijo_div + '#id_usuario').val($(this).attr('id'));
+//                $(prefijo_div + '#id_usuario_button_desc').empty().html(objeto('empresa', path).getOne($(prefijo_div + '#id_usuario_button').val()).descripcion);
+                $(prefijo_div + '#id_usuario_button_desc').empty().html(objeto('empresa', path).getOne($(prefijo_div + '#id_usuario').val()).descripcion);
 
                 return false;
             }

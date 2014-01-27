@@ -163,22 +163,7 @@
                     var empresaControl = control_empresa_list('<%=request.getContextPath()%>');
                     empresaControl.inicia(empresaView, 1, null, null, 10, null, null, null, null);
                     return false;
-                });
-                // id_usuario_button
-                /*
-                $('#id_usuario_button').unbind('click');
-                $('#id_usuario_button').click(function() {
-                    var empresa = objeto('empresa', '<%=request.getContextPath()%>');
-                    var empresaView = vista(empresa, '<%=request.getContextPath()%>');
-
-                    $('#indexContenidoJsp').empty();
-                    $('#indexContenido').empty().append(empresaView.getEmptyList());
-
-                    var empresaControl = control_empresa_list('<%=request.getContextPath()%>');
-                    empresaControl.inicia(empresaView, 1, null, null, 10, null, null, null, null);
-                    return false;
-                });
-                */
+                });         
             });
 
         </script>
