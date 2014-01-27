@@ -17,7 +17,7 @@ public class MetadocumentoGetprettycolumns implements GenericOperation {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
-            String data = "{\"data\": [\"id\", \"nombre\"]}";
+            String data = "{\"data\": [\"id\", \"titulo\", \"fecha\"]}";
             return data;
         } catch (Exception e) {
             throw new ServletException("MetadocumentoGetpagesJson: View Error: " + e.getMessage());
