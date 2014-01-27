@@ -128,6 +128,7 @@
                     lenguajeControl.inicia(lenguajeView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
+                
                 $('#lnkEntrada').unbind('click');
                 $('#lnkEntrada').click(function() {
                     var entrada = objeto('entrada', '<%=request.getContextPath()%>');
@@ -140,6 +141,7 @@
                     entradaControl.inicia(entradaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
+                
                 $('#lnkUsuario').unbind('click');
                 $('#lnkUsuario').click(function() {
                     var usuario = objeto('usuario', '<%=request.getContextPath()%>');
@@ -152,10 +154,11 @@
                     usuarioControl.inicia(usuarioView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
+                
                 $('#lnkHilo').unbind('click');
                 $('#lnkHilo').click(function() {
-                    var Hilo = objeto('Hilo', '<%=request.getContextPath()%>');
-                    var hiloView = vista(Hilo, '<%=request.getContextPath()%>');
+                    var hilo = objeto('hilo', '<%=request.getContextPath()%>');
+                    var hiloView = vista(hilo, '<%=request.getContextPath()%>');
 
                     $('#indexContenidoJsp').empty();
                     $('#indexContenido').empty().append(hiloView.getEmptyList());
@@ -164,6 +167,7 @@
                     hiloControl.inicia(hiloView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
+                
             });
 
         </script>
