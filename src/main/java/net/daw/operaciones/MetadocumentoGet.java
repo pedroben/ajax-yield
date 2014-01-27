@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.daw.bean.MetadocumentoBean;
 import net.daw.dao.MetadocumentoDao;
 import net.daw.helper.Conexion;
@@ -29,8 +30,12 @@ public class MetadocumentoGet implements GenericOperation {
                 MetadocumentoDao oMetadocumentoDAO = new MetadocumentoDao(Conexion.getConection());
                 MetadocumentoBean oMetadocumento = new MetadocumentoBean();
                 oMetadocumento.setId(Integer.parseInt(request.getParameter("id")));
-                oMetadocumentoDAO.get(oMetadocumento);
-                data = new Gson().toJson(oMetadocumento);
+                oMetadocumentoDAO.get(oMetadocumento);                                
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("dd/MM/yyyy");
+                Gson gson = gsonBuilder.create();
+                data = gson.toJson(oMetadocumento);                
+                //data = new Gson().toJson(oMetadocumento);
             }
             return data;
         } catch (Exception e) {
