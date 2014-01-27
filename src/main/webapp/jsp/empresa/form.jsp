@@ -21,7 +21,7 @@
                        name="id_tipoproducto" type="text" size="5" maxlength="5" />  
         -->
         <input readonly="true" id="id_usuario" class="input-mini" 
-               name="id_tipoproducto" type="text" size="5" maxlength="5" />
+               name="id_usuario" type="text" size="5" maxlength="5" />
             <a class="btn btn-mini" id="id_usuario_button" href="#"><i class="icon-search"></i></a>
         </div>
     </div>

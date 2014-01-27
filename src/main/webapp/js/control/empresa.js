@@ -63,7 +63,7 @@ var control_empresa_list = function(path) {
         $(prefijo_div + '#id_usuario_button').unbind('click');
         $(prefijo_div + '#id_usuario_button').click(function() {
 
-            var tipoUsuario = objeto('empresa', path);
+            var tipoUsuario = objeto('usuario', path);
             var tipoUsuarioView = vista(tipoUsuario, path);
 
             cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="myModalLabel">Elección</h3>';
@@ -88,7 +88,7 @@ var control_empresa_list = function(path) {
 //                $(prefijo_div + '#id_usuario_button').val($(this).attr('id'));
                 $(prefijo_div + '#id_usuario').val($(this).attr('id'));
 //                $(prefijo_div + '#id_usuario_button_desc').empty().html(objeto('empresa', path).getOne($(prefijo_div + '#id_usuario_button').val()).descripcion);
-                $(prefijo_div + '#id_usuario_button_desc').empty().html(objeto('empresa', path).getOne($(prefijo_div + '#id_usuario').val()).descripcion);
+                $(prefijo_div + '#id_usuario_button_desc').empty().html(objeto('usuario', path).getOne($(prefijo_div + '#id_usuario').val()).descripcion);
 
                 return false;
             }
