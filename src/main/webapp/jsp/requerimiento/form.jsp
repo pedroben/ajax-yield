@@ -1,7 +1,7 @@
 <%-- 
     Document   : form
     Created on : Jan 21, 2013, 10:24:17 AM
-    Author     : Alvaro
+    Author     : Jordi
 --%>
 <form class="form-horizontal" action="#" id="formulario" name="formulario">
     <h2>Requerimiento</h2>
@@ -12,17 +12,17 @@
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label"  for="inputNombre">Enunciado:</label>
+        <label class="control-label"  for="inputEnunciado">Enunciado:</label>
         <div class="controls">
-            <input type="text" id="nombre" name="enunciado" size="15" placeholder="enunciado" />
+            <input type="text" id="enunciado" name="enunciado" size="15" placeholder="enunciado" />
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label" for="descripcion">Fecha: </label> 
+        <label class="control-label" for="inputFechaalta">Fecha: </label> 
         <div class="controls">
-            <input id="fecha" name="fecha" type="text" size="10" maxlength="50" value="" /> 
+            <input id="fechaalta" name="fechaalta" type="text" size="10" maxlength="50" value="" /> 
         </div>
-        <script>$("#fecha").datepicker({
+        <script>$("#fechaalta").datepicker({
                 showOn: 'both',
                 buttonImageOnly: true,
                 changeYear: true,

@@ -13,7 +13,7 @@ import java.util.Date;
 public class RequerimientoBean {
 
     private Integer id = 0;
-    private String enunaciado = "";
+    private String enunciado = "";
     private Date fechaalta = new Date();
 
     public Integer getId() {
@@ -24,12 +24,12 @@ public class RequerimientoBean {
         this.id = id;
     }
 
-    public String getEnunaciado() {
-        return enunaciado;
+    public String getEnunciado() {
+        return enunciado;
     }
 
-    public void setEnunaciado(String enunaciado) {
-        this.enunaciado = enunaciado;
+    public void setEnunciado(String enunciado) {
+        this.enunciado = enunciado;
     }
 
     public Date getFechaalta() {

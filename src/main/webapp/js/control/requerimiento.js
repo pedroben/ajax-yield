@@ -52,7 +52,7 @@ var control_requerimiento_list = function(path) {
         }
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view, id);
+            enviarDatosUpdateForm(view,prefijo_div);
             return false;
         });
     }

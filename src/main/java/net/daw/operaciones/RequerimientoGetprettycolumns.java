@@ -17,7 +17,7 @@ public class RequerimientoGetprettycolumns implements GenericOperation {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
-            String data = "{\"data\": [\"id\", \"enunciado\", \"fechaalta\"]}";
+            String data = "{\"data\": [\"id\", \"enunciado\", \"fecha alta\"]}";
             return data;
         } catch (Exception e) {
             throw new ServletException("RequerimientoGetpagesJson: View Error: " + e.getMessage());
