@@ -15,6 +15,8 @@
         <li><a id="lnkProfesor" href="#">Profesor</a></li>
         <li><a id="lnkTipodocumento" href="#">Tipodocumento</a></li>
         <li><a id="lnkActividad" href="#">Actividad</a></li>
+        <li><a id="lnkUsuario" href="#">Usuario</a></li>
+        <li><a id="lnkHilo" href="#">Hilo</a></li>
     </ul>
 </div>
 

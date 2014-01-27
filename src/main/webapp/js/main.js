@@ -133,7 +133,7 @@ var vista = function(objeto, ContextPath) {
                 vector += ("<li>" + "<a href=\"#\">...</a>" + "</li>");
             for (i = (page_number - neighborhood); i <= (page_number + neighborhood); i++) {
                 if (i >= 1 && i <= total_pages) {
-                    if (page_number == i) {
+                    if (page_number === i) {
                         vector += ("<li class=\"active\"><a class=\"pagination_link\" id=\"" + i + "\" href=\"" + link + i + "\">" + i + "</a></li>");
                     }
                     else
@@ -151,13 +151,18 @@ var vista = function(objeto, ContextPath) {
         },
         getPageTable: function(pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, systemfilter, systemfilteroperator, systemfiltervalue, botonera) {
             var tabla = "<table class=\"table table table-striped table-condensed\">";
-            if (objeto.getPrettyFieldNamesAcciones() != null) {
+            if (objeto.getPrettyFieldNamesAcciones() !== null) {
                 tabla += '<tr>';
                 $.each(objeto.getPrettyFieldNamesAcciones(), function(index, value) {
                     tabla += '<th>' + value;
-                    tabla += '<a class="orderAsc' + index + '" href="#"><i class="icon-arrow-up"></i></a>';
-                    tabla += '<a class="orderDesc' + index + '" href="#"><i class="icon-arrow-down"></i></a>';
-                    tabla += '</th>';
+                    if (value === "acciones") {
+                        tabla += '</th>';
+                    } else {
+                        tabla += '<a class="orderAsc' + index + '" href="#"><i class="icon-arrow-up"></i></a>';
+                        tabla += '<a class="orderDesc' + index + '" href="#"><i class="icon-arrow-down"></i></a>';
+                        tabla += '</th>';
+                    }
+
                 });
                 tabla += '</tr>';
             }
@@ -172,13 +177,13 @@ var vista = function(objeto, ContextPath) {
                             contador = 0;
                             add_tabla = "";
                             for (key in data) {
-                                if (contador == 0)
+                                if (contador === 0)
                                     add_tabla = '<td>id=' + data[key] + '(no existe)</td>';
-                                if (contador == 1)
+                                if (contador === 1)
                                     add_tabla = '<td>' + data[key] + '</td>';
                                 contador++;
                             }
-                            if (contador == 0) {
+                            if (contador === 0) {
                                 add_tabla = '<td>' + value[valor] + ' #error</td>';
                             }
                             tabla += add_tabla;
@@ -223,6 +228,7 @@ var vista = function(objeto, ContextPath) {
                         tabla += '<tr><td><strong>' + cabecera[index] + '</strong></td><td>' + datos[valor] + '</td></tr>';
                 }
             });
+
             tabla += '</table>';
             return tabla;
         },

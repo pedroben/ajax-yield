@@ -112,6 +112,8 @@
         <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
         <script src="js/control/actividad.js" charset="UTF-8"></script>
 
+        <script src="js/control/usuario.js" charset="UTF-8"></script>
+        <script src="js/control/hilo.js" charset="UTF-8"></script>
 
 
         <script>
@@ -130,6 +132,7 @@
                     lenguajeControl.inicia(lenguajeView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
+                
                 $('#lnkEntrada').unbind('click');
                 $('#lnkEntrada').click(function() {
                     var entrada = objeto('entrada', '<%=request.getContextPath()%>');
@@ -176,6 +179,32 @@
 
                     var actividadControl = control_actividad_list('<%=request.getContextPath()%>');
                     actividadControl.inicia(actividadView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                
+                  $('#lnkUsuario').unbind('click');
+                $('#lnkUsuario').click(function() {
+                    var usuario = objeto('usuario', '<%=request.getContextPath()%>');
+                    var usuarioView = vista(usuario, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(usuarioView.getEmptyList());
+
+                    var usuarioControl = control_usuario_list('<%=request.getContextPath()%>');
+                    usuarioControl.inicia(usuarioView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                
+                $('#lnkHilo').unbind('click');
+                $('#lnkHilo').click(function() {
+                    var hilo = objeto('hilo', '<%=request.getContextPath()%>');
+                    var hiloView = vista(hilo, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(hiloView.getEmptyList());
+
+                    var hiloControl = control_hilo_list('<%=request.getContextPath()%>');
+                    hiloControl.inicia(hiloView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
             });
