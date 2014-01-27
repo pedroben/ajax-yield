@@ -221,6 +221,7 @@ var vista = function(objeto, ContextPath) {
             var tabla = "<table class=\"table table table-bordered table-condensed\">";
             $.each(objeto.getFieldNames(), function(index, valor) {
                 tabla += '<tr><td><strong>' + cabecera[index] + '</strong></td>';
+                tabla += '<td>';
                 if (/id_/.test(valor)) {
                     $.when(ajaxCallSync(ContextPath + '/json?ob=' + valor.split("_")[1] + '&op=get&id=' + datos[valor], 'GET', '')).done(function(data) {
                         contador = 0;
@@ -229,8 +230,7 @@ var vista = function(objeto, ContextPath) {
                             if (contador === 0)
                                 add_tabla = '<td>' + data[key] + '</td>';
                             if (contador === 1)
-                                //add_tabla = '<td>' + data[key] + ' --> <strong>id: </strong>' + datos[valor] + '</td>';
-                                add_tabla = '<td>' + data[key] + '</td>';
+                                add_tabla = data[key] + ', <strong> id: </strong>' + datos[valor];
                             contador++;
                         }
                         if (contador === 0) {
@@ -239,7 +239,10 @@ var vista = function(objeto, ContextPath) {
                         tabla += add_tabla;
                     });
                 }
-                tabla += '<td>' + datos[valor] + '</td></tr>';
+                if (/id_/.test(valor)) {
+                } else {
+                    tabla += datos[valor] + '</td></tr>';
+                }
             });
 
             tabla += '</table>';
