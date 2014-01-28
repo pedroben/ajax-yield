@@ -5,6 +5,7 @@
 package net.daw.operaciones;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -26,7 +27,7 @@ public class RequerimientoSave implements GenericOperation {
         try {
             RequerimientoDao oRequerimientoDAO = new RequerimientoDao(Conexion.getConection());
             RequerimientoBean oRequerimiento = new RequerimientoBean();
-            Gson gson = new Gson();
+            Gson gson=  new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
             String jason = request.getParameter("json");
             jason = EncodingUtil.decodeURIComponent(jason);
             oRequerimiento = gson.fromJson(jason, oRequerimiento.getClass());
