@@ -109,7 +109,7 @@
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
         <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
-        <script src="js/control/votodocumento.js" charset="UTF-8"></script>
+        <script src="js/control/actividad.js" charset="UTF-8"></script>
 
 
         <script>
@@ -152,16 +152,16 @@
                     tipodocumentoControl.inicia(tipodocumentoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
-                $('#lnkVotodocumento').unbind('click');
-                $('#lnkVotodocumento').click(function() {
-                    var votodocumento = objeto('votodocumento', '<%=request.getContextPath()%>');
-                    var votodocumentoView = vista(votodocumento, '<%=request.getContextPath()%>');
+                $('#lnkActividad').unbind('click');
+                $('#lnkActividad').click(function() {
+                    var actividad = objeto('actividad', '<%=request.getContextPath()%>');
+                    var actividadView = vista(actividad, '<%=request.getContextPath()%>');
 
                     $('#indexContenidoJsp').empty();
-                    $('#indexContenido').empty().append(votodocumentoView.getEmptyList());
+                    $('#indexContenido').empty().append(actividadView.getEmptyList());
 
-                    var votodocumentoControl = control_votodocumento_list('<%=request.getContextPath()%>');
-                    votodocumentoControl.inicia(votodocumentoView, 1, null, null, 10, null, null, null, null);
+                    var actividadControl = control_actividad_list('<%=request.getContextPath()%>');
+                    actividadControl.inicia(actividadView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
             });
