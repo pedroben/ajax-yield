@@ -3,25 +3,23 @@
     Created on : Jan 21, 2013, 10:24:17 AM
     Author     : Jose
 --%>
-<%@page import="java.text.SimpleDateFormat"%>
 <form class="form-horizontal" action="#" id="formulario" name="formulario">
-    <h2>Usuario</h2>
     <div class="control-group">
-        <label class="control-label" for="inputId">Id: </label>
+        <label class="control-label" for="inputId">Id:</label>
         <div class="controls">
-            <input id="id" name="id" type="text" size="30" maxlength="50" />
+            <input type="text" id="id" name="id" placeholder="id"/>
         </div>
-    </div>        
+    </div>
     <div class="control-group">
         <label class="control-label"  for="inputLogin">Login:</label>
         <div class="controls">
-            <input type="text" id="login" name="login" size="15"placeholder="Login" />
+            <input type="text" id="login" name="login" size="15" placeholder="login" />
         </div>
     </div>
     <div class="control-group">
         <label class="control-label"  for="inputPassword">Password:</label>
         <div class="controls">
-            <input type="text" id="password" name="password" size="15" placeholder="Password" />
+            <input type="text" id="password" name="password" size="15" placeholder="password" />
         </div>
     </div>
     <div class="control-group">
@@ -29,6 +27,5 @@
             <button type="submit" id="submitForm" class="btn submitForm">Submit</button>
         </div>
     </div>
-</fieldset>
 </form>
 
