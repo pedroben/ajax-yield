@@ -88,7 +88,8 @@ var control_empresa_list = function(path) {
 //                $(prefijo_div + '#id_usuario_button').val($(this).attr('id'));
                 $(prefijo_div + '#id_usuario').val($(this).attr('id'));
 //                $(prefijo_div + '#id_usuario_button_desc').empty().html(objeto('empresa', path).getOne($(prefijo_div + '#id_usuario_button').val()).descripcion);
-                $(prefijo_div + '#id_usuario_button_desc').empty().html(objeto('usuario', path).getOne($(prefijo_div + '#id_usuario').val()).descripcion);
+                // yo
+                $(prefijo_div + '#id_usuario_button_desc').empty().html(objeto('empresa', path).getOne($(prefijo_div + '#id_usuario').val()).descripcion);
 
                 return false;
             }
