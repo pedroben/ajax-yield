@@ -11,6 +11,7 @@ var control_hilo_list = function(path) {
 
     function cargaBotoneraMantenimiento() {
         var botonera = [
+            {"class": "btn btn-mini action05", "icon": "", "text": "entradas"},
             {"class": "btn btn-mini action01", "icon": "icon-eye-open", "text": ""},
             {"class": "btn btn-mini action02", "icon": "icon-zoom-in", "text": ""},
             {"class": "btn btn-mini action03", "icon": "icon-pencil", "text": ""},
@@ -79,6 +80,19 @@ var control_hilo_list = function(path) {
         pie = "<button class=\"btn btn-primary\" data-dismiss=\"modal\" aria-hidden=\"true\">Cerrar</button>";
         loadForm(place, cabecera, view.getObjectTable(id), pie, true);
     }
+    function cargaEntradas(id) {
+
+        var entrada = objeto('entrada', path);
+        var entradaView = vista(entrada, path);
+
+        $('#indexContenidoJsp').empty();
+        $('#indexContenido').empty().append(entradaView.getEmptyList());
+
+        var entradaControl = control_entrada_list(path);
+        entradaControl.inicia(entradaView, 1, null, null, 10, null, null, null, null, "id_hilo", "equals", id);
+        return false;
+
+    }
 
     return {
         inicia: function(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue) {
@@ -139,6 +153,10 @@ var control_hilo_list = function(path) {
                 $(prefijo_div + '.btn.btn-mini.action04').click(function() {
                     removeConfirmationModalForm(view, '#modal01', $(this).attr('id'));
                 });
+                $(prefijo_div + '.btn.btn-mini.action05').unbind('click');
+                $(prefijo_div + '.btn.btn-mini.action05').click(function() {
+                    cargaEntradas($(this).attr('id'));
+                });
 
             }
 
@@ -173,7 +191,7 @@ var control_hilo_list = function(path) {
             });
 
             //asignación del evento de click para cambiar de página en la botonera de paginación
-            
+
             $(prefijo_div + '.pagination_link').unbind('click');
             $(prefijo_div + '.pagination_link').click(function() {
                 var id = $(this).attr('id');
@@ -183,7 +201,7 @@ var control_hilo_list = function(path) {
             });
 
             //boton de crear un nuevo elemento
-            
+
             if (callback) {
                 $(prefijo_div + '#crear').css("display", "none");
             } else {

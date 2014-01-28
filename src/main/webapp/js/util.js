@@ -209,7 +209,6 @@ function inicializacion() {
 
 function enviarDatosUpdateForm(view, prefijo_div) {
     var jsonObj = [];
-//    jsonObj = $(prefijo_div + '#formulario').serializeObject();
     jsonObj = $(prefijo_div + '#formulario').serializeObject();
     jsonfile = {json: JSON.stringify(jsonObj)};
     cabecera = "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>" + "<h3 id=\"myModalLabel\">Respuesta del servidor</h3>";
