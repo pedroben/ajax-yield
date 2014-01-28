@@ -108,6 +108,7 @@
 
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
+        <script src="js/control/estado.js" charset="UTF-8"></script>
 
 
         <script>
@@ -136,6 +137,18 @@
 
                     var entradaControl = control_entrada_list('<%=request.getContextPath()%>');
                     entradaControl.inicia(entradaView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnkEstado').unbind('click');
+                $('#lnkEstado').click(function() {
+                    var estado = objeto('estado', '<%=request.getContextPath()%>');
+                    var estadoView = vista(estado, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(estadoView.getEmptyList());
+
+                    var estadoControl = control_estado_list('<%=request.getContextPath()%>');
+                    estadoControl.inicia(estadoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
             });
