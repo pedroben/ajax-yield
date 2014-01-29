@@ -116,7 +116,7 @@ var control_documento_list = function(path) {
                     digits: true
                 },
                 id_usuario:{
-                    required: true,,
+                    required: true,
                     digits: true
                 },
                 etiquetas: {
