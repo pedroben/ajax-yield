@@ -24,7 +24,7 @@ import net.daw.helper.Conexion;
 
 public class ActividadofflineGetcolumns implements GenericOperation{
     
-    @Override
+     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ArrayList<String> alColumns = null;
         try {
@@ -38,7 +38,4 @@ public class ActividadofflineGetcolumns implements GenericOperation{
         }
     }
 
-    
-    
-    
 }

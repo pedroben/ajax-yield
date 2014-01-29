@@ -23,7 +23,7 @@ import net.daw.helper.Conexion;
 import net.daw.helper.FilterBean;
 
 
-public class ActividadofflineGetPage implements GenericOperation{
+public class ActividadofflineGetpage implements GenericOperation{
     
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -77,7 +77,7 @@ public class ActividadofflineGetPage implements GenericOperation{
             } else {
                 hmOrder = null;
             }
-             ActividadofflineDao oActividadofflineDAO = new  ActividadofflineDao(Conexion.getConection());
+            ActividadofflineDao oActividadofflineDAO = new ActividadofflineDao(Conexion.getConection());
             List<ActividadofflineBean> oActividadoffline = oActividadofflineDAO.getPage(rpp, page, alFilter, hmOrder);
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.setDateFormat("dd/MM/yyyy");

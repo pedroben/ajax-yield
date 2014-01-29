@@ -14,9 +14,9 @@ public class ActividadofflineBean {
     
      private Integer id = 0;
      private String enunciado = "";
-     private Date fecha;
-     private double calificacion = 0;
-     private Integer  evaluacion =0;
+     private Date fecha= new Date();
+     private Double calificacion = 0.0;
+     private Integer evaluacion =0;
      private Integer activo = 0;
 
     public ActividadofflineBean() {
@@ -39,7 +39,7 @@ public class ActividadofflineBean {
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -81,7 +81,7 @@ public class ActividadofflineBean {
     /**
      * @param calificacion the calificacion to set
      */
-    public void setCalificacion(double calificacion) {
+    public void setCalificacion(Double calificacion) {
         this.calificacion = calificacion;
     }
 
@@ -98,9 +98,6 @@ public class ActividadofflineBean {
     public void setEvaluacion(Integer evaluacion) {
         this.evaluacion = evaluacion;
     }
-
-    
-   
 
     /**
      * @return the activo

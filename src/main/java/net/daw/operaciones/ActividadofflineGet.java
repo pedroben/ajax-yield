@@ -42,7 +42,7 @@ public class ActividadofflineGet implements GenericOperation{
             }
             return data;
         } catch (Exception e) {
-            throw new ServletException("ActividadofflineGetJson: View Error: " + e.getMessage());
+            throw new ServletException("ACtividadofflineGetJson: View Error: " + e.getMessage());
         }
     }
     

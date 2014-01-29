@@ -49,7 +49,7 @@ var objeto = function(clase, ContextPath) {
             } else {
                 systemfilterParams = "";
             }
-            $.when(ajaxCallSync(urlDatos + '&op=getpage' + filterParams + '&rpp=' + rpp + orderParams + '&page=' + pagina + systemfilterParams, 'GET', '')).done(function(data) {
+            $.when(ajaxCallSync(urlDatos + '&op=Getpage' + filterParams + '&rpp=' + rpp + orderParams + '&page=' + pagina + systemfilterParams, 'GET', '')).done(function(data) {
                 pagina_objs = data;
             });
             return pagina_objs;

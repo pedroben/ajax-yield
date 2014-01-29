@@ -23,7 +23,7 @@ import net.daw.helper.FilterBean;
 
 public class ActividadofflineGetregisters implements GenericOperation{
     
-    @Override
+   @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String data;
         try {
