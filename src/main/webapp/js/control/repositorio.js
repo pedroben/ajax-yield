@@ -121,10 +121,53 @@ var control_repositorio_list = function(path) {
             return false;
         });
 
+//http://jqueryvalidation.org/documentation/
+        $('#formulario').validate({
+            rules: {
+                titulo: {
+                    required: true,
+                    maxlength: 255
+                },
+                contenido: {
+                    required: true
+                },
+                fecha: {
+                    required: true,
+                    date: true
+                }
+               
+            },
+            messages: {
+                titulo: {
+                    required: "Introduce un titulo",
+                    maxlength: "Tiene que ser menos de 255 caracteres"
+                },
+                contenido: {
+                    required: "Introduce contenido"
+                },
+                fecha: {
+                    required: "Introduce una fecha",
+                    date: "Introduze una fecha valida 'dd/MM/yyyy'"
+                }
+                
+                
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                        .text('OK!').addClass('valid')
+                        .closest('.control-group').removeClass('error').addClass('success');
+            }
+        });
+
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function(event) {
             //validaciones...
-            enviarDatosUpdateForm(view,prefijo_div);
+            if ($('#formulario').valid()) {
+                enviarDatosUpdateForm(view, prefijo_div);
+            }
             return false;
         });
     }
@@ -133,7 +176,7 @@ var control_repositorio_list = function(path) {
         if ($(prefijo_div + lugarID).val() != "") {
             objInfo = objeto(objetoClaveAjena, path).getOne($(prefijo_div + lugarID).val());
             props = Object.getOwnPropertyNames(objInfo);
-            $(prefijo_div + lugarDesc).empty().html(objInfo[props[1]] + " " + objInfo[props[2]]);
+            $(prefijo_div + lugarDesc).empty().html(objInfo[props[1]]);
         }
     }
 
