@@ -14,6 +14,7 @@
         <li><a id="lnkEntrada" href="#">Entrada</a></li>
         <li><a id="lnkTipodocumento" href="#">Tipodocumento</a></li>
         <li><a id="lnkRequerimiento" href="#">Requerimiento</a></li>
+        <li><a id="lnkFollower" href="#">Follower</a></li>
     </ul>
 </div>
 

@@ -110,6 +110,7 @@
         <script src="js/control/entrada.js" charset="UTF-8"></script>
         <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
         <script src="js/control/requerimiento.js" charset="UTF-8"></script>
+        <script src="js/control/follower.js" charset="UTF-8"></script>
 
 
         <script>
@@ -162,6 +163,18 @@
 
                     var requerimientoControl = control_requerimiento_list('<%=request.getContextPath()%>');
                     requerimientoControl.inicia(requerimientoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                 $('#lnkFollower').unbind('click');
+                $('#lnkFollower').click(function() {
+                    var follower = objeto('follower', '<%=request.getContextPath()%>');
+                    var followerView = vista(follower, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(followerView.getEmptyList());
+
+                    var followerControl = control_follower_list('<%=request.getContextPath()%>');
+                    followerControl.inicia(followerView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
             });
