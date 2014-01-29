@@ -153,6 +153,7 @@ var vista = function(objeto, ContextPath) {
             var tabla = "<table class=\"table table table-striped table-condensed\">";
             if (objeto.getPrettyFieldNamesAcciones() != null) {
                 tabla += '<tr>';
+                
                 $.each(objeto.getPrettyFieldNamesAcciones(), function(index, value) {
                     tabla += '<th>' + value;
                     tabla += '<a class="orderAsc' + index + '" href="#"><i class="icon-arrow-up"></i></a>';
@@ -161,6 +162,7 @@ var vista = function(objeto, ContextPath) {
                 });
                 tabla += '</tr>';
             }
+            
             page = objeto.getPage(pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, systemfilter, systemfilteroperator, systemfiltervalue)['list'];
             $.each(page, function(index, value) {
                 tabla += '<tr>';

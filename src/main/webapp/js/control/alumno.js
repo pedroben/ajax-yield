@@ -81,7 +81,7 @@ var control_alumno_list = function(path) {
     }
 
     return {
-        inicia: function(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue) {
+        inicia: function(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, prueba, systemfilter, systemfilteroperator, systemfiltervalue) {
 
             var thisObject = this;
 

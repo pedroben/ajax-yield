@@ -3,7 +3,7 @@
     Created on : Jan 24, 2013, 12:02:17 AM
     Author     : Sergio
 --%>
-<form class="form-horizontal" action="#" id="formulario" name="formulario">
+<form class="form-horizontal" action="#" id="formulario" name="formulario" onsubmit="return validacion()">
     <h2>Entrada</h2>
     <div class="control-group">
         <label class="control-label" for="inputId">ID:</label>
