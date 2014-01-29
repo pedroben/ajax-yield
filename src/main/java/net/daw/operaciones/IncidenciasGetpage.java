@@ -12,16 +12,16 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.daw.bean.HiloBean;
-import net.daw.dao.HiloDao;
+import net.daw.bean.IncidenciasBean;
+import net.daw.dao.IncidenciasDao;
 import net.daw.helper.Conexion;
 import net.daw.helper.FilterBean;
 
 /**
  *
- * @author Alvaro
+ * @author Jordi
  */
-public class HiloGetpage implements GenericOperation {
+public class IncidenciasGetpage implements GenericOperation {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -75,16 +75,16 @@ public class HiloGetpage implements GenericOperation {
             } else {
                 hmOrder = null;
             }
-            HiloDao oHiloDAO = new HiloDao(Conexion.getConection());
-            List<HiloBean> oHilos = oHiloDAO.getPage(rpp, page, alFilter, hmOrder);
-            GsonBuilder gsonBuilder = new GsonBuilder();
+            IncidenciasDao oIncidenciasDAO = new IncidenciasDao(Conexion.getConection());
+            List<IncidenciasBean> oIncidencias = oIncidenciasDAO.getPage(rpp, page, alFilter, hmOrder);
+             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.setDateFormat("dd/MM/yyyy");
             Gson gson = gsonBuilder.create();
-            data = gson.toJson(oHilos);
+            data = gson.toJson(oIncidencias);
             data = "{\"list\":" + data + "}";
             return data;
         } catch (Exception e) {
-            throw new ServletException("HiloGetJson: View Error: " + e.getMessage());
+            throw new ServletException("IncidenciasGetJson: View Error: " + e.getMessage());
         }
     }
 }

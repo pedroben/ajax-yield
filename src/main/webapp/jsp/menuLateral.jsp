@@ -21,6 +21,7 @@
         <li><a id="lnkVotodocumento" href="#">Votodocumento</a></li>
         <li><a id="lnkRequerimiento" href="#">Requerimiento</a></li>
         <li><a id="lnkFollower" href="#">Follower</a></li>
+        <li><a id="lnkIncidencias" href="#">Incidencias</a></li>
     </ul>
 </div>
 

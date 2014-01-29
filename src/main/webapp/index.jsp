@@ -118,6 +118,7 @@
         <script src="js/control/votodocumento.js" charset="UTF-8"></script>
         <script src="js/control/requerimiento.js" charset="UTF-8"></script>
         <script src="js/control/follower.js" charset="UTF-8"></script>
+        <script src="js/control/incidencias.js" charset="UTF-8"></script>
 
 
 
@@ -275,6 +276,19 @@
 
                     var followerControl = control_follower_list('<%=request.getContextPath()%>');
                     followerControl.inicia(followerView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                
+                 $('#lnkIncidencias').unbind('click');
+                $('#lnkIncidencias').click(function() {
+                    var incidencias = objeto('incidencias', '<%=request.getContextPath()%>');
+                    var incidenciasView = vista(incidencias, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(incidenciasView.getEmptyList());
+
+                    var incidenciasControl = control_incidencias_list('<%=request.getContextPath()%>');
+                    incidenciasControl.inicia(incidenciasView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
 

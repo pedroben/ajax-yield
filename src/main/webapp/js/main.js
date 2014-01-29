@@ -223,7 +223,7 @@ var vista = function(objeto, ContextPath) {
                 tabla += '<tr><td><strong>' + cabecera[index] + '</strong></td>';
                 tabla += '<td>';
                 if (/id_/.test(valor)) {
-                    $.when(ajaxCallSync(ContextPath + '/json?ob=' + valor.split("_")[1] + '&op=get&id=' + datos[valor], 'GET', '')).done(function(data) {
+                    $.when(ajaxCallSync(ContextPath + '/json?ob=' + valor.split("_")[1].replace(/[0-9]*$/, "") + '&op=get&id=' + datos[valor], 'GET', '')).done(function(data) {
                         contador = 0;
                         add_tabla = "";
                         for (key in data) {
