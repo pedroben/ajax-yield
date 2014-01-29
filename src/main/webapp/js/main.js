@@ -238,10 +238,18 @@ var vista = function(objeto, ContextPath) {
                         }
                         tabla += add_tabla;
                     });
-                }
-                if (/id_/.test(valor)) {
                 } else {
-                    tabla += datos[valor] + '</td></tr>';
+                    switch (datos[valor]) {
+                        case true:
+                            tabla += '<i class="icon-ok"></i>';
+                            break;
+                        case false:
+                            tabla += '<i class="icon-remove"></i>';
+                            break;
+                        default:
+                            tabla += datos[valor];
+                    }
+                    tabla += '</td></tr>';
                 }
             });
 
