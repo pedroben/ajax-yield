@@ -6,7 +6,8 @@
 
 package net.daw.dao;
 
-import net.daw.bean.EmpresaBean;
+
+import net.daw.bean.ProfesorBean;
 import net.daw.bean.UsuarioBean;
 import net.daw.helper.Conexion;
 
@@ -14,28 +15,28 @@ import net.daw.helper.Conexion;
  *
  * @author AntonioNP
  */
-public class EmpresaDao extends GenericDaoImplementation<EmpresaBean>{
+public class ProfesorDao extends GenericDaoImplementation<ProfesorBean>{
     
-    public EmpresaDao(Conexion.Tipo_conexion tipo_conexion) throws Exception{
-        super(tipo_conexion, "empresa");
+    public ProfesorDao(Conexion.Tipo_conexion tipo_conexion) throws Exception{
+        super(tipo_conexion, "profesor");
     }
     
-    public EmpresaBean getFromId_usuario(UsuarioBean oUsuarioBean) throws Exception {
-        EmpresaBean oEmpresaBean = new EmpresaBean();
+    public ProfesorBean getFromId_usuario(UsuarioBean oUsuarioBean) throws Exception {
+        ProfesorBean oProfesorBean = new ProfesorBean();
         if (oUsuarioBean.getId() > 0) {
             try {
                 oMysql.conexion(enumTipoConexion);
                 String id_usuario = Integer.toString(oUsuarioBean.getId());
                 Integer id_user = Integer.parseInt(oMysql.getId("empresa", "id_usuario", id_usuario));
-                oEmpresaBean.setId(id_user);
+                oProfesorBean.setId(id_user);
             } catch (Exception e) {
-                throw new Exception("EmpresaDao.getEmpresa: Error: " + e.getMessage());
+                throw new Exception("ProfesorDao.getProfesor: Error: " + e.getMessage());
             } finally {
                 oMysql.desconexion();
             }
         } else {
-            oEmpresaBean.setId(0);
+            oProfesorBean.setId(0);
         }
-        return oEmpresaBean;
+        return oProfesorBean;
     }
 }
