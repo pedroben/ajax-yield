@@ -43,17 +43,17 @@ public class UsuarioDao extends GenericDaoImplementation<UsuarioBean> {
         try {
             AlumnoDao oAlumnoDao = new AlumnoDao(enumTipoConexion);
             AlumnoBean oAlumnoBean = oAlumnoDao.getFromId_usuario(oUsuarioBean);
-            oUsuarioBean.setTipoUsuario(Enum.TipoUsuario.Alumno);
+            //oUsuarioBean.setTipoUsuario(Enum.TipoUsuario.Alumno);
         } catch (Exception e1) {
             try {
                 ProfesorDao oProfesorDao = new ProfesorDao(enumTipoConexion);
                 ProfesorBean oProfesorBean = oProfesorDao.getFromId_usuario(oUsuarioBean);
-                oUsuarioBean.setTipoUsuario(Enum.TipoUsuario.Profesor);
+               // oUsuarioBean.setTipoUsuario(Enum.TipoUsuario.Profesor);
             } catch (Exception e2) {
                 try {
                     EmpresaDao oEmpresaDao = new EmpresaDao(enumTipoConexion);                  
                     EmpresaBean oEmpresaBean = oEmpresaDao.getFromId_usuario(oUsuarioBean);
-                    oUsuarioBean.setTipoUsuario(Enum.TipoUsuario.Empresa);
+                    //oUsuarioBean.setTipoUsuario(Enum.TipoUsuario.Empresa);
                 } catch (Exception e3) {
                     throw new Exception("UsuarioDao.type: Error: " + e3.getMessage());
                 }
