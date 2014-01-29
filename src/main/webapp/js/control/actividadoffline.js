@@ -50,11 +50,82 @@ var control_actividadoffline_list = function(path) {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             //$(prefijo_div + '#nombre').focus();
         }
+        
+        
+          //http://jqueryvalidation.org/documentation/
+        $('#formulario').validate({
+            rules: {
+                enunciado: {
+                    required: true,
+                    maxlength: 255
+                },
+                fecha: {
+                    required: true
+                    
+                },
+                calificacion: {
+                    required: true,
+                    maxlength: 4,
+                    number: true
+                },
+                evaluacion: {
+                    required: true,
+                    maxlength: 1,
+                    digits: true
+                },
+                activo: {
+                    required: true,
+                    maxlength: 1,
+                    digits: true
+                }
+                
+            },
+            messages: {
+                enunciado: {
+                    required: "Introduce un enunciado",
+                    maxlength: "Tiene que ser menos de 255 caracteres"
+                },
+                fecha: {
+                    required: "Introduce una fecha"
+                    
+                },
+                calificacion: {
+                    required: "Introduce una calificacion",
+                    maxlength: "Tiene que ser menos de 4 caracteres",
+                    Double: "Tiene que ser un numero"
+                },
+                evaluacion: {
+                    required: "Introduce una evaluacion",
+                    maxlength: "Tiene que ser menos de 2 caracteres",
+                    digits: "Tiene que ser un numero entero"         
+                }
+                ,
+                activo: {
+                    required: "Introduce si es activo",
+                    maxlength: "Tiene que ser menos de 2 caracteres",
+                    digits: "Tiene que ser un numero entero"         
+                }
+                
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                        .text('OK!').addClass('valid')
+                        .closest('.control-group').removeClass('error').addClass('success');
+            }
+        });
+
+
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view, prefijo_div);
+            if ($('#formulario').valid()) {
+                enviarDatosUpdateForm(view, prefijo_div);
+            }
             return false;
         });
+    
     }
 
     function removeConfirmationModalForm(view, place, id) {
