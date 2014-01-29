@@ -78,8 +78,8 @@ var control_repositorio_list = function(path) {
 
         $(prefijo_div + '#id_usuario_button').unbind('click');
         $(prefijo_div + '#id_usuario_button').click(function() {
-            loadForeign('usuario', '#modal02', control_usuario_list, callbackSearchCliente);
-            function callbackSearchCliente(id) {
+            loadForeign('usuario', '#modal02', control_usuario_list, callbackSearchUsuario);
+            function callbackSearchUsuario(id) {
                 $(prefijo_div + '#modal02').modal('hide');
                 $(prefijo_div + '#modal02').data('modal', null);
                 $(prefijo_div + '#id_usuario').val($(this).attr('id'));
@@ -94,8 +94,8 @@ var control_repositorio_list = function(path) {
 
         $(prefijo_div + '#id_lenguaje_button').unbind('click');
         $(prefijo_div + '#id_lenguaje_button').click(function() {
-            loadForeign('lenguaje', '#modal02', control_lenguaje_list, callbackSearchCliente);
-            function callbackSearchCliente(id) {
+            loadForeign('lenguaje', '#modal02', control_lenguaje_list, callbackSearchLenguaje);
+            function callbackSearchLenguaje(id) {
                 $(prefijo_div + '#modal02').modal('hide');
                 $(prefijo_div + '#modal02').data('modal', null);
                 $(prefijo_div + '#id_lenguaje').val($(this).attr('id'));
@@ -110,8 +110,8 @@ var control_repositorio_list = function(path) {
 
         $(prefijo_div + '#id_documento_button').unbind('click');
         $(prefijo_div + '#id_documento_button').click(function() {
-            loadForeign('documento', '#modal02', control_documento_list, callbackSearchCliente);
-            function callbackSearchCliente(id) {
+            loadForeign('documento', '#modal02', control_documento_list, callbackSearchDocumento);
+            function callbackSearchDocumento(id) {
                 $(prefijo_div + '#modal02').modal('hide');
                 $(prefijo_div + '#modal02').data('modal', null);
                 $(prefijo_div + '#id_documento').val($(this).attr('id'));
@@ -129,7 +129,8 @@ var control_repositorio_list = function(path) {
                     maxlength: 255
                 },
                 contenido: {
-                    required: true
+                    required: true,
+                    maxlength: 255
                 },
                 fecha: {
                     required: true,
