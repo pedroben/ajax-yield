@@ -86,20 +86,20 @@ var control_empresa_list = function(path) {
             return false;
         });
 
-//        //clave ajena hilo
-//        cargaClaveAjena('#id_hilo', '#id_hilo_desc', 'hilo')
-//        $(prefijo_div + '#id_hilo_button').unbind('click');
-//        $(prefijo_div + '#id_hilo_button').click(function() {
-//            loadForeign('hilo', '#modal02', control_hilo_list, callbackSearchHilo);
-//            function callbackSearchHilo(id) {
-//                $(prefijo_div + '#modal02').modal('hide');
-//                $(prefijo_div + '#modal02').data('modal', null);
-//                $(prefijo_div + '#id_hilo').val($(this).attr('id'));
-//                cargaClaveAjena('#id_hilo', '#id_hilo_desc', 'hilo');
-//                return false;
-//            }
-//            return false;
-//        });
+//        //clave ajena usuario
+        cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario')
+        $(prefijo_div + '#id_usuario_button').unbind('click');
+        $(prefijo_div + '#id_usuario_button').click(function() {
+            loadForeign('usuario', '#modal02', control_usuario_list, callbackSearchHilo);
+            function callbackSearchHilo(id) {
+                $(prefijo_div + '#modal02').modal('hide');
+                $(prefijo_div + '#modal02').data('modal', null);
+                $(prefijo_div + '#id_usuario').val($(this).attr('id'));
+                cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario');
+                return false;
+            }
+            return false;
+        });
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
             enviarDatosUpdateForm(view, prefijo_div);
