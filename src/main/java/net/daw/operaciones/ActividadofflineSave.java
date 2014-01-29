@@ -8,8 +8,8 @@ package net.daw.operaciones;
  *
  * @author Javi Bonet
  */
-
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -23,13 +23,13 @@ import net.daw.helper.EncodingUtil;
 
 public class ActividadofflineSave implements GenericOperation{
     
-    @Override
+      @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try {
             ActividadofflineDao oActividadofflineDAO = new ActividadofflineDao(Conexion.getConection());
             ActividadofflineBean oActividadoffline = new ActividadofflineBean();
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
             String jason = request.getParameter("json");
             jason = EncodingUtil.decodeURIComponent(jason);
             oActividadoffline = gson.fromJson(jason, oActividadoffline.getClass());

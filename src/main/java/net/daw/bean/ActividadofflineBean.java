@@ -16,7 +16,7 @@ public class ActividadofflineBean {
      private String enunciado = "";
      private Date fecha= new Date();
      private Double calificacion = 0.0;
-     private Integer evaluacion =0;
+     private Integer evaluacion = 0;
      private Integer activo = 0;
 
     public ActividadofflineBean() {

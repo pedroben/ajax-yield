@@ -46,10 +46,11 @@ public class ActividadofflineRemove implements GenericOperation{
             throw new ServletException("ActividadofflineRemoveJson: View Error: " + e.getMessage());
         }
     }
+    }
     
     
     
     
     
     
-}
+
