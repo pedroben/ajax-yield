@@ -116,6 +116,8 @@
         <script src="js/control/actividad.js" charset="UTF-8"></script>
         <script src="js/control/empresa.js" charset="UTF-8"></script>
         <script src="js/control/votodocumento.js" charset="UTF-8"></script>
+        <script src="js/control/metadocumento.js" charset="UTF-8"></script>
+        <script src="js/control/repositorio.js" charset="UTF-8"></script>
 
 
 
@@ -260,6 +262,32 @@
 
                     var votodocumentoControl = control_votodocumento_list('<%=request.getContextPath()%>');
                     votodocumentoControl.inicia(votodocumentoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                
+                 $('#lnkMetadocumento').unbind('click');
+                $('#lnkMetadocumento').click(function() {
+                    var metadocumento = objeto('metadocumento', '<%=request.getContextPath()%>');
+                    var metadocumentoView = vista(metadocumento, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(metadocumentoView.getEmptyList());
+
+                    var metadocumentoControl = control_metadocumento_list('<%=request.getContextPath()%>');
+                    metadocumentoControl.inicia(metadocumentoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                
+                 $('#lnkRepositorio').unbind('click');
+                $('#lnkRepositorio').click(function() {
+                    var repositorio = objeto('repositorio', '<%=request.getContextPath()%>');
+                    var repositorioView = vista(repositorio, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(repositorioView.getEmptyList());
+
+                    var repositorioControl = control_repositorio_list('<%=request.getContextPath()%>');
+                    repositorioControl.inicia(repositorioView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
 

@@ -19,6 +19,8 @@
         <li><a id="lnkActividad" href="#">Actividad</a></li>
         <li><a id="lnkEmpresa" href="#">Empresa</a></li>
         <li><a id="lnkVotodocumento" href="#">Votodocumento</a></li>
+        <li><a id="lnkMetadocumento" href="#">Metadocumento</a></li>
+        <li><a id="lnkRepositorio" href="#">Repositorio</a></li>
     </ul>
 </div>
 
