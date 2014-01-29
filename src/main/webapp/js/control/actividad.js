@@ -50,6 +50,49 @@ var control_actividad_list = function(path) {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             //$(prefijo_div + '#nombre').focus();
         }
+        
+        //http://jqueryvalidation.org/documentation/
+        $('#formulario').validate({
+            rules: {
+                enunciado: {
+                    required: true,
+                    maxlength: 255
+                },
+                evaluacion: {
+                    required: true,
+                    digits: true
+                },
+                fecha: {
+                    required: true,
+                    date: true
+                },
+                activo: {
+                    required: false
+                }
+            },
+            messages: {
+                enunciado: {
+                    required: "Introduce un enunciado",
+                    maxlength: "Tiene que ser menos de 255 caracteres"
+                },
+                evaluacion: {
+                    required: "Introduce una evaluacion"
+                },
+                fecha: {
+                    required: "Introduce una fecha",
+                    date: "Introduze una fecha valida 'dd/MM/yyyy'"
+                }                
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                        .text('OK!').addClass('valid')
+                        .closest('.control-group').removeClass('error').addClass('success');
+            }
+        });
+        
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
             enviarDatosUpdateForm(view, prefijo_div);

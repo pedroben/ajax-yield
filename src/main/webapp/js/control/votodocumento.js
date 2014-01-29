@@ -77,8 +77,8 @@ var control_votodocumento_list = function(path) {
 
         $(prefijo_div + '#id_documento_button').unbind('click');
         $(prefijo_div + '#id_documento_button').click(function() {
-            loadForeign('documento', '#modal02', control_documento_list, callbackSearchCliente);
-            function callbackSearchCliente(id) {
+            loadForeign('documento', '#modal02', control_documento_list, callbackSearchDocumento);
+            function callbackSearchDocumento(id) {
                 $(prefijo_div + '#modal02').modal('hide');
                 $(prefijo_div + '#modal02').data('modal', null);
                 $(prefijo_div + '#id_documento').val($(this).attr('id'));
@@ -87,14 +87,14 @@ var control_votodocumento_list = function(path) {
             }
             return false;
         });
-        
+
         //clave ajena usuario
         cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario')
 
         $(prefijo_div + '#id_usuario_button').unbind('click');
         $(prefijo_div + '#id_usuario_button').click(function() {
-            loadForeign('usuario', '#modal02', control_usuario_list, callbackSearchCliente);
-            function callbackSearchCliente(id) {
+            loadForeign('usuario', '#modal02', control_usuario_list, callbackSearchUsuario);
+            function callbackSearchUsuario(id) {
                 $(prefijo_div + '#modal02').modal('hide');
                 $(prefijo_div + '#modal02').data('modal', null);
                 $(prefijo_div + '#id_usuario').val($(this).attr('id'));
@@ -102,6 +102,41 @@ var control_votodocumento_list = function(path) {
                 return false;
             }
             return false;
+        });
+
+        //http://jqueryvalidation.org/documentation/
+        $('#formulario').validate({
+            rules: {
+                id_documento: {
+                    required: true,
+                    digits: true
+                },
+                id_usuario: {
+                    required: false
+                },
+                valor: {
+                    required: false
+                }
+            },
+            messages: {
+                id_documento: {
+                    required: "Selecciona un documento."
+                },
+                id_usuario: {
+                    required: "Selecciona un usuario."
+                },
+                valor: {
+                    required: "Introduce un voto."
+                }
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                        .text('OK!').addClass('valid')
+                        .closest('.control-group').removeClass('error').addClass('success');
+            }
         });
 
         $(prefijo_div + '#submitForm').unbind('click');
