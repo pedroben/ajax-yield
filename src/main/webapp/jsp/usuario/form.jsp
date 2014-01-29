@@ -19,7 +19,13 @@
     <div class="control-group">
         <label class="control-label"  for="inputPassword">Password:</label>
         <div class="controls">
-            <input type="text" id="password" name="password" size="15" placeholder="password" />
+            <input type="password" id="password" name="password" size="15" placeholder="password" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label"  for="inputPasswordRepite">Repite Password:</label>
+        <div class="controls">
+            <input type="password" id="passwordRepite" name="passwordRepite" size="15" placeholder="repitePassword" />
         </div>
     </div>
     <div class="control-group">
