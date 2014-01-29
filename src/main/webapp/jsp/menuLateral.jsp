@@ -19,6 +19,7 @@
         <li><a id="lnkActividad" href="#">Actividad</a></li>
         <li><a id="lnkEmpresa" href="#">Empresa</a></li>
         <li><a id="lnkVotodocumento" href="#">Votodocumento</a></li>
+        <li><a id="lnkActividadoffline" href="#">Actividad offline</a></li>
     </ul>
 </div>
 
