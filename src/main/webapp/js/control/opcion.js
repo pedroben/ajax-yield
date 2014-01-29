@@ -49,9 +49,81 @@ var control_opcion_list = function(path) {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             //$(prefijo_div + '#nombre').focus();
         }
+
+//clave ajena pregunta
+        cargaClaveAjena('#id_pregunta', '#id_pregunta_desc', 'pregunta')
+
+        $(prefijo_div + '#id_pregunta_button').unbind('click');
+        $(prefijo_div + '#id_pregunta_button').click(function() {
+            loadForeign('pregunta', '#modal02', control_pregunta_list, callbackSearchPregunta);
+            function callbackSearchPregunta(id) {
+                $(prefijo_div + '#modal02').modal('hide');
+                $(prefijo_div + '#modal02').data('modal', null);
+                $(prefijo_div + '#id_pregunta').val($(this).attr('id'));
+                cargaClaveAjena('#id_pregunta', '#id_pregunta_desc', 'pregunta');
+                return false;
+            }
+            return false;
+        });
+
+        function cargaClaveAjena(lugarID, lugarDesc, objetoClaveAjena) {
+            if ($(prefijo_div + lugarID).val() !== "") {
+                objInfo = objeto(objetoClaveAjena, path).getOne($(prefijo_div + lugarID).val());
+                props = Object.getOwnPropertyNames(objInfo);
+                $(prefijo_div + lugarDesc).empty().html(objInfo[props[1]]);
+            }
+        }
+//        $(prefijo_div + '#submitForm').unbind('click');
+//        $(prefijo_div + '#submitForm').click(function() {
+//            enviarDatosUpdateForm(view, id);
+//            return false;
+//        });
+//        
+        //http://jqueryvalidation.org/documentation/
+        $('#formulario').validate({
+            rules: {
+                descripcion: {
+                    required: true,
+                    maxlength: 255
+                },
+                id_pregunta: {
+                    required: true,
+                },
+                correcta: {
+                    required: true,
+                    digits: true
+                }
+            },
+            messages: {
+                descripcion: {
+                    required: "Introduce una descripcion",
+                    maxlength: "Tiene que ser menos de 255 caracteres"
+                },
+                id_pregunta: {
+                    required: "Introduce un ID de pregunta",
+                },
+                correcta: {
+                    required: "Introduce un valor",
+                    digits: "Tiene que ser solo un numero entero"
+                }
+
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                        .text('OK!').addClass('valid')
+                        .closest('.control-group').removeClass('error').addClass('success');
+            }
+        });
+
+
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view, id);
+            if ($('#formulario').valid()) {
+                enviarDatosUpdateForm(view, prefijo_div);
+            }
             return false;
         });
     }
@@ -172,7 +244,7 @@ var control_opcion_list = function(path) {
             });
 
             //asignación del evento de click para cambiar de página en la botonera de paginación
-            
+
             $(prefijo_div + '.pagination_link').unbind('click');
             $(prefijo_div + '.pagination_link').click(function() {
                 var id = $(this).attr('id');
@@ -182,7 +254,7 @@ var control_opcion_list = function(path) {
             });
 
             //boton de crear un nuevo elemento
-            
+
             if (callback) {
                 $(prefijo_div + '#crear').css("display", "none");
             } else {
