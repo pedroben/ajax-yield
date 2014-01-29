@@ -28,6 +28,7 @@
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script src="./js/vendor/jquery.validate.min.js"></script>
 
     </head>
     <body>
@@ -107,12 +108,13 @@
         <script src="js/main.js" charset="UTF-8"></script>
 
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
+        <script src="js/control/documento.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
         <script src="js/control/actividadoffline.js" charset="UTF-8"></script>
 
 
         <script>
-            
+
             $(document).ready(function() {
                 inicializacion();
                 $('#lnkLenguaje').unbind('click');
@@ -127,6 +129,18 @@
                     lenguajeControl.inicia(lenguajeView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
+                $('#lnkDocumento').unbind('click');
+                $('#lnkDocumento').click(function() {
+                    var documento = objeto('documento', '<%=request.getContextPath()%>');
+                    var documentoView = vista(documento, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(documentoView.getEmptyList());
+
+                    var documentoControl = control_documento_list('<%=request.getContextPath()%>');
+                    documentoControl.inicia(documentoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
                 $('#lnkEntrada').unbind('click');
                 $('#lnkEntrada').click(function() {
                     var entrada = objeto('entrada', '<%=request.getContextPath()%>');
@@ -139,19 +153,110 @@
                     entradaControl.inicia(entradaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
-                 $('#lnkActividadoffline').unbind('click');
-                $('#lnkActividadoffline').click(function() {
-                    var actividadoffline = objeto('actividadoffline', '<%=request.getContextPath()%>');
-                    var actividadofflineView = vista(actividadoffline, '<%=request.getContextPath()%>');
+
+                $('#lnkUsuario').unbind('click');
+                $('#lnkUsuario').click(function() {
+                    var usuario = objeto('usuario', '<%=request.getContextPath()%>');
+                    var usuarioView = vista(usuario, '<%=request.getContextPath()%>');
 
                     $('#indexContenidoJsp').empty();
-                    $('#indexContenido').empty().append(actividadofflineView.getEmptyList());
+                    $('#indexContenido').empty().append(usuarioView.getEmptyList());
 
-                    var actividadofflineControl = control_actividadoffline_list('<%=request.getContextPath()%>');
-                    actividadofflineControl.inicia(actividadofflineView, 1, null, null, 10, null, null, null, null);
+                    var usuarioControl = control_usuario_list('<%=request.getContextPath()%>');
+                    usuarioControl.inicia(usuarioView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+
+                $('#lnkHilo').unbind('click');
+                $('#lnkHilo').click(function() {
+                    var hilo = objeto('hilo', '<%=request.getContextPath()%>');
+                    var hiloView = vista(hilo, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(hiloView.getEmptyList());
+
+                    var hiloControl = control_hilo_list('<%=request.getContextPath()%>');
+                    hiloControl.inicia(hiloView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+
+                $('#lnkDocumento').unbind('click');
+                $('#lnkDocumento').click(function() {
+                    var documento = objeto('documento', '<%=request.getContextPath()%>');
+                    var documentoView = vista(documento, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(documentoView.getEmptyList());
+
+                    var documentoControl = control_documento_list('<%=request.getContextPath()%>');
+                    documentoControl.inicia(documentoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnkTipodocumento').unbind('click');
+                $('#lnkTipodocumento').click(function() {
+                    var tipodocumento = objeto('tipodocumento', '<%=request.getContextPath()%>');
+                    var tipodocumentoView = vista(tipodocumento, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(tipodocumentoView.getEmptyList());
+
+                    var tipodocumentoControl = control_tipodocumento_list('<%=request.getContextPath()%>');
+                    tipodocumentoControl.inicia(tipodocumentoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+
+                $('#lnkActividad').unbind('click');
+                $('#lnkActividad').click(function() {
+                    var actividad = objeto('actividad', '<%=request.getContextPath()%>');
+                    var actividadView = vista(actividad, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(actividadView.getEmptyList());
+
+                    var actividadControl = control_actividad_list('<%=request.getContextPath()%>');
+                    actividadControl.inicia(actividadView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
                 
+                $('#lnkVotodocumento').unbind('click');
+                $('#lnkVotodocumento').click(function() {
+                    var votodocumento = objeto('votodocumento', '<%=request.getContextPath()%>');
+                    var votodocumentoView = vista(votodocumento, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(votodocumentoView.getEmptyList());
+
+                    var votodocumentoControl = control_votodocumento_list('<%=request.getContextPath()%>');
+                    votodocumentoControl.inicia(votodocumentoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+
+                $('#lnkEmpresa').unbind('click');
+                $('#lnkEmpresa').click(function() {
+                    var empresa = objeto('empresa', '<%=request.getContextPath()%>');
+                    var empresaView = vista(empresa, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(empresaView.getEmptyList());
+
+                    var empresaControl = control_empresa_list('<%=request.getContextPath()%>');
+                    empresaControl.inicia(empresaView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                
+                $('#lnkVotodocumento').unbind('click');
+                $('#lnkVotodocumento').click(function() {
+                    var votodocumento = objeto('votodocumento', '<%=request.getContextPath()%>');
+                    var votodocumentoView = vista(votodocumento, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(votodocumentoView.getEmptyList());
+
+                    var votodocumentoControl = control_votodocumento_list('<%=request.getContextPath()%>');
+                    votodocumentoControl.inicia(votodocumentoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+
             });
 
         </script>
