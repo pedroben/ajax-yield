@@ -18,6 +18,7 @@
         <li><a id="lnkTipodocumento" href="#">Tipodocumento</a></li>
         <li><a id="lnkActividad" href="#">Actividad</a></li>
         <li><a id="lnkEmpresa" href="#">Empresa</a></li>
+        <li><a id="lnkVotodocumento" href="#">Votodocumento</a></li>
     </ul>
 </div>
 

@@ -115,7 +115,8 @@ var control_votodocumento_list = function(path) {
                     required: false
                 },
                 valor: {
-                    required: false
+                    required: true,
+                    digits: true
                 }
             },
             messages: {
