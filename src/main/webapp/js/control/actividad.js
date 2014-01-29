@@ -50,7 +50,7 @@ var control_actividad_list = function(path) {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             //$(prefijo_div + '#nombre').focus();
         }
-        
+
         //http://jqueryvalidation.org/documentation/
         $('#formulario').validate({
             rules: {
@@ -81,7 +81,7 @@ var control_actividad_list = function(path) {
                 fecha: {
                     required: "Introduce una fecha",
                     date: "Introduze una fecha valida 'dd/MM/yyyy'"
-                }                
+                }
             },
             highlight: function(element) {
                 $(element).closest('.control-group').removeClass('success').addClass('error');
@@ -92,10 +92,12 @@ var control_actividad_list = function(path) {
                         .closest('.control-group').removeClass('error').addClass('success');
             }
         });
-        
+
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view, prefijo_div);
+            if ($('#formulario').valid()) {
+                enviarDatosUpdateForm(view, prefijo_div);
+            }
             return false;
         });
     }
@@ -216,7 +218,7 @@ var control_actividad_list = function(path) {
             });
 
             //asignación del evento de click para cambiar de página en la botonera de paginación
-            
+
             $(prefijo_div + '.pagination_link').unbind('click');
             $(prefijo_div + '.pagination_link').click(function() {
                 var id = $(this).attr('id');
@@ -226,7 +228,7 @@ var control_actividad_list = function(path) {
             });
 
             //boton de crear un nuevo elemento
-            
+
             if (callback) {
                 $(prefijo_div + '#crear').css("display", "none");
             } else {
