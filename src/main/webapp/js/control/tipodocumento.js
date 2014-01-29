@@ -50,9 +50,40 @@ var control_tipodocumento_list = function(path) {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             //$(prefijo_div + '#nombre').focus();
         }
+        
+        //http://jqueryvalidation.org/documentation/
+        $('#formulario').validate({
+            rules: {
+                descripcion: {
+                    required: true,
+                    maxlength: 255
+                },
+                privado: {
+                    required: false
+                }
+            },
+            messages: {
+                descripcion: {
+                    required: "Introduce una descripcion",
+                    maxlength: "Tiene que ser menos de 255 caracteres"
+                }                
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                        .text('OK!').addClass('valid')
+                        .closest('.control-group').removeClass('error').addClass('success');
+            }
+        });
+        
+        
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view, prefijo_div);
+            if ($('#formulario').valid()) {
+                enviarDatosUpdateForm(view, prefijo_div);
+            }
             return false;
         });
     }
