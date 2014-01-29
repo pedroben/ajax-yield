@@ -1,9 +1,8 @@
 /* 
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 var control_votodocumento_list = function(path) {
     //contexto privado
 
@@ -34,6 +33,28 @@ var control_votodocumento_list = function(path) {
         });
     }
 
+    function loadForeign(strObjetoForeign, strPlace, control, functionCallback) {
+        var objConsulta = objeto(strObjetoForeign, path);
+        var consultaView = vista(objConsulta, path);
+
+        cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' + '<h3 id="myModalLabel">Elección</h3>';
+        pie = '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>';
+        listado = consultaView.getEmptyList();
+        loadForm(strPlace, cabecera, listado, pie, true);
+
+        $(prefijo_div + strPlace).css({
+            'right': '20px',
+            'left': '20px',
+            'width': 'auto',
+            'margin': '0',
+            'display': 'block'
+        });
+
+        var consultaControl = control(path);
+        consultaControl.inicia(consultaView, 1, null, null, 10, null, null, null, functionCallback, null, null, null);
+
+    }
+
     function loadModalForm(view, place, id, action) {
         cabecera = '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
         if (action == "edit") {
@@ -48,13 +69,55 @@ var control_votodocumento_list = function(path) {
             view.doFillForm(id);
         } else {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
-            //$(prefijo_div + '#nombre').focus();
+            $(prefijo_div + '#codigo').focus();
         }
-        $(prefijo_div + '#submitForm').unbind('click');
-        $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view, prefijo_div);
+
+        //clave ajena documento
+        cargaClaveAjena('#id_documento', '#id_documento_desc', 'documento')
+
+        $(prefijo_div + '#id_documento_button').unbind('click');
+        $(prefijo_div + '#id_documento_button').click(function() {
+            loadForeign('documento', '#modal02', control_documento_list, callbackSearchCliente);
+            function callbackSearchCliente(id) {
+                $(prefijo_div + '#modal02').modal('hide');
+                $(prefijo_div + '#modal02').data('modal', null);
+                $(prefijo_div + '#id_documento').val($(this).attr('id'));
+                cargaClaveAjena('#id_documento', '#id_documento_desc', 'documento');
+                return false;
+            }
             return false;
         });
+        
+        //clave ajena usuario
+        cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario')
+
+        $(prefijo_div + '#id_usuario_button').unbind('click');
+        $(prefijo_div + '#id_usuario_button').click(function() {
+            loadForeign('usuario', '#modal02', control_usuario_list, callbackSearchCliente);
+            function callbackSearchCliente(id) {
+                $(prefijo_div + '#modal02').modal('hide');
+                $(prefijo_div + '#modal02').data('modal', null);
+                $(prefijo_div + '#id_usuario').val($(this).attr('id'));
+                cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario');
+                return false;
+            }
+            return false;
+        });
+
+        $(prefijo_div + '#submitForm').unbind('click');
+        $(prefijo_div + '#submitForm').click(function(event) {
+            //validaciones...
+            enviarDatosUpdateForm(view, id);
+            return false;
+        });
+    }
+
+    function cargaClaveAjena(lugarID, lugarDesc, objetoClaveAjena) {
+        if ($(prefijo_div + lugarID).val() != "") {
+            objInfo = objeto(objetoClaveAjena, path).getOne($(prefijo_div + lugarID).val());
+            props = Object.getOwnPropertyNames(objInfo);
+            $(prefijo_div + lugarDesc).empty().html(objInfo[props[1]]);
+        }
     }
 
     function removeConfirmationModalForm(view, place, id) {
@@ -80,6 +143,46 @@ var control_votodocumento_list = function(path) {
         loadForm(place, cabecera, view.getObjectTable(id), pie, true);
     }
 
+    function enviarDatosUpdateForm(view, id) {
+        $.fn.serializeObject = function()
+        {
+            // http://jsfiddle.net/davidhong/gP9bh/
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function() {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = encodeURIComponent(this.value) || '';
+                }
+            });
+            return o;
+        };
+        var jsonObj = [];
+        jsonObj = $(prefijo_div + '#formulario').serializeObject();
+        jsonfile = {json: JSON.stringify(jsonObj)};
+        cabecera = "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>" + "<h3 id=\"myModalLabel\">Respuesta del servidor</h3>";
+        pie = "<button class=\"btn btn-primary\" data-dismiss=\"modal\" aria-hidden=\"true\">Cerrar</button>";
+        resultado = view.getObject().saveOne(jsonfile);
+        if (resultado["status"] = "200") {
+            mensaje = 'valores actualizados correctamente para el registro con id=' + resultado["message"];
+            loadForm('#modal02', cabecera, "Código: " + resultado["status"] + "<br />" + mensaje + "<br />" + view.getObjectTable(resultado["message"]), pie, true);
+        } else {
+            mensaje = 'el servidor ha retornado el mensaje de error=' + resultado["message"];
+            loadForm('#modal02', cabecera, "Código: " + resultado["status"] + "<br />" + mensaje + "<br />" + view.getObjectTable(resultado["message"]), pie, true);
+        }
+        $(prefijo_div + '#modal02').css({
+            'right': '20px',
+            'left': '20px',
+            'width': 'auto',
+            'margin': '0',
+            'display': 'block'
+        });
+
+    }
     return {
         inicia: function(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue) {
 
@@ -116,6 +219,7 @@ var control_votodocumento_list = function(path) {
             $(prefijo_div + "#filter").empty().append(view.getLoading()).html(view.getFilterInfo(filter, filteroperator, filtervalue));
 
             //asignación eventos de la botonera de cada línea del listado principal
+
             if (callback) {
                 $(prefijo_div + '.btn.btn-mini.action01').unbind('click');
                 $(prefijo_div + '.btn.btn-mini.action01').click(callback);
@@ -139,7 +243,6 @@ var control_votodocumento_list = function(path) {
                 $(prefijo_div + '.btn.btn-mini.action04').click(function() {
                     removeConfirmationModalForm(view, '#modal01', $(this).attr('id'));
                 });
-
             }
 
             //asignación de evento del enlace para quitar el orden en el listado principal
@@ -173,30 +276,30 @@ var control_votodocumento_list = function(path) {
             });
 
             //asignación del evento de click para cambiar de página en la botonera de paginación
-            
+
             $(prefijo_div + '.pagination_link').unbind('click');
-            $(prefijo_div + '.pagination_link').click(function() {
+            $(prefijo_div + '.pagination_link').click(function(event) {
                 var id = $(this).attr('id');
                 rpp = $(prefijo_div + "#rpp option:selected").text();
                 thisObject.inicia(view, id, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue);
                 return false;
+
             });
 
             //boton de crear un nuevo elemento
-            
-            if (callback) {
-                $(prefijo_div + '#crear').css("display", "none");
-            } else {
-                $(prefijo_div + '#crear').unbind('click');
-                $(prefijo_div + '#crear').click(function() {
-                    loadModalForm(view, prefijo_div + '#modal01', $(this).attr('id'));
-                });
-            }
+
+            $(prefijo_div + '#crear').unbind('click');
+            $(prefijo_div + '#crear').click(function() {
+                loadModalForm(view, '#modal01', $(this).attr('id'));
+            });
+
+
+
 
             //asignación del evento de filtrado al boton
 
             $(prefijo_div + '#btnFiltrar').unbind('click');
-            $(prefijo_div + "#btnFiltrar").click(function() {
+            $(prefijo_div + "#btnFiltrar").click(function(event) {
                 filter = $(prefijo_div + "#selectFilter option:selected").text();
                 filteroperator = $(prefijo_div + "#selectFilteroperator option:selected").text();
                 filtervalue = $(prefijo_div + "#inputFiltervalue").val();
@@ -208,9 +311,9 @@ var control_votodocumento_list = function(path) {
 
             $(prefijo_div + '#modal01').unbind('hidden');
             $(prefijo_div + '#modal01').on('hidden', function() {
-
                 rpp = $(prefijo_div + "#rpp option:selected").text();
                 thisObject.inicia(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue);
+
             });
 
             //asignación del evento de cambio del numero de regs por página
