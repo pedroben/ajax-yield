@@ -6,7 +6,6 @@
 
 var control_follower_list = function(path) {
     //contexto privado
-
     var prefijo_div = "#follower_list ";
 
     function cargaBotoneraMantenimiento() {
@@ -34,6 +33,28 @@ var control_follower_list = function(path) {
         });
     }
 
+    function loadForeign(strObjetoForeign, strPlace, control, functionCallback) {
+        var objConsulta = objeto(strObjetoForeign, path);
+        var consultaView = vista(objConsulta, path);
+
+        cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' + '<h3 id="myModalLabel">Elección</h3>';
+        pie = '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>';
+        listado = consultaView.getEmptyList();
+        loadForm(strPlace, cabecera, listado, pie, true);
+
+        $(prefijo_div + strPlace).css({
+            'right': '20px',
+            'left': '20px',
+            'width': 'auto',
+            'margin': '0',
+            'display': 'block'
+        });
+
+        var consultaControl = control(path);
+        consultaControl.inicia(consultaView, 1, null, null, 10, null, null, null, functionCallback, null, null, null);
+
+    }
+
     function loadModalForm(view, place, id, action) {
         cabecera = '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
         if (action == "edit") {
@@ -48,13 +69,53 @@ var control_follower_list = function(path) {
             view.doFillForm(id);
         } else {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
-            //$(prefijo_div + '#nombre').focus();
+            $(prefijo_div + '#codigo').focus();
         }
-        $(prefijo_div + '#submitForm').unbind('click');
-        $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view, id);
+
+        //clave ajena usuario1
+        cargaClaveAjena('#id_usuario1', '#id_usuario1_desc', 'usuario')
+        $(prefijo_div + '#id_usuario1_button').unbind('click');
+        $(prefijo_div + '#id_usuario1_button').click(function() {
+            loadForeign('usuario', '#modal02', control_usuario_list, callbackSearchProducto);
+            function callbackSearchProducto(id) {
+                $(prefijo_div + '#modal02').modal('hide');
+                $(prefijo_div + '#modal02').data('modal', null);
+                $(prefijo_div + '#id_usuario1').val($(this).attr('id'));
+                cargaClaveAjena('#id_usuario1', '#id_usuario1_desc', 'usuario');
+                return false;
+            }
             return false;
         });
+        
+        //clave ajena usuario2
+        cargaClaveAjena('#id_usuario2', '#id_usuario2_desc', 'usuario');
+        $(prefijo_div + '#id_usuario2_button').unbind('click');
+        $(prefijo_div + '#id_usuario2_button').click(function() {
+            loadForeign('usuario', '#modal02', control_usuario_list, callbackSearchProducto);
+            function callbackSearchProducto(id) {
+                $(prefijo_div + '#modal02').modal('hide');
+                $(prefijo_div + '#modal02').data('modal', null);
+                $(prefijo_div + '#id_usuario2').val($(this).attr('id'));
+                cargaClaveAjena('#id_usuario2', '#id_usuario2_desc', 'usuario');
+                return false;
+            }
+            return false;
+        });
+
+        $(prefijo_div + '#submitForm').unbind('click');
+        $(prefijo_div + '#submitForm').click(function(event) {
+            //validaciones...
+            enviarDatosUpdateForm(view,prefijo_div);
+            return false;
+        });
+    }
+
+    function cargaClaveAjena(lugarID, lugarDesc, objetoClaveAjena) {
+        if ($(prefijo_div + lugarID).val() != "") {
+            objInfo = objeto(objetoClaveAjena, path).getOne($(prefijo_div + lugarID).val());
+            props = Object.getOwnPropertyNames(objInfo);
+            $(prefijo_div + lugarDesc).empty().html(objInfo[props[1]]);
+        }
     }
 
     function removeConfirmationModalForm(view, place, id) {
@@ -79,6 +140,7 @@ var control_follower_list = function(path) {
         pie = "<button class=\"btn btn-primary\" data-dismiss=\"modal\" aria-hidden=\"true\">Cerrar</button>";
         loadForm(place, cabecera, view.getObjectTable(id), pie, true);
     }
+
 
     return {
         inicia: function(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue) {
@@ -116,6 +178,7 @@ var control_follower_list = function(path) {
             $(prefijo_div + "#filter").empty().append(view.getLoading()).html(view.getFilterInfo(filter, filteroperator, filtervalue));
 
             //asignación eventos de la botonera de cada línea del listado principal
+
             if (callback) {
                 $(prefijo_div + '.btn.btn-mini.action01').unbind('click');
                 $(prefijo_div + '.btn.btn-mini.action01').click(callback);
@@ -139,7 +202,6 @@ var control_follower_list = function(path) {
                 $(prefijo_div + '.btn.btn-mini.action04').click(function() {
                     removeConfirmationModalForm(view, '#modal01', $(this).attr('id'));
                 });
-
             }
 
             //asignación de evento del enlace para quitar el orden en el listado principal
@@ -173,30 +235,30 @@ var control_follower_list = function(path) {
             });
 
             //asignación del evento de click para cambiar de página en la botonera de paginación
-            
+
             $(prefijo_div + '.pagination_link').unbind('click');
-            $(prefijo_div + '.pagination_link').click(function() {
+            $(prefijo_div + '.pagination_link').click(function(event) {
                 var id = $(this).attr('id');
                 rpp = $(prefijo_div + "#rpp option:selected").text();
                 thisObject.inicia(view, id, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue);
                 return false;
+
             });
 
             //boton de crear un nuevo elemento
-            
-            if (callback) {
-                $(prefijo_div + '#crear').css("display", "none");
-            } else {
-                $(prefijo_div + '#crear').unbind('click');
-                $(prefijo_div + '#crear').click(function() {
-                    loadModalForm(view, prefijo_div + '#modal01', $(this).attr('id'));
-                });
-            }
+
+            $(prefijo_div + '#crear').unbind('click');
+            $(prefijo_div + '#crear').click(function() {
+                loadModalForm(view, '#modal01', $(this).attr('id'));
+            });
+
+
+
 
             //asignación del evento de filtrado al boton
 
             $(prefijo_div + '#btnFiltrar').unbind('click');
-            $(prefijo_div + "#btnFiltrar").click(function() {
+            $(prefijo_div + "#btnFiltrar").click(function(event) {
                 filter = $(prefijo_div + "#selectFilter option:selected").text();
                 filteroperator = $(prefijo_div + "#selectFilteroperator option:selected").text();
                 filtervalue = $(prefijo_div + "#inputFiltervalue").val();
@@ -208,9 +270,9 @@ var control_follower_list = function(path) {
 
             $(prefijo_div + '#modal01').unbind('hidden');
             $(prefijo_div + '#modal01').on('hidden', function() {
-
                 rpp = $(prefijo_div + "#rpp option:selected").text();
                 thisObject.inicia(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue);
+
             });
 
             //asignación del evento de cambio del numero de regs por página
@@ -223,4 +285,3 @@ var control_follower_list = function(path) {
         }
     };
 };
-

@@ -28,7 +28,7 @@ public class FollowerSave implements GenericOperation {
         try {
             FollowerDao oFollowerDAO = new FollowerDao(Conexion.getConection());
             FollowerBean oFollower = new FollowerBean();
-            Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
+            Gson gson = new Gson();
             String jason = request.getParameter("json");
             jason = EncodingUtil.decodeURIComponent(jason);
             oFollower = gson.fromJson(jason, oFollower.getClass());

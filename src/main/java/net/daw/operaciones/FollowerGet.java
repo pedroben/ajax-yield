@@ -28,14 +28,11 @@ public class FollowerGet implements GenericOperation {
             if (request.getParameter("id") == null) {
                 data = "{\"error\":\"id is mandatory\"}";
             } else {
-                FollowerDao oFollowerDAO = new FollowerDao(Conexion.getConection());
+               FollowerDao oFollowerDAO = new FollowerDao(Conexion.getConection());
                 FollowerBean oFollower = new FollowerBean();
                 oFollower.setId(Integer.parseInt(request.getParameter("id")));
                 oFollowerDAO.get(oFollower);
-                GsonBuilder gsonBuilder = new GsonBuilder();
-                gsonBuilder.setDateFormat("dd/MM/yyyy");
-                Gson gson = gsonBuilder.create();
-                data = gson.toJson(oFollower);
+                data = new Gson().toJson(oFollower);
                 
             }
             return data;

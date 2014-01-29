@@ -76,11 +76,8 @@ public class FollowerGetpage implements GenericOperation {
                 hmOrder = null;
             }
             FollowerDao oFollowerDAO = new FollowerDao(Conexion.getConection());
-            List<FollowerBean> oFollowers = oFollowerDAO.getPage(rpp, page, alFilter, hmOrder);
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.setDateFormat("dd/MM/yyyy");
-            Gson gson = gsonBuilder.create();
-            data = gson.toJson(oFollowers);
+            List<FollowerBean> oFollowers = oFollowerDAO.getPage( rpp, page, alFilter,hmOrder );
+            data = new Gson().toJson(oFollowers);
             data = "{\"list\":" + data + "}";
             return data;
         } catch (Exception e) {

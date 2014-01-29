@@ -12,7 +12,13 @@
         <li class="nav-header">Mantenimientos</li>            
         <li><a id="lnkLenguaje" href="#">Lenguaje</a></li>
         <li><a id="lnkEntrada" href="#">Entrada</a></li>
+        <li><a id="lnkUsuario" href="#">Usuario</a></li>
+        <li><a id="lnkHilo" href="#">Hilo</a></li>
+        <li><a id="lnkDocumento" href="#">Documento</a></li> 
         <li><a id="lnkTipodocumento" href="#">Tipodocumento</a></li>
+        <li><a id="lnkActividad" href="#">Actividad</a></li>
+        <li><a id="lnkEmpresa" href="#">Empresa</a></li>
+        <li><a id="lnkVotodocumento" href="#">Votodocumento</a></li>
         <li><a id="lnkRequerimiento" href="#">Requerimiento</a></li>
         <li><a id="lnkFollower" href="#">Follower</a></li>
     </ul>
