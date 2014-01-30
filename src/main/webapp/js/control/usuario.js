@@ -242,7 +242,8 @@ var control_usuario_list = function(path) {
                 rpp = $(prefijo_div + "#rpp option:selected").text();
                 thisObject.inicia(view, id, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue);
                 return false;
-            })
+            });
+
             //boton de crear un nuevo elemento
 
             if (callback) {

@@ -76,7 +76,7 @@ public class ControlJsp extends HttpServlet {
                         UsuarioDao oUsuarioDao = new UsuarioDao(Conexion.getConection());
                         oUsuario = oUsuarioDao.getFromLogin(oUsuario);
                         if (oUsuario.getId() != 0) {
-                            //rellenar el tipo de usuario
+                            //rellena el tipo de usuario
                             oUsuario = oUsuarioDao.type(oUsuario);
                             request.getSession().setAttribute("usuarioBean", oUsuario);
                         }
