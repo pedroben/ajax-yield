@@ -41,8 +41,8 @@ public class UsuarioDao extends GenericDaoImplementation<UsuarioBean> {
             throw new Exception("UsuarioDao.getFromLogin: Error: " + e.getMessage());
         }
     }
-    
-     public UsuarioBean type(UsuarioBean oUsuarioBean) throws Exception {
+
+    public UsuarioBean type(UsuarioBean oUsuarioBean) throws Exception {
 
         try {
             AlumnoDao oAlumnoDao = new AlumnoDao(enumTipoConexion);
@@ -50,14 +50,14 @@ public class UsuarioDao extends GenericDaoImplementation<UsuarioBean> {
             oUsuarioBean.setTipoUsuario(Enum.TipoUsuario.Alumno);
         } catch (Exception e1) {
             try {
-                ProfesorDao oProfesorDao = new ProfesorDao(enumTipoConexion);
-                ProfesorBean oProfesorBean = oProfesorDao.getFromId_usuario(oUsuarioBean);
-                oUsuarioBean.setTipoUsuario(Enum.TipoUsuario.Profesor);
+                EmpresaDao oEmpresaDao = new EmpresaDao(enumTipoConexion);
+                EmpresaBean oEmpresaBean = oEmpresaDao.getFromId_usuario(oUsuarioBean);
+                oUsuarioBean.setTipoUsuario(Enum.TipoUsuario.Empresa);
             } catch (Exception e2) {
                 try {
-                    EmpresaDao oEmpresaDao = new EmpresaDao(enumTipoConexion);                  
-                    EmpresaBean oEmpresaBean = oEmpresaDao.getFromId_usuario(oUsuarioBean);
-                    oUsuarioBean.setTipoUsuario(Enum.TipoUsuario.Empresa);
+                    ProfesorDao oProfesorDao = new ProfesorDao(enumTipoConexion);
+                    ProfesorBean oProfesorBean = oProfesorDao.getFromId_usuario(oUsuarioBean);
+                    oUsuarioBean.setTipoUsuario(Enum.TipoUsuario.Profesor);
                 } catch (Exception e3) {
                     throw new Exception("UsuarioDao.type: Error: " + e3.getMessage());
                 }
