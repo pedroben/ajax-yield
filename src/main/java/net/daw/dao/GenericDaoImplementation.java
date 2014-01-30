@@ -99,29 +99,31 @@ public class GenericDaoImplementation<TIPO_OBJETO> implements GenericDao<TIPO_OB
                         if (!method.getName().substring(3).equalsIgnoreCase("id")) {
                             if (method.getName().substring(0, 3).equalsIgnoreCase("set")) {
                                 final Class<?> strTipoParamMetodoSet = method.getParameterTypes()[0];
-                                String strValor = oMysql.getOne(strTabla, method.getName().substring(3).toLowerCase(Locale.ENGLISH), (Integer) metodo_getId.invoke(oBean));
-                                if (strValor != null) {
-                                    switch (strTipoParamMetodoSet.getName()) {
-                                        case "java.lang.Double":
-                                            method.invoke(oBean, Double.parseDouble(strValor));
-                                            break;
-                                        case "java.lang.Integer":
-                                            method.invoke(oBean, Integer.parseInt(strValor));
-                                            break;
-                                        case "java.lang.Boolean":
-                                            if (Integer.parseInt(strValor) == 1) {
-                                                method.invoke(oBean, true);
-                                            } else {
-                                                method.invoke(oBean, false);
-                                            }
-                                            break;
-                                        case "java.util.Date":
-                                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                                            method.invoke(oBean, format.parse(strValor));
-                                            break;
-                                        default:
-                                            method.invoke(oBean, strValor);
-                                            break;
+                                if (!method.getName().equals("setTipoUsuario")) {
+                                    String strValor = oMysql.getOne(strTabla, method.getName().substring(3).toLowerCase(Locale.ENGLISH), (Integer) metodo_getId.invoke(oBean));
+                                    if (strValor != null) {
+                                        switch (strTipoParamMetodoSet.getName()) {
+                                            case "java.lang.Double":
+                                                method.invoke(oBean, Double.parseDouble(strValor));
+                                                break;
+                                            case "java.lang.Integer":
+                                                method.invoke(oBean, Integer.parseInt(strValor));
+                                                break;
+                                            case "java.lang.Boolean":
+                                                if (Integer.parseInt(strValor) == 1) {
+                                                    method.invoke(oBean, true);
+                                                } else {
+                                                    method.invoke(oBean, false);
+                                                }
+                                                break;
+                                            case "java.util.Date":
+                                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                                                method.invoke(oBean, format.parse(strValor));
+                                                break;
+                                            default:
+                                                method.invoke(oBean, strValor);
+                                                break;
+                                        }
                                     }
                                 }
                             }
