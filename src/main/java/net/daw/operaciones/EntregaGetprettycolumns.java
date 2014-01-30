@@ -18,7 +18,7 @@ public class EntregaGetprettycolumns implements GenericOperation {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         
         try {
-            String data = "{\"data\": [\"id\", \"id documento\", \"id actividad\", \"nota\", \"fecha\"]}";
+            String data = "{\"data\": [\"id\", \"Titulo documento\", \"Enunciado actividad\", \"Nota\", \"Fecha\"]}";
             return data;
         } catch (Exception e) {
             throw new ServletException("EntregaGetpagesJson: View Error: " + e.getMessage());
