@@ -117,6 +117,7 @@
         <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
         <script src="js/control/votodocumento.js" charset="UTF-8"></script>
         <script src="js/control/actividadoffline.js" charset="UTF-8"></script>
+        <script src="js/control/entrega.js" charset="UTF-8"></script>
         
 
 
@@ -261,6 +262,19 @@
 
                     var actividadofflineControl = control_actividadoffline_list('<%=request.getContextPath()%>');
                     actividadofflineControl.inicia(actividadofflineView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                
+                $('#lnkEntrega').unbind('click');
+                $('#lnkEntrega').click(function() {
+                    var entrega = objeto('entrega', '<%=request.getContextPath()%>');
+                    var entregaView = vista(entrega, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(entregaView.getEmptyList());
+
+                    var entregaControl = control_entrega_list('<%=request.getContextPath()%>');
+                    entregaControl.inicia(entregaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
 
