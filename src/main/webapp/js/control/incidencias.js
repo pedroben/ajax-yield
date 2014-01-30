@@ -9,7 +9,7 @@ var control_incidencias_list = function(path) {
 
     var prefijo_div = "#incidencias_list ";
 
-    function cargaBotoneraMantenimiento() {
+function cargaBotoneraMantenimiento() {
         var botonera = [
             {"class": "btn btn-mini action01", "icon": "icon-eye-open", "text": ""},
             {"class": "btn btn-mini action02", "icon": "icon-zoom-in", "text": ""},
@@ -33,27 +33,6 @@ var control_incidencias_list = function(path) {
             $(prefijo_div + place).empty();
         });
     }
-    function loadForeign(strObjetoForeign, strPlace, control, functionCallback) {
-        var objConsulta = objeto(strObjetoForeign, path);
-        var consultaView = vista(objConsulta, path);
-
-        cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="myModalLabel">Elección</h3>';
-        pie = '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>';
-        listado = consultaView.getEmptyList();
-        loadForm(strPlace, cabecera, listado, pie, true);
-
-        $(prefijo_div + strPlace).css({
-            'right': '20px',
-            'left': '20px',
-            'width': 'auto',
-            'margin': '0',
-            'display': 'block'
-        });
-
-        var consultaControl = control(path);
-        consultaControl.inicia(consultaView, 1, null, null, 10, null, null, null, functionCallback, null, null, null);
-
-    }
     function loadModalForm(view, place, id, action) {
         cabecera = '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
         if (action == "edit") {
@@ -68,31 +47,16 @@ var control_incidencias_list = function(path) {
             view.doFillForm(id);
         } else {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
-            $(prefijo_div + '#nombre').focus();
+            //$(prefijo_div + '#nombre').focus();
         }
         
-        
-        //clave ajena usuario
-        cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario');
-        $(prefijo_div + '#id_usuario_button').unbind('click');
-        $(prefijo_div + '#id_usuario_button').click(function() {
-            loadForeign('usuario', '#modal02', control_usuario_list, callbackSearchUsuario);
-            function callbackSearchUsuario(id) {
-                $(prefijo_div + '#modal02').modal('hide');
-                $(prefijo_div + '#modal02').data('modal', null);
-                $(prefijo_div + '#id_usuario').val($(this).attr('id'));
-                cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario');
-                return false;
-            }
-            return false;
-        });
 
         //clave ajena estado
         cargaClaveAjena('#id_estado', '#id_estado_desc', 'estado');
         $(prefijo_div + '#id_estado_button').unbind('click');
         $(prefijo_div + '#id_estado_button').click(function() {
-            loadForeign('estado', '#modal02', control_estado_list, callbackSearchHilo);
-            function callbackSearchHilo(id) {
+            loadForeign('estado', '#modal02', control_estado_list, callbackSearchEstado);
+            function callbackSearchEstado(id) {
                 $(prefijo_div + '#modal02').modal('hide');
                 $(prefijo_div + '#modal02').data('modal', null);
                 $(prefijo_div + '#id_estado').val($(this).attr('id'));
@@ -111,8 +75,8 @@ var control_incidencias_list = function(path) {
         cargaClaveAjena('#id_repositorio', '#id_repositorio_desc', 'repositorio');
         $(prefijo_div + '#id_repositorio_button').unbind('click');
         $(prefijo_div + '#id_repositorio_button').click(function() {
-            loadForeign('repositorio', '#modal02', control_repositorio_list, callbackSearchHilo);
-            function callbackSearchHilo(id) {
+            loadForeign('repositorio', '#modal02', control_repositorio_list, callbackSearchRepositorio);
+            function callbackSearchRepositorio(id) {
                 $(prefijo_div + '#modal02').modal('hide');
                 $(prefijo_div + '#modal02').data('modal', null);
                 $(prefijo_div + '#id_repositorio').val($(this).attr('id'));
@@ -121,6 +85,23 @@ var control_incidencias_list = function(path) {
             }
             return false;
         });
+        
+           //clave ajena usuario
+        cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario');
+        $(prefijo_div + '#id_usuario_button').unbind('click');
+        $(prefijo_div + '#id_usuario_button').click(function() {
+            loadForeign('usuario', '#modal02', control_usuario_list, callbackSearchUsuario);
+            function callbackSearchUsuario(id) {
+                $(prefijo_div + '#modal02').modal('hide');
+                $(prefijo_div + '#modal02').data('modal', null);
+                $(prefijo_div + '#id_usuario').val($(this).attr('id'));
+                cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario');
+                return false;
+            }
+            return false;
+        });
+        
+        
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
             enviarDatosUpdateForm(view, prefijo_div);
@@ -136,7 +117,7 @@ var control_incidencias_list = function(path) {
         }
     }
     
-    function removeConfirmationModalForm(view, place, id) {
+     function removeConfirmationModalForm(view, place, id) {
         cabecera = "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>" +
                 "<h3 id=\"myModalLabel\">Borrado de " + view.getObject().getName() + "</h3>";
         pie = "<div id=\"result\">¿Seguro que desea borrar el registro?</div>" +
@@ -176,7 +157,7 @@ var control_incidencias_list = function(path) {
 
             //muestra el listado principal
 
-           if (callback) {
+            if (callback) {
                 $(prefijo_div + "#datos").empty().append(view.getLoading()).html(view.getPageTable(pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, systemfilter, systemfilteroperator, systemfiltervalue, cargaBotoneraBuscando()));
             } else {
                 $(prefijo_div + "#datos").empty().append(view.getLoading()).html(view.getPageTable(pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, systemfilter, systemfilteroperator, systemfiltervalue, cargaBotoneraMantenimiento()));
@@ -252,7 +233,7 @@ var control_incidencias_list = function(path) {
             });
 
             //asignación del evento de click para cambiar de página en la botonera de paginación
-
+            
             $(prefijo_div + '.pagination_link').unbind('click');
             $(prefijo_div + '.pagination_link').click(function() {
                 var id = $(this).attr('id');
@@ -262,7 +243,7 @@ var control_incidencias_list = function(path) {
             });
 
             //boton de crear un nuevo elemento
-
+            
             if (callback) {
                 $(prefijo_div + '#crear').css("display", "none");
             } else {

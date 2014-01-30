@@ -16,7 +16,7 @@ import net.daw.helper.Conexion;
 public class IncidenciasDao extends GenericDaoImplementation<IncidenciasBean> {
 
     public IncidenciasDao(Conexion.Tipo_conexion tipoConexion) throws Exception {
-        super(tipoConexion, "requerimiento");
+        super(tipoConexion, "incidencias");
     }
 
 }
