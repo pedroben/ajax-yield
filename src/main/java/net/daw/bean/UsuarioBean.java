@@ -13,7 +13,7 @@ public class UsuarioBean {
     private Integer id = 0;
     private String login = "";
     private String password = "";
-    //private Enum tipoUsuario = null;
+    private Enum tipoUsuario = null;
 
     public UsuarioBean() {
 
@@ -26,16 +26,16 @@ public class UsuarioBean {
     /**
      * @return the tipoUsuario
      */
-//    public Enum getTipoUsuario() {
-//        return tipoUsuario;
-//    }
+    public Enum getTipoUsuario() {
+        return tipoUsuario;
+    }
 
     /**
      * @param tipoUsuario the tipoUsuario to set
      */
-//    public void setTipoUsuario(Enum tipoUsuario) {
-//        this.tipoUsuario = tipoUsuario;
-//    }
+    public void setTipoUsuario(Enum tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+   }
 
     /**
      * @return the id
