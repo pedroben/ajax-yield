@@ -49,7 +49,7 @@ var objeto = function(clase, ContextPath) {
             } else {
                 systemfilterParams = "";
             }
-            $.when(ajaxCallSync(urlDatos + '&op=getpage' + filterParams + '&rpp=' + rpp + orderParams + '&page=' + pagina + systemfilterParams, 'GET', '')).done(function(data) {
+            $.when(ajaxCallSync(urlDatos + '&op=Getpage' + filterParams + '&rpp=' + rpp + orderParams + '&page=' + pagina + systemfilterParams, 'GET', '')).done(function(data) {
                 pagina_objs = data;
             });
             return pagina_objs;
@@ -153,6 +153,7 @@ var vista = function(objeto, ContextPath) {
             var tabla = "<table class=\"table table table-striped table-condensed\">";
             if (objeto.getPrettyFieldNamesAcciones() !== null) {
                 tabla += '<tr>';
+                
                 $.each(objeto.getPrettyFieldNamesAcciones(), function(index, value) {
                     tabla += '<th>' + value;
                     if (value === "acciones") {
@@ -166,6 +167,7 @@ var vista = function(objeto, ContextPath) {
                 });
                 tabla += '</tr>';
             }
+            
             page = objeto.getPage(pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, systemfilter, systemfilteroperator, systemfiltervalue)['list'];
             if (page != 0) {
 
@@ -174,7 +176,7 @@ var vista = function(objeto, ContextPath) {
 
                     $.each(objeto.getFieldNames(), function(index, valor) {
                         if (/id_/.test(valor)) {
-                            $.when(ajaxCallSync(ContextPath + '/json?ob=' + valor.split("_")[1].replace(/[0-9]*$/, "") + '&op=get&id=' + value[valor], 'GET', '')).done(function(data) {
+                            $.when(ajaxCallSync(ContextPath + '/json?ob=' + valor.split("_")[1] + '&op=get&id=' + value[valor], 'GET', '')).done(function(data) {
                                 contador = 0;
                                 add_tabla = "";
                                 for (key in data) {
@@ -203,6 +205,7 @@ var vista = function(objeto, ContextPath) {
                         }
                     });
                     tabla += '<td><div class="btn-toolbar"><div class="btn-group">';
+
                     $.each(botonera, function(indice, valor) {
                         tabla += '<a class="' + valor.class + '" id=' + value.id + ' href="#"><i class="' + valor.icon + '"></i> ' + valor.text + '</a>';
                     });
@@ -213,6 +216,7 @@ var vista = function(objeto, ContextPath) {
             } else {
                 tabla = "<div class=\"alert alert-info\"><h4>Ha habido un problema con la base de datos</h4><br/>El probema puede ser:<ul><li>La tabla está vacia.</li><li>Tu busqueda no tubo resultados.</li></ul></div>";
             }
+
             return tabla;
         },
         getObjectTable: function(id) {
@@ -220,30 +224,40 @@ var vista = function(objeto, ContextPath) {
             datos = objeto.getOne(id);
             var tabla = "<table class=\"table table table-bordered table-condensed\">";
             $.each(objeto.getFieldNames(), function(index, valor) {
+
                 tabla += '<tr><td><strong>' + cabecera[index] + '</strong></td>';
                 tabla += '<td>';
                 if (/id_/.test(valor)) {
-                    $.when(ajaxCallSync(ContextPath + '/json?ob=' + valor.split("_")[1].replace(/[0-9]*$/, "") + '&op=get&id=' + datos[valor], 'GET', '')).done(function(data) {
+                    $.when(ajaxCallSync(ContextPath + '/json?ob=' + valor.split("_")[1] + '&op=get&id=' + datos[valor], 'GET', '')).done(function(data) {
                         contador = 0;
                         add_tabla = "";
                         for (key in data) {
                             if (contador === 0)
-                                add_tabla = '<td>' + data[key] + '</td>';
+                                add_tabla = data[key];
                             if (contador === 1)
                                 add_tabla = data[key] + ', <strong> id: </strong>' + datos[valor];
                             contador++;
                         }
                         if (contador === 0) {
-                            add_tabla = '<td>' + datos[valor] + ' #error</td>';
+                            add_tabla = datos[valor] + ' #error';
                         }
                         tabla += add_tabla;
                     });
-                }
-                if (/id_/.test(valor)) {
                 } else {
-                    tabla += datos[valor] + '</td></tr>';
+                    switch (datos[valor]) {
+                        case true:
+                            tabla += '<i class="icon-ok"></i>';
+                            break;
+                        case false:
+                            tabla += '<i class="icon-remove"></i>';
+                            break;
+                        default:
+                            tabla += datos[valor];
+                    }
+                    tabla += '</td></tr>';
                 }
             });
+
 
             tabla += '</table>';
             return tabla;

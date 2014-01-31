@@ -27,7 +27,6 @@ public class UsuarioGet implements GenericOperation {
             } else {
                 UsuarioDao oUsuarioDAO = new UsuarioDao(Conexion.getConection());
                 UsuarioBean oUsuario = new UsuarioBean();
-                String valor = request.getParameter("id");
                 oUsuario.setId(Integer.parseInt(request.getParameter("id")));
                 oUsuarioDAO.get(oUsuario);
                 data = new Gson().toJson(oUsuario);

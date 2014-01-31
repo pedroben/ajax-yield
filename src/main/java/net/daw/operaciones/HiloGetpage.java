@@ -17,6 +17,7 @@ import net.daw.dao.HiloDao;
 import net.daw.helper.Conexion;
 import net.daw.helper.FilterBean;
 
+
 /**
  *
  * @author Alvaro
@@ -49,9 +50,9 @@ public class HiloGetpage implements GenericOperation {
                         oFilterBean.setFilterValue(request.getParameter("filtervalue"));
                         oFilterBean.setFilterOrigin("user");
                         alFilter.add(oFilterBean);
-                    }
-                }
-            }
+                    } 
+                } 
+            } 
             if (request.getParameter("systemfilter") != null) {
                 if (request.getParameter("systemfilteroperator") != null) {
                     if (request.getParameter("systemfiltervalue") != null) {
@@ -67,17 +68,13 @@ public class HiloGetpage implements GenericOperation {
             HashMap<String, String> hmOrder = new HashMap<>();
 
             if (request.getParameter("order") != null) {
-                if (request.getParameter("ordervalue") != null) {
-                    hmOrder.put(request.getParameter("order"), request.getParameter("ordervalue"));
-                } else {
-                    hmOrder = null;
-                }
-            } else {
-                hmOrder = null;
-            }
+                if (request.getParameter("ordervalue") != null) {           
+                    hmOrder.put(request.getParameter("order"), request.getParameter("ordervalue"));                  
+                } else             hmOrder=null;
+            } else             hmOrder=null;
             HiloDao oHiloDAO = new HiloDao(Conexion.getConection());
-            List<HiloBean> oHilos = oHiloDAO.getPage(rpp, page, alFilter, hmOrder);
-            GsonBuilder gsonBuilder = new GsonBuilder();
+            List<HiloBean> oHilos = oHiloDAO.getPage( rpp, page, alFilter,hmOrder );
+           GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.setDateFormat("dd/MM/yyyy");
             Gson gson = gsonBuilder.create();
             data = gson.toJson(oHilos);
