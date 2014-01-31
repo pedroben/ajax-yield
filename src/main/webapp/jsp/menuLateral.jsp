@@ -21,6 +21,7 @@
         <li><a id="lnkAlumno" href="#">Alumno</a></li>
         <li><a id="lnkActividadoffline" href="#">Actividad offline</a></li>
         <li><a id="lnkEntrega" href="#">Entrega</a></li>
+        <li><a id="lnkMetadocumento" href="#">Metadocumento</a></li>
+        <li><a id="lnkRepositorio" href="#">Repositorio</a></li>
     </ul>
 </div>
-
