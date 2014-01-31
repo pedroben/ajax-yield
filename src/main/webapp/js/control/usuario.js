@@ -51,9 +51,53 @@ var control_usuario_list = function(path) {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             $(prefijo_div + '#nombre').focus();
         }
+        //http://jqueryvalidation.org/documentation/
+        $('#formulario').validate({
+            rules: {
+                login: {
+                    required: true,
+                    maxlength: 20
+                },
+                password: {
+                    required: true,
+                    maxlength: 25
+                },
+                passwordRepite: {
+                    required: true,
+                    maxlength: 25,
+                    equalTo: "#password"
+                }
+            },
+            messages: {
+                login: {
+                    required: "Introduce un login",
+                    maxlength: "Tiene que ser menos de 20 caracteres"
+                },
+                password: {
+                    required: "Introduce una contraseña",
+                    maxlength: "Tiene que ser menos de 25 caracteres"
+                },
+                passwordRepite: {
+                    required: "Repite la contraseña",
+                    date: "Tiene que ser menos de 25 caracteres",
+                    equalTo: "Las contraseñas no concuerdan"
+                }
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                        .text('OK!').addClass('valid')
+                        .closest('.control-group').removeClass('error').addClass('success');
+            }
+        });
+
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view, prefijo_div);
+            if ($("#formulario").valid()) {
+                enviarDatosUpdateForm(view, prefijo_div);
+            }
             return false;
         });
     }

@@ -10,7 +10,6 @@ var control_documento_list = function(path) {
 
     function cargaBotoneraMantenimiento() {
         var botonera = [
-            {"class": "btn btn-mini action05", "icon": "", "text": "compras"},
             {"class": "btn btn-mini action01", "icon": "icon-eye-open", "text": ""},
             {"class": "btn btn-mini action02", "icon": "icon-zoom-in", "text": ""},
             {"class": "btn btn-mini action03", "icon": "icon-pencil", "text": ""},
@@ -109,12 +108,15 @@ var control_documento_list = function(path) {
                     required: true
                 },
                 fecha: {
-                    required: true,
-                    date: true
+                    required: true
                 },
                 nota: {
                     required: true,
                     maxlength: 6,
+                    digits: true
+                },
+                id_usuario:{
+                    required: true,
                     digits: true
                 },
                 etiquetas: {
@@ -131,13 +133,16 @@ var control_documento_list = function(path) {
                     required: "Introduce contenido"
                 },
                 fecha: {
-                    required: "Introduce una fecha",
-                    date: "Introduze una fecha valida 'dd/MM/yyyy'"
+                    required: "Introduce una fecha"
                 },
                 nota: {
                     required: "Introduce una nota",
                     maxlength: "Tiene que ser menos de 6 caracteres",
                     digits: "Tiene que ser un numero entero"
+                },
+                id_usuario:{
+                    required: "Introduce un usuario",
+                    digits: "El id del usuario tiene que ser un entero"
                 },
                 etiquetas: {
                     required: "Introduce una/s etiqueta/s",
@@ -188,20 +193,6 @@ var control_documento_list = function(path) {
                 "<h3 id=\"myModalLabel\">Detalle de " + view.getObject().getName() + "</h3>";
         pie = "<button class=\"btn btn-primary\" data-dismiss=\"modal\" aria-hidden=\"true\">Cerrar</button>";
         loadForm(place, cabecera, view.getObjectTable(id), pie, true);
-    }
-
-    function cargaCompras(id) {
-
-        var compra = objeto('compra', path);
-        var compraView = vista(compra, path);
-
-        $('#indexContenidoJsp').empty();
-        $('#indexContenido').empty().append(compraView.getEmptyList());
-
-        var compraControl = control_compra_list(path);
-        compraControl.inicia(compraView, 1, null, null, 10, null, null, null, null, "id_documento", "equals", id);
-        return false;
-
     }
 
     return {
@@ -263,11 +254,6 @@ var control_documento_list = function(path) {
                 $(prefijo_div + '.btn.btn-mini.action04').unbind('click');
                 $(prefijo_div + '.btn.btn-mini.action04').click(function() {
                     removeConfirmationModalForm(view, '#modal01', $(this).attr('id'));
-                });
-
-                $(prefijo_div + '.btn.btn-mini.action05').unbind('click');
-                $(prefijo_div + '.btn.btn-mini.action05').click(function() {
-                    cargaCompras($(this).attr('id'));
                 });
 
             }
