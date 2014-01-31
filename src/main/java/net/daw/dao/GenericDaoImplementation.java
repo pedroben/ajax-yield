@@ -184,7 +184,7 @@ public class GenericDaoImplementation<TIPO_OBJETO> implements GenericDao<TIPO_OB
         } finally {
             oMysql.desconexion();
         }
-        return oBean;
+            return oBean;
     }
 
     @Override
