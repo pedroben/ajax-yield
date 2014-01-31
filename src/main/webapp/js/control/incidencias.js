@@ -25,6 +25,28 @@ function cargaBotoneraMantenimiento() {
         ];
         return botonera;
     }
+    
+    function loadForeign(strObjetoForeign, strPlace, control, functionCallback) {
+        var objConsulta = objeto(strObjetoForeign, path);
+        var consultaView = vista(objConsulta, path);
+
+        cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' + '<h3 id="myModalLabel">Elección</h3>';
+        pie = '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>';
+        listado = consultaView.getEmptyList();
+        loadForm(strPlace, cabecera, listado, pie, true);
+
+        $(prefijo_div + strPlace).css({
+            'right': '20px',
+            'left': '20px',
+            'width': 'auto',
+            'margin': '0',
+            'display': 'block'
+        });
+
+        var consultaControl = control(path);
+        consultaControl.inicia(consultaView, 1, null, null, 10, null, null, null, functionCallback, null, null, null);
+
+    }
 
     function loadDivView(view, place, id) {
         $(prefijo_div + place).empty().append((view.getObjectTable(id))
@@ -47,7 +69,7 @@ function cargaBotoneraMantenimiento() {
             view.doFillForm(id);
         } else {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
-            //$(prefijo_div + '#nombre').focus();
+            $(prefijo_div + '#nombre').focus();
         }
         
 
@@ -100,7 +122,7 @@ function cargaBotoneraMantenimiento() {
             }
             return false;
         });
-        
+             
         
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
