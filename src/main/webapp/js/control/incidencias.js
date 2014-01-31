@@ -9,7 +9,7 @@ var control_incidencias_list = function(path) {
 
     var prefijo_div = "#incidencias_list ";
 
-function cargaBotoneraMantenimiento() {
+    function cargaBotoneraMantenimiento() {
         var botonera = [
             {"class": "btn btn-mini action01", "icon": "icon-eye-open", "text": ""},
             {"class": "btn btn-mini action02", "icon": "icon-zoom-in", "text": ""},
@@ -25,7 +25,7 @@ function cargaBotoneraMantenimiento() {
         ];
         return botonera;
     }
-    
+
     function loadForeign(strObjetoForeign, strPlace, control, functionCallback) {
         var objConsulta = objeto(strObjetoForeign, path);
         var consultaView = vista(objConsulta, path);
@@ -71,10 +71,14 @@ function cargaBotoneraMantenimiento() {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             $(prefijo_div + '#nombre').focus();
         }
-        
 
-        //clave ajena estado
-        cargaClaveAjena('#id_estado', '#id_estado_desc', 'estado');
+
+
+
+
+     
+                //clave ajena estado
+                cargaClaveAjena('#id_estado', '#id_estado_desc', 'estado');
         $(prefijo_div + '#id_estado_button').unbind('click');
         $(prefijo_div + '#id_estado_button').click(function() {
             loadForeign('estado', '#modal02', control_estado_list, callbackSearchEstado);
@@ -87,12 +91,7 @@ function cargaBotoneraMantenimiento() {
             }
             return false;
         });
-        $(prefijo_div + '#submitForm').unbind('click');
-        $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view, prefijo_div);
-            return false;
-        });
-        
+
         //clave ajena repositorio
         cargaClaveAjena('#id_repositorio', '#id_repositorio_desc', 'repositorio');
         $(prefijo_div + '#id_repositorio_button').unbind('click');
@@ -107,8 +106,8 @@ function cargaBotoneraMantenimiento() {
             }
             return false;
         });
-        
-           //clave ajena usuario
+
+        //clave ajena usuario
         cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario');
         $(prefijo_div + '#id_usuario_button').unbind('click');
         $(prefijo_div + '#id_usuario_button').click(function() {
@@ -122,15 +121,17 @@ function cargaBotoneraMantenimiento() {
             }
             return false;
         });
-             
-        
+
+
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view, prefijo_div);
+            if ($('#formulario').valid()) {
+                enviarDatosUpdateForm(view, prefijo_div);
+            }
             return false;
         });
     }
-    
+
     function cargaClaveAjena(lugarID, lugarDesc, objetoClaveAjena) {
         if ($(prefijo_div + lugarID).val() !== "") {
             objInfo = objeto(objetoClaveAjena, path).getOne($(prefijo_div + lugarID).val());
@@ -138,8 +139,8 @@ function cargaBotoneraMantenimiento() {
             $(prefijo_div + lugarDesc).empty().html(objInfo[props[1]]);
         }
     }
-    
-     function removeConfirmationModalForm(view, place, id) {
+
+    function removeConfirmationModalForm(view, place, id) {
         cabecera = "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>" +
                 "<h3 id=\"myModalLabel\">Borrado de " + view.getObject().getName() + "</h3>";
         pie = "<div id=\"result\">¿Seguro que desea borrar el registro?</div>" +
@@ -255,7 +256,7 @@ function cargaBotoneraMantenimiento() {
             });
 
             //asignación del evento de click para cambiar de página en la botonera de paginación
-            
+
             $(prefijo_div + '.pagination_link').unbind('click');
             $(prefijo_div + '.pagination_link').click(function() {
                 var id = $(this).attr('id');
@@ -265,7 +266,7 @@ function cargaBotoneraMantenimiento() {
             });
 
             //boton de crear un nuevo elemento
-            
+
             if (callback) {
                 $(prefijo_div + '#crear').css("display", "none");
             } else {
