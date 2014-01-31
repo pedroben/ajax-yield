@@ -363,6 +363,41 @@ var control_empresa_list = function(path) {
                 return false;
             });
 
+            // Navegar por la paginación capturando las teclas Re Pág - Av Pág   
+
+//            window.onkeydown = tecla;
+//            function tecla(event) {
+//                event.preventDefault();
+//                num = event.keyCode;
+//                if (num == 112)
+////                    alert("Pulsaste F1");
+//    
+//    
+//
+//                if (num == 123) {
+////                    alert("Pulsaste F12"); 
+//
+//                }
+//            }
+
+
+
+
+
+
+
+
+            //    $(prefijo_div + '.pagination_link').unbind('keypress');
+            $(prefijo_div + '.pagination_link').keypress(function(event) {
+                if (event.wich == 100) {
+                    var id = $(this).attr('id');
+                    rpp = $(prefijo_div + "#rpp option:selected").text();
+                    thisObject.inicia(view, id + 1, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue);
+                    return false;
+                }
+            });
+
+
             //boton de crear un nuevo elemento
 
             if (callback) {
