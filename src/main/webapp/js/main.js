@@ -153,7 +153,7 @@ var vista = function(objeto, ContextPath) {
             var tabla = "<table class=\"table table table-striped table-condensed\">";
             if (objeto.getPrettyFieldNamesAcciones() !== null) {
                 tabla += '<tr>';
-                
+
                 $.each(objeto.getPrettyFieldNamesAcciones(), function(index, value) {
                     tabla += '<th>' + value;
                     if (value === "acciones") {
@@ -167,7 +167,7 @@ var vista = function(objeto, ContextPath) {
                 });
                 tabla += '</tr>';
             }
-            
+
             page = objeto.getPage(pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, systemfilter, systemfilteroperator, systemfiltervalue)['list'];
             if (page != 0) {
 
@@ -176,7 +176,7 @@ var vista = function(objeto, ContextPath) {
 
                     $.each(objeto.getFieldNames(), function(index, valor) {
                         if (/id_/.test(valor)) {
-                            $.when(ajaxCallSync(ContextPath + '/json?ob=' + valor.split("_")[1] + '&op=get&id=' + value[valor], 'GET', '')).done(function(data) {
+                            $.when(ajaxCallSync(ContextPath + '/json?ob=' + valor.split("_")[1].replace(/[0-9]*$/, "") + '&op=get&id=' + value[valor], 'GET', '')).done(function(data) {
                                 contador = 0;
                                 add_tabla = "";
                                 for (key in data) {
@@ -228,7 +228,7 @@ var vista = function(objeto, ContextPath) {
                 tabla += '<tr><td><strong>' + cabecera[index] + '</strong></td>';
                 tabla += '<td>';
                 if (/id_/.test(valor)) {
-                    $.when(ajaxCallSync(ContextPath + '/json?ob=' + valor.split("_")[1] + '&op=get&id=' + datos[valor], 'GET', '')).done(function(data) {
+                    $.when(ajaxCallSync(ContextPath + '/json?ob=' + valor.split("_")[1].replace(/[0-9]*$/, "") + '&op=get&id=' + datos[valor], 'GET', '')).done(function(data) {
                         contador = 0;
                         add_tabla = "";
                         for (key in data) {
