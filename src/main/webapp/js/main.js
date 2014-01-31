@@ -230,13 +230,13 @@ var vista = function(objeto, ContextPath) {
                         add_tabla = "";
                         for (key in data) {
                             if (contador === 0)
-                                add_tabla = '<td>' + data[key] + '</td>';
+                                add_tabla = data[key];
                             if (contador === 1)
                                 add_tabla = data[key] + ', <strong> id: </strong>' + datos[valor];
                             contador++;
                         }
                         if (contador === 0) {
-                            add_tabla = '<td>' + datos[valor] + ' #error</td>';
+                            add_tabla = datos[valor] + ' #error';
                         }
                         tabla += add_tabla;
                     });

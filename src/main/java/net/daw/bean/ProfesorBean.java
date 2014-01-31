@@ -7,37 +7,31 @@ package net.daw.bean;
 
 /**
  *
- * @author Sergio
+ * @author Pedro Benito
  */
-public class AlumnoBean {
+public class ProfesorBean {
 
     private Integer id = 0;
     private Integer id_usuario = 0;
-    private String dni = "";
-    private String numexpediente = "";
     private String nombre = "";
     private String ape1 = "";
     private String ape2 = "";
     private String sexo = "";
-    private String domicilio = "";
-    private String codpostal = "";
-    private String poblacion = "";
-    private String provincia = "";
     private String telefono = "";
     private String email = "";
-    private String validado = "";
+    private String dni = "";
 
-    public AlumnoBean() {
+    public ProfesorBean() {
     }
 
-    public AlumnoBean(Integer id) {
+    public ProfesorBean(Integer id) {
         this.id = id;
     }
 
     /**
      * @return the id
      */
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -51,7 +45,7 @@ public class AlumnoBean {
     /**
      * @return the id_usuario
      */
-    public Integer getId_usuario() {
+    public int getId_usuario() {
         return id_usuario;
     }
 
@@ -60,20 +54,6 @@ public class AlumnoBean {
      */
     public void setId_usuario(Integer id_usuario) {
         this.id_usuario = id_usuario;
-    }
-
-    /**
-     * @return the numexpediente
-     */
-    public String getNumexpediente() {
-        return numexpediente;
-    }
-
-    /**
-     * @param numexpediente the numexpediente to set
-     */
-    public void setNumexpediente(String numexpediente) {
-        this.numexpediente = numexpediente;
     }
 
     /**
@@ -133,62 +113,6 @@ public class AlumnoBean {
     }
 
     /**
-     * @return the domicilio
-     */
-    public String getDomicilio() {
-        return domicilio;
-    }
-
-    /**
-     * @param domicilio the domicilio to set
-     */
-    public void setDomicilio(String domicilio) {
-        this.domicilio = domicilio;
-    }
-
-    /**
-     * @return the codpostal
-     */
-    public String getCodpostal() {
-        return codpostal;
-    }
-
-    /**
-     * @param codpostal the codpostal to set
-     */
-    public void setCodpostal(String codpostal) {
-        this.codpostal = codpostal;
-    }
-
-    /**
-     * @return the poblacion
-     */
-    public String getPoblacion() {
-        return poblacion;
-    }
-
-    /**
-     * @param poblacion the poblacion to set
-     */
-    public void setPoblacion(String poblacion) {
-        this.poblacion = poblacion;
-    }
-
-    /**
-     * @return the provincia
-     */
-    public String getProvincia() {
-        return provincia;
-    }
-
-    /**
-     * @param provincia the provincia to set
-     */
-    public void setProvincia(String provincia) {
-        this.provincia = provincia;
-    }
-
-    /**
      * @return the telefono
      */
     public String getTelefono() {
@@ -217,20 +141,6 @@ public class AlumnoBean {
     }
 
     /**
-     * @return the validado
-     */
-    public String getValidado() {
-        return validado;
-    }
-
-    /**
-     * @param validado the validado to set
-     */
-    public void setValidado(String validado) {
-        this.validado = validado;
-    }
-
-    /**
      * @return the dni
      */
     public String getDni() {
@@ -243,4 +153,5 @@ public class AlumnoBean {
     public void setDni(String dni) {
         this.dni = dni;
     }
+
 }
