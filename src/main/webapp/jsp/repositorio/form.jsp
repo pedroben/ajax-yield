@@ -18,14 +18,14 @@
         <div class="control-group">
             <label class="control-label" for="titulo">Titulo: </label>
             <div class="controls">
-                <input id="titulo" name="titulo" type="text" size="30" maxlength="50" />
+                <input id="titulo" name="titulo" type="text" size="30"  />
             </div>
         </div>   
 
         <div class="control-group">
             <label class="control-label" for="contenido">Contenido: </label>
             <div class="controls">
-                <input id="contenido" name="contenido" type="text" size="30" maxlength="50" />
+                <input id="contenido" name="contenido" type="text" size="30"  />
             </div>
         </div>   
 
