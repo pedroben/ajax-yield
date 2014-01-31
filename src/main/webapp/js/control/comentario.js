@@ -1,8 +1,9 @@
 
-var control_estado_list = function(path) {
+
+var control_comentario_list = function(path) {
     //contexto privado
 
-    var prefijo_div = "#estado_list ";
+    var prefijo_div = "#comentario_list ";
 
     function cargaBotoneraMantenimiento() {
         var botonera = [
@@ -29,6 +30,28 @@ var control_estado_list = function(path) {
         });
     }
 
+    function loadForeign(strObjetoForeign, strPlace, control, functionCallback) {
+        var objConsulta = objeto(strObjetoForeign, path);
+        var consultaView = vista(objConsulta, path);
+
+        cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' + '<h3 id="myModalLabel">Elección</h3>';
+        pie = '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>';
+        listado = consultaView.getEmptyList();
+        loadForm(strPlace, cabecera, listado, pie, true);
+
+        $(prefijo_div + strPlace).css({
+            'right': '20px',
+            'left': '20px',
+            'width': 'auto',
+            'margin': '0',
+            'display': 'block'
+        });
+
+        var consultaControl = control(path);
+        consultaControl.inicia(consultaView, 1, null, null, 10, null, null, null, functionCallback, null, null, null);
+
+    }
+
     function loadModalForm(view, place, id, action) {
         cabecera = '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
         if (action == "edit") {
@@ -42,22 +65,79 @@ var control_estado_list = function(path) {
         if (action == "edit") {
             view.doFillForm(id);
         } else {
-            $(prefijo_div + '#id').val('0').attr("disabled", true);            
+            $(prefijo_div + '#id').val('0').attr("disabled", true);
+            $(prefijo_div + '#codigo').focus();
         }
-        
-        //http://jqueryvalidation.org/documentation/
+
+        //clave ajena usuario
+        cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario')
+
+        $(prefijo_div + '#id_usuario_button').unbind('click');
+        $(prefijo_div + '#id_usuario_button').click(function() {
+            loadForeign('usuario', '#modal02', control_usuario_list, callbackSearchId_usuario);
+            function callbackSearchId_usuario(id) {
+                $(prefijo_div + '#modal02').modal('hide');
+                $(prefijo_div + '#modal02').data('modal', null);
+                $(prefijo_div + '#id_usuario').val($(this).attr('id'));
+                cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario');
+                return false;
+            }
+            return false;
+        });
+
+        //clave ajena documento
+        cargaClaveAjena('#id_documento', '#id_documento_desc', 'documento')
+        $(prefijo_div + '#id_documento_button').unbind('click');
+        $(prefijo_div + '#id_documento_button').click(function() {
+            loadForeign('documento', '#modal02', control_documento_list, callbackSearchId_documento);
+            function callbackSearchId_documento(id) {
+                $(prefijo_div + '#modal02').modal('hide');
+                $(prefijo_div + '#modal02').data('modal', null);
+                $(prefijo_div + '#id_documento').val($(this).attr('id'));
+                cargaClaveAjena('#id_documento', '#id_documento_desc', 'documento');
+                return false;
+            }
+            return false;
+        });
+
         $('#formulario').validate({
             rules: {
-                nombre: {
+                titulo: {
                     required: true,
                     maxlength: 255
-                }
+                },
+                contenido: {
+                    required: true,
+                    maxlength: 255
+                },
+                fecha: {
+                    required: true,
+                },
+                id_usuario: {
+                    required: true,
+                },
+                id_documento: {
+                    required: true,
+                },
             },
             messages: {
-                nombre: {
-                    required: "Introduce un nombre",
+                titulo: {
+                    required: "Introduce un titulo",
                     maxlength: "Tiene que ser menos de 255 caracteres"
-                }
+                },
+                contenido: {
+                    required: "Introduce un contenido",
+                    maxlength: "Tiene que ser menos de 255 caracteres"
+                },
+                fecha: {
+                    required: "Introduce una fecha",
+                },
+                id_usuario: {
+                    required: "Introduce un id de usuario",
+                },
+                id_documento: {
+                    required: "Introduce un id de documento",
+                },
             },
             highlight: function(element) {
                 $(element).closest('.control-group').removeClass('success').addClass('error');
@@ -69,14 +149,21 @@ var control_estado_list = function(path) {
             }
         });
 
-
         $(prefijo_div + '#submitForm').unbind('click');
-        $(prefijo_div + '#submitForm').click(function() {
-             if ($('#formulario').valid()) {
-            enviarDatosUpdateForm(view,prefijo_div);
-             }
+        $(prefijo_div + '#submitForm').click(function(event) {
+            if ($('#formulario').valid()) {
+                enviarDatosUpdateForm(view, prefijo_div);
+            }
             return false;
         });
+    }
+
+    function cargaClaveAjena(lugarID, lugarDesc, objetoClaveAjena) {
+        if ($(prefijo_div + lugarID).val() != "") {
+            objInfo = objeto(objetoClaveAjena, path).getOne($(prefijo_div + lugarID).val());
+            props = Object.getOwnPropertyNames(objInfo);
+            $(prefijo_div + lugarDesc).empty().html(objInfo[props[1]]);
+        }
     }
 
     function removeConfirmationModalForm(view, place, id) {
@@ -101,6 +188,7 @@ var control_estado_list = function(path) {
         pie = "<button class=\"btn btn-primary\" data-dismiss=\"modal\" aria-hidden=\"true\">Cerrar</button>";
         loadForm(place, cabecera, view.getObjectTable(id), pie, true);
     }
+
 
     return {
         inicia: function(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue) {
@@ -138,6 +226,7 @@ var control_estado_list = function(path) {
             $(prefijo_div + "#filter").empty().append(view.getLoading()).html(view.getFilterInfo(filter, filteroperator, filtervalue));
 
             //asignación eventos de la botonera de cada línea del listado principal
+
             if (callback) {
                 $(prefijo_div + '.btn.btn-mini.action01').unbind('click');
                 $(prefijo_div + '.btn.btn-mini.action01').click(callback);
@@ -161,9 +250,6 @@ var control_estado_list = function(path) {
                 $(prefijo_div + '.btn.btn-mini.action04').click(function() {
                     removeConfirmationModalForm(view, '#modal01', $(this).attr('id'));
                 });
-
-               
-
             }
 
             //asignación de evento del enlace para quitar el orden en el listado principal
@@ -197,30 +283,30 @@ var control_estado_list = function(path) {
             });
 
             //asignación del evento de click para cambiar de página en la botonera de paginación
-            
+
             $(prefijo_div + '.pagination_link').unbind('click');
-            $(prefijo_div + '.pagination_link').click(function() {
+            $(prefijo_div + '.pagination_link').click(function(event) {
                 var id = $(this).attr('id');
                 rpp = $(prefijo_div + "#rpp option:selected").text();
                 thisObject.inicia(view, id, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue);
                 return false;
+
             });
 
             //boton de crear un nuevo elemento
-            
-            if (callback) {
-                $(prefijo_div + '#crear').css("display", "none");
-            } else {
-                $(prefijo_div + '#crear').unbind('click');
-                $(prefijo_div + '#crear').click(function() {
-                    loadModalForm(view, prefijo_div + '#modal01', $(this).attr('id'));
-                });
-            }
+
+            $(prefijo_div + '#crear').unbind('click');
+            $(prefijo_div + '#crear').click(function() {
+                loadModalForm(view, '#modal01', $(this).attr('id'));
+            });
+
+
+
 
             //asignación del evento de filtrado al boton
 
             $(prefijo_div + '#btnFiltrar').unbind('click');
-            $(prefijo_div + "#btnFiltrar").click(function() {
+            $(prefijo_div + "#btnFiltrar").click(function(event) {
                 filter = $(prefijo_div + "#selectFilter option:selected").text();
                 filteroperator = $(prefijo_div + "#selectFilteroperator option:selected").text();
                 filtervalue = $(prefijo_div + "#inputFiltervalue").val();
@@ -232,9 +318,9 @@ var control_estado_list = function(path) {
 
             $(prefijo_div + '#modal01').unbind('hidden');
             $(prefijo_div + '#modal01').on('hidden', function() {
-
                 rpp = $(prefijo_div + "#rpp option:selected").text();
                 thisObject.inicia(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue);
+
             });
 
             //asignación del evento de cambio del numero de regs por página
@@ -247,6 +333,5 @@ var control_estado_list = function(path) {
         }
     };
 };
-
 
 

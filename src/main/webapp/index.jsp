@@ -49,7 +49,7 @@
                     <div class="nav-collapse collapse">
                         <%if (user != null) {%>
                         <jsp:include page="jsp/menuSuperior.jsp" />   
-                        <% } %>
+                        <% }%>
                         <jsp:include page="jsp/usuario/infologin.jsp" />                        
                     </div>
                 </div>
@@ -116,6 +116,8 @@
         <script src="js/control/actividad.js" charset="UTF-8"></script>
         <script src="js/control/empresa.js" charset="UTF-8"></script>
         <script src="js/control/votodocumento.js" charset="UTF-8"></script>
+        <script src="js/control/estado.js" charset="UTF-8"></script>
+        <script src="js/control/comentario.js" charset="UTF-8"></script>
 
 
 
@@ -237,7 +239,7 @@
                     actividadControl.inicia(actividadView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
-                
+
                 $('#lnkVotodocumento').unbind('click');
                 $('#lnkVotodocumento').click(function() {
                     var votodocumento = objeto('votodocumento', '<%=request.getContextPath()%>');
@@ -263,7 +265,7 @@
                     empresaControl.inicia(empresaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
-                
+
                 $('#lnkVotodocumento').unbind('click');
                 $('#lnkVotodocumento').click(function() {
                     var votodocumento = objeto('votodocumento', '<%=request.getContextPath()%>');
@@ -277,6 +279,19 @@
                     return false;
                 });
 
+
+                $('#lnkComentario').unbind('click');
+                $('#lnkComentario').click(function() {
+                    var comentario = objeto('comentario', '<%=request.getContextPath()%>');
+                    var comentarioView = vista(comentario, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(comentarioView.getEmptyList());
+
+                    var comentarioControl = control_comentario_list('<%=request.getContextPath()%>');
+                    comentarioControl.inicia(comentarioView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
 
             });
 

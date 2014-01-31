@@ -17,7 +17,7 @@ public class ComentarioBean {
     private String contenido = "";
     private Date fecha = new Date();
     private Integer id_usuario = 0;
-    private Integer id_comentario = 0;
+    private Integer id_documento = 0;
     
     
     
@@ -70,13 +70,15 @@ public class ComentarioBean {
         this.id_usuario = id_usuario;
     }
 
-    public Integer getId_comentario() {
-        return id_comentario;
+    public Integer getId_documento() {
+        return id_documento;
     }
 
-    public void setId_comentario(Integer id_comentario) {
-        this.id_comentario = id_comentario;
+    public void setId_documento(Integer id_documento) {
+        this.id_documento = id_documento;
     }
+
+   
     
     
     
