@@ -51,9 +51,43 @@ var control_hilo_list = function(path) {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             //$(prefijo_div + '#nombre').focus();
         }
+        //http://jqueryvalidation.org/documentation/
+        $('#formulario').validate({
+            rules: {
+                nombre: {
+                    required: true,
+                    maxlength: 255
+                },
+                fecha: {
+                    required: true,
+                    date: true
+                }
+                
+            },
+            messages: {
+                nombre: {
+                    required: "Introduce un nombre",
+                    maxlength: "Tiene que ser menos de 255 caracteres"
+                },
+                fecha: {
+                    required: "Introduce una fecha",
+                    date: "Introduze una fecha valida 'dd/MM/yyyy'"
+                }
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                        .text('OK!').addClass('valid')
+                        .closest('.control-group').removeClass('error').addClass('success');
+            }
+        });
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view, prefijo_div);
+            if ($("#formulario").valid()) {
+                enviarDatosUpdateForm(view, prefijo_div);
+            }
             return false;
         });
     }

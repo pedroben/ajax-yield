@@ -9,6 +9,7 @@
         <li class="nav-header">Usuario</li>
         <li><a id="lnkHome"  href="jsp">Home</a></li>
         <li><a id="lnkLogout" href="jsp?ob=usuario&op=logout">Logout</a></li>
+
         <li class="nav-header">Mantenimientos</li>            
         <li><a id="lnkLenguaje" href="#">Lenguaje</a></li>
         <li><a id="lnkEstado" href="#">Estado</a></li>
@@ -21,7 +22,10 @@
         <li><a id="lnkEmpresa" href="#">Empresa</a></li>
         <li><a id="lnkVotodocumento" href="#">Votodocumento</a></li>
         <li><a id="lnkComentario" href="#">Comentario</a></li>
+        <li><a id="lnkAlumno" href="#">Alumno</a></li>
+        <li><a id="lnkActividadoffline" href="#">Actividad offline</a></li>
+        <li><a id="lnkEntrega" href="#">Entrega</a></li>
+        <li><a id="lnkMetadocumento" href="#">Metadocumento</a></li>
+        <li><a id="lnkRepositorio" href="#">Repositorio</a></li>
     </ul>
 </div>
-
-
