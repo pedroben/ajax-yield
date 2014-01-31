@@ -42,7 +42,7 @@
         <div class="control-group">
             <label class="control-label" for="correcta">Correcta: </label>
             <div class="controls">
-                <input id="correcta" name="correcta" type="text" size="30" maxlength="50" />
+                <input type="checkbox" id="correcta" name="correcta" value="true" />
             </div>
         </div>
        

@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var control_opcion_list = function(path) {
+
+var control_cuestionario_list = function(path) {
     //contexto privado
 
-    var prefijo_div = "#opcion_list ";
+    var prefijo_div = "#cuestionario_list ";
 
     function cargaBotoneraMantenimiento() {
         var botonera = [
@@ -65,34 +66,12 @@ var control_opcion_list = function(path) {
         loadForm(place, cabecera, view.getEmptyForm(), pie, false);
         if (action == "edit") {
             view.doFillForm(id);
+            $(prefijo_div + '#id').val('0').attr("disabled", true);
         } else {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
-            //$(prefijo_div + '#nombre').focus();
+            $(prefijo_div + '#descripcion').focus();
         }
-
-//clave ajena pregunta
-        cargaClaveAjena('#id_pregunta', '#id_pregunta_desc', 'pregunta')
-
-        $(prefijo_div + '#id_pregunta_button').unbind('click');
-        $(prefijo_div + '#id_pregunta_button').click(function() {
-            loadForeign('pregunta', '#modal02', control_pregunta_list, callbackSearchPregunta);
-            function callbackSearchPregunta(id) {
-                $(prefijo_div + '#modal02').modal('hide');
-                $(prefijo_div + '#modal02').data('modal', null);
-                $(prefijo_div + '#id_pregunta').val($(this).attr('id'));
-                cargaClaveAjena('#id_pregunta', '#id_pregunta_desc', 'pregunta');
-                return false;
-            }
-            return false;
-        });
-        function cargaClaveAjena(lugarID, lugarDesc, objetoClaveAjena) {
-            if ($(prefijo_div + lugarID).val() !== "") {
-                objInfo = objeto(objetoClaveAjena, path).getOne($(prefijo_div + lugarID).val());
-                props = Object.getOwnPropertyNames(objInfo);
-                $(prefijo_div + lugarDesc).empty().html(objInfo[props[1]]);
-            }
-        }
-
+        
 
         //http://jqueryvalidation.org/documentation/
         $('#formulario').validate({
@@ -101,19 +80,30 @@ var control_opcion_list = function(path) {
                     required: true,
                     maxlength: 255
                 },
-                id_pregunta: {
+                fecha: {
                     required: true,
-                }
+                    date: true
+                },
+                evaluacion: {
+                    required: true,
+                    maxlength: 1,
+                    digits: true
+                },
             },
             messages: {
                 descripcion: {
-                    required: "Introduce una descripcion",
+                    required: "Introduce una descripción",
                     maxlength: "Tiene que ser menos de 255 caracteres"
                 },
-                id_pregunta: {
-                    required: "Introduce un ID de pregunta",
-                }
-
+                fecha: {
+                    required: "Introduce una fecha",
+                    date: "Introduze una fecha valida 'dd/MM/yyyy'"
+                },
+                evaluacion: {
+                    required: "Introduce una evaluación",
+                    maxlength: "Tiene que ser menos de 1 digito",
+                    digits: "Tiene que ser un numero entero"
+                },                
             },
             highlight: function(element) {
                 $(element).closest('.control-group').removeClass('success').addClass('error');
@@ -134,7 +124,13 @@ var control_opcion_list = function(path) {
             return false;
         });
     }
-
+    function cargaClaveAjena(lugarID, lugarDesc, objetoClaveAjena) {
+        if ($(prefijo_div + lugarID).val() !== "") {
+            objInfo = objeto(objetoClaveAjena, path).getOne($(prefijo_div + lugarID).val());
+            props = Object.getOwnPropertyNames(objInfo);
+            $(prefijo_div + lugarDesc).empty().html(objInfo[props[1]]);
+        }
+    }
     function removeConfirmationModalForm(view, place, id) {
         cabecera = "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>" +
                 "<h3 id=\"myModalLabel\">Borrado de " + view.getObject().getName() + "</h3>";

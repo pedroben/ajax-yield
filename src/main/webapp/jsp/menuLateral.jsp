@@ -19,6 +19,8 @@
         <li><a id="lnkUsuario" href="#">Usuario</a></li>
         <li><a id="lnkActividad" href="#">Actividad</a></li>
         <li><a id="lnkEmpresa" href="#">Empresa</a></li>
+         <li><a id="lnkCuestionario" href="#">Cuestionario</a></li>
+        <li><a id="lnkPregunta" href="#">Pregunta</a></li>
     </ul>
 </div>
 

@@ -15,7 +15,7 @@ public class OpcionBean {
     private Integer id = 0;
     private String descripcion = "";
     private Integer id_pregunta = 0;
-    private Integer correcta = 0;
+    private Boolean correcta;
 
     public OpcionBean() {        
     }
@@ -48,11 +48,11 @@ public class OpcionBean {
         this.id_pregunta = id_pregunta;
     }
 
-    public Integer getCorrecta() {
+    public Boolean getCorrecta() {
         return correcta;
     }
 
-    public void setCorrecta(Integer correcta) {
+    public void setCorrecta(Boolean correcta) {
         this.correcta = correcta;
     }
 

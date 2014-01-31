@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var control_opcion_list = function(path) {
+
+var control_pregunta_list = function(path) {
     //contexto privado
 
-    var prefijo_div = "#opcion_list ";
+    var prefijo_div = "#pregunta_list ";
 
     function cargaBotoneraMantenimiento() {
         var botonera = [
@@ -32,7 +33,7 @@ var control_opcion_list = function(path) {
             $(prefijo_div + place).empty();
         });
     }
-    function loadForeign(strObjetoForeign, strPlace, control, functionCallback) {
+        function loadForeign(strObjetoForeign, strPlace, control, functionCallback) {
         var objConsulta = objeto(strObjetoForeign, path);
         var consultaView = vista(objConsulta, path);
 
@@ -53,6 +54,7 @@ var control_opcion_list = function(path) {
         consultaControl.inicia(consultaView, 1, null, null, 10, null, null, null, functionCallback, null, null, null);
 
     }
+
     function loadModalForm(view, place, id, action) {
         cabecera = '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
         if (action == "edit") {
@@ -67,20 +69,19 @@ var control_opcion_list = function(path) {
             view.doFillForm(id);
         } else {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
-            //$(prefijo_div + '#nombre').focus();
+            $(prefijo_div + '#descripcion').focus();
         }
+        //clave ajena cuestionario
+        cargaClaveAjena('#id_cuestionario', '#id_cuestionario_desc', 'cuestionario')
 
-//clave ajena pregunta
-        cargaClaveAjena('#id_pregunta', '#id_pregunta_desc', 'pregunta')
-
-        $(prefijo_div + '#id_pregunta_button').unbind('click');
-        $(prefijo_div + '#id_pregunta_button').click(function() {
-            loadForeign('pregunta', '#modal02', control_pregunta_list, callbackSearchPregunta);
-            function callbackSearchPregunta(id) {
+        $(prefijo_div + '#id_cuestionario_button').unbind('click');
+        $(prefijo_div + '#id_cuestionario_button').click(function() {
+            loadForeign('cuestionario', '#modal02', control_cuestionario_list, callbackSearchCuestionario);
+            function callbackSearchCuestionario(id) {
                 $(prefijo_div + '#modal02').modal('hide');
                 $(prefijo_div + '#modal02').data('modal', null);
-                $(prefijo_div + '#id_pregunta').val($(this).attr('id'));
-                cargaClaveAjena('#id_pregunta', '#id_pregunta_desc', 'pregunta');
+                $(prefijo_div + '#id_cuestionario').val($(this).attr('id'));
+                cargaClaveAjena('#id_cuestionario', '#id_cuestionario_desc', 'cuestionario');
                 return false;
             }
             return false;
@@ -101,18 +102,20 @@ var control_opcion_list = function(path) {
                     required: true,
                     maxlength: 255
                 },
-                id_pregunta: {
-                    required: true,
+                id_cuestionario: {
+                    required: true
                 }
+
             },
             messages: {
                 descripcion: {
-                    required: "Introduce una descripcion",
+                    required: "Introduce la descripcion",
                     maxlength: "Tiene que ser menos de 255 caracteres"
                 },
-                id_pregunta: {
-                    required: "Introduce un ID de pregunta",
+                id_cuestionario: {
+                    required: "Introduce un ID de cuestionario",
                 }
+
 
             },
             highlight: function(element) {
@@ -301,4 +304,5 @@ var control_opcion_list = function(path) {
         }
     };
 };
+
 
