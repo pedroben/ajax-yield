@@ -108,6 +108,7 @@
         <script src="js/main.js" charset="UTF-8"></script>
 
         <script src="js/control/alumno.js" charset="UTF-8"></script>
+        <script src="js/control/usuario.js" charset="UTF-8"></script>
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
         <script src="js/control/documento.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
