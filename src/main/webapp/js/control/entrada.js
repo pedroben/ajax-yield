@@ -33,7 +33,27 @@ var control_entrada_list = function(path) {
             $(prefijo_div + place).empty();
         });
     }
+    function loadForeign(strObjetoForeign, strPlace, control, functionCallback) {
+        var objConsulta = objeto(strObjetoForeign, path);
+        var consultaView = vista(objConsulta, path);
 
+        cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="myModalLabel">Elección</h3>';
+        pie = '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>';
+        listado = consultaView.getEmptyList();
+        loadForm(strPlace, cabecera, listado, pie, true);
+
+        $(prefijo_div + strPlace).css({
+            'right': '20px',
+            'left': '20px',
+            'width': 'auto',
+            'margin': '0',
+            'display': 'block'
+        });
+
+        var consultaControl = control(path);
+        consultaControl.inicia(consultaView, 1, null, null, 10, null, null, null, functionCallback, null, null, null);
+
+    }
     function loadModalForm(view, place, id, action) {
         cabecera = '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
         if (action == "edit") {
@@ -48,15 +68,102 @@ var control_entrada_list = function(path) {
             view.doFillForm(id);
         } else {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
-            //$(prefijo_div + '#nombre').focus();
+            $(prefijo_div + '#nombre').focus();
         }
+        //http://jqueryvalidation.org/documentation/
+        $('#formulario').validate({
+            rules: {
+                titulo: {
+                    required: true,
+                    maxlength: 255
+                },
+                contenido: {
+                    required: true
+                },
+                id_usuario: {
+                    required: true
+                },
+                id_hilo: {
+                    required: true
+                },
+                fecha: {
+                    required: true,
+                    date: true
+                }
+            },
+            messages: {
+                titulo: {
+                    required: "Introduce un titulo",
+                    maxlength: "Tiene que ser menos de 255 caracteres"
+                },
+                contenido: {
+                    required: "Introduce contenido"
+                },
+                id_usuario: {
+                    required: "Introduce un usuario"
+                },
+                id_hilo: {
+                    required: "Introduce un hilo"
+                },
+                fecha: {
+                    required: "Introduce una fecha",
+                    date: "Introduze una fecha valida 'dd/MM/yyyy'"
+                },
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                        .text('OK!').addClass('valid')
+                        .closest('.control-group').removeClass('error').addClass('success');
+            }
+        });
+        //clave ajena usuario
+        cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario')
+
+        $(prefijo_div + '#id_usuario_button').unbind('click');
+        $(prefijo_div + '#id_usuario_button').click(function() {
+            loadForeign('usuario', '#modal02', control_usuario_list, callbackSearchUsuario);
+            function callbackSearchUsuario(id) {
+                $(prefijo_div + '#modal02').modal('hide');
+                $(prefijo_div + '#modal02').data('modal', null);
+                $(prefijo_div + '#id_usuario').val($(this).attr('id'));
+                cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario');
+                return false;
+            }
+            return false;
+        });
+
+        //clave ajena hilo
+        cargaClaveAjena('#id_hilo', '#id_hilo_desc', 'hilo')
+        $(prefijo_div + '#id_hilo_button').unbind('click');
+        $(prefijo_div + '#id_hilo_button').click(function() {
+            loadForeign('hilo', '#modal02', control_hilo_list, callbackSearchHilo);
+            function callbackSearchHilo(id) {
+                $(prefijo_div + '#modal02').modal('hide');
+                $(prefijo_div + '#modal02').data('modal', null);
+                $(prefijo_div + '#id_hilo').val($(this).attr('id'));
+                cargaClaveAjena('#id_hilo', '#id_hilo_desc', 'hilo');
+                return false;
+            }
+            return false;
+        });
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view, id);
+            if ($("#formulario").valid()) {
+                enviarDatosUpdateForm(view, prefijo_div);
+            }
             return false;
         });
     }
-
+    function cargaClaveAjena(lugarID, lugarDesc, objetoClaveAjena) {
+        if ($(prefijo_div + lugarID).val() !== "") {
+            objInfo = objeto(objetoClaveAjena, path).getOne($(prefijo_div + lugarID).val());
+            props = Object.getOwnPropertyNames(objInfo);
+            $(prefijo_div + lugarDesc).empty().html(objInfo[props[1]]);
+        }
+    }
     function removeConfirmationModalForm(view, place, id) {
         cabecera = "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>" +
                 "<h3 id=\"myModalLabel\">Borrado de " + view.getObject().getName() + "</h3>";
@@ -173,7 +280,7 @@ var control_entrada_list = function(path) {
             });
 
             //asignación del evento de click para cambiar de página en la botonera de paginación
-            
+
             $(prefijo_div + '.pagination_link').unbind('click');
             $(prefijo_div + '.pagination_link').click(function() {
                 var id = $(this).attr('id');
@@ -183,7 +290,7 @@ var control_entrada_list = function(path) {
             });
 
             //boton de crear un nuevo elemento
-            
+
             if (callback) {
                 $(prefijo_div + '#crear').css("display", "none");
             } else {

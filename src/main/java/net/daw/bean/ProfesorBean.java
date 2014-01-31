@@ -5,17 +5,12 @@
  */
 package net.daw.bean;
 
-import javax.ejb.Stateless;
-
 /**
  *
  * @author Pedro Benito
  */
-@Stateless
 public class ProfesorBean {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
     private Integer id = 0;
     private Integer id_usuario = 0;
     private String nombre = "";
