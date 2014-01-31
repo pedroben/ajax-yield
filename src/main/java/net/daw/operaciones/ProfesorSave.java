@@ -1,12 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package net.daw.operaciones;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -19,18 +18,17 @@ import net.daw.helper.EncodingUtil;
 
 /**
  *
- * @author AMPAROYPEDRO
+ * @author rafa
  */
 public class ProfesorSave implements GenericOperation {
 
-   @Override
+    @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try {
             ProfesorDao oProfesorDAO = new ProfesorDao(Conexion.getConection());
             ProfesorBean oProfesor = new ProfesorBean();
-//            Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
             String jason = request.getParameter("json");
             jason = EncodingUtil.decodeURIComponent(jason);
             oProfesor = gson.fromJson(jason, oProfesor.getClass());

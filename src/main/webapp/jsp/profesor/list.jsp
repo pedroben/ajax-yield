@@ -7,8 +7,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Iterator"%>
 <%
-    ProfesorDao oProfesorDAO = new ProfesorDao(Conexion.getConection());
-    ArrayList<String> alColumnsNames = (ArrayList<String>) oProfesorDAO.getColumnsNames();
+    ProfesorDao oProfesorDao = new ProfesorDao(Conexion.getConection());
+    ArrayList<String> alColumnsNames = (ArrayList<String>) oProfesorDao.getColumnsNames();
     Iterator<String> oIterador = alColumnsNames.listIterator();
     String strNombreMantenimiento = "profesor";
 %>
@@ -25,7 +25,7 @@
             <div class="span5">
                 <div class="text-right">
                     <legend>Filtro</legend> 
-                    <form class="navbar-form pull-right" action="Controller" method="post" id="empresaForm">
+                    <form class="navbar-form pull-right" action="Controller" method="post" id="profesorForm">
                         <fieldset>                                                                     
                             <span>
                                 <select id="selectFilter" name="filter" width="80" style="width: 100px">
@@ -92,3 +92,4 @@
         <div class="modal-footer"></div>
     </div>
 </div>
+

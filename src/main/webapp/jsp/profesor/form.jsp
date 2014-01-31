@@ -3,91 +3,67 @@
     Author     : Pedro Benito
 --%>
 <form class="form-horizontal" action="#" id="formulario" name="formulario">
-    <h2>Profesor</h2>
+    <h2>Entrada</h2>
     <div class="control-group">
-        <label class="control-label" for="inputId">Id:</label>
+        <label class="control-label" for="inputId">ID:</label>
         <div class="controls">
             <input type="text" id="id" name="id" placeholder="id" />
         </div>
     </div>
-    
-    
     <div class="control-group">
-            <label class="control-label" for="inputId_usuario">Id Usuario: </label> 
-            <div class="controls"> 
-                <!-- <span id="id_tipoproducto" class="alert alert-info"></span> -->
-               <input readonly="true" id="id_usuario" class="input-mini"
-                       name="id_usuario" type="text" size="5" maxlength="5" />  
-                <a class="btn btn-mini" id="id_usuario_button" href="#"><i class="icon-search"></i></a>
-            </div>
-    </div>
-          <!--      <div class="control-group">
-            <div class="controls">
-                <span id="id_usuario_desc" class="alert alert-success"></span>                                       
-            </div>
-        </div> -->
-    
-    <!--
-    <div class="control-group">
-        <label class="control-label" for="inputId_usuario">Id usuario:</label>
+        <label class="control-label" for="inputId_usuario">ID Usuario:</label>
         <div class="controls">
-            <input type="text" id="id_usuario" name="id_usuario" placeholder="id_usuario" />
+            <input type="text" id="id_usuario" name="id_usuario" placeholder="Id usuario" />
             <a class="btn btn-mini" id="id_usuario_button" href="#"><i class="icon-search"></i></a>
         </div>
     </div>
-    -->
-    
     <div class="control-group">
-        <label class="control-label" for="inputNombre">Nombre:</label>
+        <label class="control-label"  for="inputDni">DNI:</label>
         <div class="controls">
-            <input type="text" id="nombre" name="nombre" placeholder="nombre" />
+            <input type="text" id="dni" name="dni" size="15" placeholder="Documento identidad" />
         </div>
     </div>
 
     <div class="control-group">
-        <label class="control-label" for="inputApe1">Primer apellido</label>
+        <label class="control-label"  for="inputNombre">Nombre:</label>
         <div class="controls">
-            <input type="text" id="ape1" name="ape1" placeholder="ape1" />
+            <input type="text" id="nombre" name="nombre" size="15" placeholder="Nombre" />
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label" for="inputApe2">Segundo apellido</label>
+        <label class="control-label"  for="inputApe1">Primer Apellido:</label>
         <div class="controls">
-            <input type="text" id="ape2" name="ape2" placeholder="ape2" />
+            <input type="text" id="ape1" name="ape1" size="15" placeholder="Primer apellido" />
         </div>
     </div>
-
-
     <div class="control-group">
-        <label class="control-label" for="inputSexo">Sexo</label>
+        <label class="control-label"  for="inputApe2">Segundo Apellido:</label>
         <div class="controls">
-            <input type="text" id="sexo" name="sexo" placeholder="sexo" />
+            <input type="text" id="ape2" name="ape2" size="15" placeholder="Segundo Apellido" />
         </div>
     </div>
-
-
     <div class="control-group">
-        <label class="control-label" for="inputTelefono">Teléfono:</label>
+        <label class="control-label"  for="inputSexo">Sexo:</label>
         <div class="controls">
-            <input type="text" id="telefono" name="telefono" placeholder="telefono" />
+            <select id="sexo" name="sexo" type="text" autofocus="autofocus">
+                <option value="">Seleccione una opción...</option>
+                <option value="Hombre">Hombre</option>
+                <option value="Mujer">Mujer</option>
+            </select>
         </div>
     </div>
     <div class="control-group">
-        <div class="control-group">
-            <label class="control-label" for="inputEmail">Email:</label>
-            <div class="controls">
-                <input type="text" id="email" name="email" placeholder="email" />
-            </div>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="inputDNI">DNI</label>
+        <label class="control-label"  for="inputTelefono">Teléfono:</label>
         <div class="controls">
-            <input type="text" id="dni" name="dni" placeholder="dni" />
+            <input type="text" id="telefono" name="telefono" size="15" placeholder="Móvil o fijo" />
         </div>
     </div>
-
-
+    <div class="control-group">
+        <label class="control-label"  for="inputEmail">Em@il:</label>
+        <div class="controls">
+            <input type="text" id="email" name="email" size="15" placeholder="Email" />
+        </div>
+    </div>
     <div class="control-group">
         <div class="controls">
             <button type="submit" id="submitForm" class="btn submitForm">Submit</button>

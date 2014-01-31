@@ -1,9 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package net.daw.operaciones;
 
 import java.util.ArrayList;
@@ -14,13 +12,14 @@ import net.daw.dao.ProfesorDao;
 import net.daw.helper.Conexion;
 import net.daw.helper.FilterBean;
 
+
 /**
  *
- * @author AMPAROYPEDRO
+ * @author rafa
  */
 public class ProfesorGetregisters implements GenericOperation {
 
-     @Override
+    @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String data;
         try {
@@ -34,9 +33,9 @@ public class ProfesorGetregisters implements GenericOperation {
                         oFilterBean.setFilterValue(request.getParameter("filtervalue"));
                         oFilterBean.setFilterOrigin("user");
                         alFilter.add(oFilterBean);
-                    }
-                }
-            }
+                    } 
+                } 
+            } 
             if (request.getParameter("systemfilter") != null) {
                 if (request.getParameter("systemfilteroperator") != null) {
                     if (request.getParameter("systemfiltervalue") != null) {
@@ -48,7 +47,7 @@ public class ProfesorGetregisters implements GenericOperation {
                         alFilter.add(oFilterBean);
                     }
                 }
-            }
+            }       
             ProfesorDao oProfesorDAO = new ProfesorDao(Conexion.getConection());
             int pages = oProfesorDAO.getCount(alFilter);
             data = "{\"data\":\"" + Integer.toString(pages) + "\"}";

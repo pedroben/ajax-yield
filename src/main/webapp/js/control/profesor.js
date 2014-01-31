@@ -1,3 +1,9 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 var control_profesor_list = function(path) {
     //contexto privado
 
@@ -29,6 +35,29 @@ var control_profesor_list = function(path) {
     }
 
     function loadModalForm(view, place, id, action) {
+
+        jQuery.validator.addMethod("caracteresespeciales",
+                function(value, element) {
+                    return /^[A-Za-z\d=#$%@_ -]+$/.test(value);
+                },
+                "Nada de caracteres especiales, por favor"
+                );
+
+        jQuery.validator.addMethod("nifES",
+                function(value, element) {
+                    "use strict";
+                    value = value.toUpperCase();
+                    if (!value.match('((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)')) {
+                        return false;
+                    }
+                    if (/^[0-9]{8}[A-Z]{1}$/.test(value)) {
+                        return ("TRWAGMYFPDXBNJZSQVHLCKE".charAt(value.substring(8, 0) % 23) === value.charAt(8));
+                    }
+                    return false;
+                },
+                "Por favor, introduce un DNI correcto"
+                );
+
         cabecera = '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
         if (action == "edit") {
             cabecera += '<h3 id="myModalLabel">Edición de ' + view.getObject().getName() + "</h3>";
@@ -44,22 +73,19 @@ var control_profesor_list = function(path) {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             //$(prefijo_div + '#nombre').focus();
         }
-        $(prefijo_div + '#submitForm').unbind('click');
-        $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view, prefijo_div);
-            return false;
-        });
-        // yo
+
+        $(prefijo_div + '#id_usuario_desc').empty().html(objeto('usuario', path).getOne($(prefijo_div + '#id_usuario').val()).descripcion);
+
         //en desarrollo: tratamiento de las claves ajenas ...
         $(prefijo_div + '#id_usuario_button').unbind('click');
         $(prefijo_div + '#id_usuario_button').click(function() {
 
-            var tipoUsuario = objeto('profesor', path);
-            var tipoUsuarioView = vista(tipoUsuario, path);
+            var usuario = objeto('usuario', path);
+            var usuarioView = vista(usuario, path);
 
-            cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="myModalLabel">Elección</h3>';
+            cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' + '<h3 id="myModalLabel">Elección</h3>';
             pie = '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>';
-            listado = tipoUsuarioView.getEmptyList();
+            listado = usuarioView.getEmptyList();
             loadForm('#modal02', cabecera, listado, pie, true);
 
             $(prefijo_div + '#modal02').css({
@@ -70,15 +96,14 @@ var control_profesor_list = function(path) {
                 'display': 'block'
             });
 
-            var tipoUsuarioControl = control_profesor_list(path);
-            tipoUsuarioControl.inicia(tipoUsuarioView, 1, null, null, 10, null, null, null, callbackSearchTipoUsuario, null, null, null);
+            var usuarioControl = control_usuario_list(path);
+            usuarioControl.inicia(usuarioView, 1, null, null, 10, null, null, null, callbackSearchTipodocumento, null, null, null);
 
-            function callbackSearchTipoUsuario(id) {
+            function callbackSearchTipodocumento(id) {
                 $(prefijo_div + '#modal02').modal('hide');
                 $(prefijo_div + '#modal02').data('modal', null);
-                $(prefijo_div + '#id_usuario_button').val($(this).attr('id'));
-                $(prefijo_div + '#id_usuario_button_desc').empty().html(objeto('profesor', path).getOne($(prefijo_div + '#id_usuario_button').val()).descripcion);
-
+                $(prefijo_div + '#id_usuario').val($(this).attr('id'));
+                $(prefijo_div + '#id_usuario_desc').empty().html(objeto('usuario', path).getOne($(prefijo_div + '#id_usuario').val()).descripcion);
                 return false;
             }
 
@@ -86,14 +111,109 @@ var control_profesor_list = function(path) {
 
         });
 
-        $(prefijo_div + '#submitForm').unbind('click');
-        $(prefijo_div + '#submitForm').click(function(event) {
-            //validaciones...
-            // yo enviarDatosUpdateForm(view, id);
-            enviarDatosUpdateForm(view, prefijo_div);
-            return false;
+        //http://jqueryvalidation.org/documentation/
+        $('#formulario').validate({
+            rules: {
+                id_usuario: {
+                    required: true,
+                    maxlength: 6,
+                    digits: true
+                },
+                dni: {
+                    required: true,
+                    maxlength: 9,
+                    caracteresespeciales: true,
+                    nifES: true
+
+                },
+                nombre: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 50,
+                    caracteresespeciales: true
+                },
+                ape1: {
+                    required: true,
+                    maxlength: 50,
+                    caracteresespeciales: true
+                },
+                ape2: {
+                    maxlength: 50
+                },
+                sexo: {
+                    required: true,
+                    maxlength: 6,
+                    caracteresespeciales: true
+
+                },
+                telefono: {
+                    caracteresespeciales: true,
+                    required: true,
+                    maxlength: 9,
+                    minlength: 9,
+                    number: true
+                },
+                email: {
+                    required: true,
+                    maxlength: 150,
+                    email: true
+                }
+            },
+            messages: {
+                id_usuario: {
+                    required: "Debes de registrarte con login y password",
+                    maxlength: "Máximo 6 dígitos"
+                },
+                dni: {
+                    required: "Introduce tu DNI"
+                },
+                nombre: {
+                    required: "Introduce tu nombre",
+                    maxlength: "Máximo 50 letras",
+                    minlength: "Cómo mínimo 3 letras"
+                },
+                ape1: {
+                    required: "Introduce tu primer apellido",
+                    maxlength: "Máximo 50 carácteres",
+                    minlength: "Cómo mínimo 3 letras"
+                },
+                ape2: {
+                    maxlength: "Máximo 50 carácteres",
+                    minlength: "Cómo mínimo 3 letras"
+                },
+                sexo: {
+                    required: "Introduce tu sexo",
+                    maxlength: "Hombre o mujer"
+                },
+                telefono: {
+                    required: "Introduce tu número de telefono",
+                    maxlength: "Máximo 9 dígitos",
+                    minlength: "Cómo mínimo 9 dígitos",
+                    number: "Por favor, introduce tu número"
+                },
+                email: {
+                    required: "Introduce tu correo electrónico",
+                    maxlength: "Máximo 150 carácteres",
+                    email: "Por favor, introduce un email válido"
+                }
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                        .text('OK!').addClass('valid')
+                        .closest('.control-group').removeClass('error').addClass('success');
+            }
         });
 
+        $(prefijo_div + '#submitForm').unbind('click');
+        $(prefijo_div + '#submitForm').click(function() {
+            if ($('#formulario').valid()) {
+                enviarDatosUpdateForm(view, prefijo_div);
+            }
+            return false;
+        });
     }
 
     function removeConfirmationModalForm(view, place, id) {
@@ -119,9 +239,8 @@ var control_profesor_list = function(path) {
         loadForm(place, cabecera, view.getObjectTable(id), pie, true);
     }
 
-
     return {
-        inicia: function(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue) {
+        inicia: function(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, prueba, systemfilter, systemfilteroperator, systemfiltervalue) {
 
             var thisObject = this;
 
@@ -263,3 +382,4 @@ var control_profesor_list = function(path) {
         }
     };
 };
+

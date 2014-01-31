@@ -1,6 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package net.daw.operaciones;
@@ -20,11 +19,11 @@ import net.daw.helper.FilterBean;
 
 /**
  *
- * @author AMPAROYPEDRO
+ * @author rafa
  */
 public class ProfesorGetpage implements GenericOperation {
 
-   @Override
+    @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String data;
         try {
@@ -77,15 +76,15 @@ public class ProfesorGetpage implements GenericOperation {
                 hmOrder = null;
             }
             ProfesorDao oProfesorDAO = new ProfesorDao(Conexion.getConection());
-            List<ProfesorBean> oProfesores = oProfesorDAO.getPage(rpp, page, alFilter, hmOrder);
+            List<ProfesorBean> oProfesors = oProfesorDAO.getPage(rpp, page, alFilter, hmOrder);
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.setDateFormat("dd/MM/yyyy");
             Gson gson = gsonBuilder.create();
-            data = gson.toJson(oProfesores);
+            data = gson.toJson(oProfesors);
             data = "{\"list\":" + data + "}";
             return data;
         } catch (Exception e) {
-            throw new ServletException("ProfesorGetpageJson: View Error: " + e.getMessage());
+            throw new ServletException("ProfesorGetJson: View Error: " + e.getMessage());
         }
     }
 }

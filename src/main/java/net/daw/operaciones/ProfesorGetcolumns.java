@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package net.daw.operaciones;
 
 import com.google.gson.Gson;
@@ -14,9 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import net.daw.dao.ProfesorDao;
 import net.daw.helper.Conexion;
 
+
 /**
  *
- * @author AMPAROYPEDRO
+ * @author rafa
  */
 public class ProfesorGetcolumns implements GenericOperation {
 
@@ -35,5 +35,3 @@ public class ProfesorGetcolumns implements GenericOperation {
     }
 
 }
-
-   

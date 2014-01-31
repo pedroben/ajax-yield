@@ -1,24 +1,24 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package net.daw.operaciones;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+/**
+ *
+ * @author rafa
+ */
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.daw.bean.ProfesorBean;
 import net.daw.dao.ProfesorDao;
 import net.daw.helper.Conexion;
 
-/**
- *
- * @author AMPAROYPEDRO
- */
+
 public class ProfesorGet implements GenericOperation {
 
     @Override
@@ -29,13 +29,13 @@ public class ProfesorGet implements GenericOperation {
                 data = "{\"error\":\"id is mandatory\"}";
             } else {
                 ProfesorDao oProfesorDAO = new ProfesorDao(Conexion.getConection());
-                ProfesorBean ProfesorBean = new ProfesorBean();
-                ProfesorBean.setId(Integer.parseInt(request.getParameter("id")));
-                oProfesorDAO.get(ProfesorBean);
+                ProfesorBean oProfesor = new ProfesorBean();
+                oProfesor.setId(Integer.parseInt(request.getParameter("id")));
+                oProfesorDAO.get(oProfesor);
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("dd/MM/yyyy");
                 Gson gson = gsonBuilder.create();
-                data = gson.toJson(ProfesorBean);
+                data = gson.toJson(oProfesor);
                 
             }
             return data;

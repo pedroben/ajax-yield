@@ -9,9 +9,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  *
- * @author AMPAROYPEDRO
+ * @author rafa
  */
 public class ProfesorGetprettycolumns implements GenericOperation {
 
@@ -19,11 +20,10 @@ public class ProfesorGetprettycolumns implements GenericOperation {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
            String data = "{\"data\": [\"id\", \"id_usuario\", \"nombre\", \"ape1\", \"ape2\", \"sexo\", \"telefono\", \"email\", \"dni\"]}";
-            // String data = "{\"data\": [\"id\", \"nombre\", \"ape1\", \"ape2\", \"telefono\", \"email\", \"dni\"]}";
-
             return data;
         } catch (Exception e) {
             throw new ServletException("ProfesorGetpagesJson: View Error: " + e.getMessage());
         }
     }
 }
+

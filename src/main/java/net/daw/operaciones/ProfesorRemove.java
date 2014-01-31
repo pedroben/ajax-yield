@@ -1,9 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package net.daw.operaciones;
 
 import com.google.gson.Gson;
@@ -16,18 +14,20 @@ import net.daw.bean.ProfesorBean;
 import net.daw.dao.ProfesorDao;
 import net.daw.helper.Conexion;
 
+
+
 /**
  *
- * @author AMPAROYPEDRO
+ * @author rafa
  */
 public class ProfesorRemove implements GenericOperation {
-      @Override
+    @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try {
             ProfesorDao oProfesorDAO = new ProfesorDao(Conexion.getConection());
-            ProfesorBean oProfesor = new ProfesorBean();
-            oProfesor.setId(Integer.parseInt(request.getParameter("id")));
+            ProfesorBean oProfesor = new ProfesorBean();                                           
+            oProfesor.setId(Integer.parseInt(request.getParameter("id")));            
             Map<String, String> data = new HashMap<>();
             if (oProfesor != null) {
                 oProfesorDAO.remove(oProfesor);
@@ -39,7 +39,7 @@ public class ProfesorRemove implements GenericOperation {
             }
             Gson gson = new Gson();
             String resultado = gson.toJson(data);
-            return resultado;
+            return resultado;        
         } catch (Exception e) {
             throw new ServletException("ProfesorRemoveJson: View Error: " + e.getMessage());
         }
