@@ -205,6 +205,7 @@ var vista = function(objeto, ContextPath) {
                         }
                     });
                     tabla += '<td><div class="btn-toolbar"><div class="btn-group">';
+
                     $.each(botonera, function(indice, valor) {
                         tabla += '<a class="' + valor.class + '" id=' + value.id + ' href="#"><i class="' + valor.icon + '"></i> ' + valor.text + '</a>';
                     });
@@ -215,6 +216,7 @@ var vista = function(objeto, ContextPath) {
             } else {
                 tabla = "<div class=\"alert alert-info\"><h4>Ha habido un problema con la base de datos</h4><br/>El probema puede ser:<ul><li>La tabla está vacia.</li><li>Tu busqueda no tubo resultados.</li></ul></div>";
             }
+
             return tabla;
         },
         getObjectTable: function(id) {
@@ -222,6 +224,7 @@ var vista = function(objeto, ContextPath) {
             datos = objeto.getOne(id);
             var tabla = "<table class=\"table table table-bordered table-condensed\">";
             $.each(objeto.getFieldNames(), function(index, valor) {
+
                 tabla += '<tr><td><strong>' + cabecera[index] + '</strong></td>';
                 tabla += '<td>';
                 if (/id_/.test(valor)) {
@@ -254,6 +257,7 @@ var vista = function(objeto, ContextPath) {
                     tabla += '</td></tr>';
                 }
             });
+
 
             tabla += '</table>';
             return tabla;

@@ -124,6 +124,9 @@
         <script src="js/control/entrega.js" charset="UTF-8"></script>    
         <script src="js/control/metadocumento.js" charset="UTF-8"></script>
         <script src="js/control/repositorio.js" charset="UTF-8"></script>
+        <script src="js/control/opcion.js" charset="UTF-8"></script>    
+        <script src="js/control/cuestionario.js" charset="UTF-8"></script>
+        <script src="js/control/pregunta.js" charset="UTF-8"></script>
         <script>
 
             $(document).ready(function() {
@@ -292,7 +295,7 @@
                     votodocumentoControl.inicia(votodocumentoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
-                
+
                 $('#lnkActividadoffline').unbind('click');
                 $('#lnkActividadoffline').click(function() {
                     var actividadoffline = objeto('actividadoffline', '<%=request.getContextPath()%>');
@@ -305,7 +308,7 @@
                     actividadofflineControl.inicia(actividadofflineView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
-                
+
                 $('#lnkEntrega').unbind('click');
                 $('#lnkEntrega').click(function() {
                     var entrega = objeto('entrega', '<%=request.getContextPath()%>');
@@ -318,7 +321,7 @@
                     entregaControl.inicia(entregaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
-                
+
                 $('#lnkMetadocumento').unbind('click');
                 $('#lnkMetadocumento').click(function() {
                     var metadocumento = objeto('metadocumento', '<%=request.getContextPath()%>');
@@ -331,8 +334,8 @@
                     metadocumentoControl.inicia(metadocumentoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
-                
-                 $('#lnkRepositorio').unbind('click');
+
+                $('#lnkRepositorio').unbind('click');
                 $('#lnkRepositorio').click(function() {
                     var repositorio = objeto('repositorio', '<%=request.getContextPath()%>');
                     var repositorioView = vista(repositorio, '<%=request.getContextPath()%>');
@@ -356,6 +359,42 @@
 
                     var comentarioControl = control_comentario_list('<%=request.getContextPath()%>');
                     comentarioControl.inicia(comentarioView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnkCuestionario').unbind('click');
+                $('#lnkCuestionario').click(function() {
+                    var cuestionario = objeto('cuestionario', '<%=request.getContextPath()%>');
+                    var cuestionarioView = vista(cuestionario, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(cuestionarioView.getEmptyList());
+
+                    var cuestionarioControl = control_cuestionario_list('<%=request.getContextPath()%>');
+                    cuestionarioControl.inicia(cuestionarioView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnkOpcion').unbind('click');
+                $('#lnkOpcion').click(function() {
+                    var opcion = objeto('opcion', '<%=request.getContextPath()%>');
+                    var opcionView = vista(opcion, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(opcionView.getEmptyList());
+
+                    var opcionControl = control_opcion_list('<%=request.getContextPath()%>');
+                    opcionControl.inicia(opcionView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnkPregunta').unbind('click');
+                $('#lnkPregunta').click(function() {
+                    var pregunta = objeto('pregunta', '<%=request.getContextPath()%>');
+                    var preguntaView = vista(pregunta, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(preguntaView.getEmptyList());
+
+                    var preguntaControl = control_pregunta_list('<%=request.getContextPath()%>');
+                    preguntaControl.inicia(preguntaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
 

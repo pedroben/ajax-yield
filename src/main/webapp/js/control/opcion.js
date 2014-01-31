@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-var control_actividad_list = function(path) {
+var control_opcion_list = function(path) {
     //contexto privado
 
-    var prefijo_div = "#actividad_list ";
+    var prefijo_div = "#opcion_list ";
 
     function cargaBotoneraMantenimiento() {
         var botonera = [
@@ -33,7 +32,27 @@ var control_actividad_list = function(path) {
             $(prefijo_div + place).empty();
         });
     }
+    function loadForeign(strObjetoForeign, strPlace, control, functionCallback) {
+        var objConsulta = objeto(strObjetoForeign, path);
+        var consultaView = vista(objConsulta, path);
 
+        cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="myModalLabel">Elección</h3>';
+        pie = '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>';
+        listado = consultaView.getEmptyList();
+        loadForm(strPlace, cabecera, listado, pie, true);
+
+        $(prefijo_div + strPlace).css({
+            'right': '20px',
+            'left': '20px',
+            'width': 'auto',
+            'margin': '0',
+            'display': 'block'
+        });
+
+        var consultaControl = control(path);
+        consultaControl.inicia(consultaView, 1, null, null, 10, null, null, null, functionCallback, null, null, null);
+
+    }
     function loadModalForm(view, place, id, action) {
         cabecera = '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
         if (action == "edit") {
@@ -51,37 +70,50 @@ var control_actividad_list = function(path) {
             //$(prefijo_div + '#nombre').focus();
         }
 
+//clave ajena pregunta
+        cargaClaveAjena('#id_pregunta', '#id_pregunta_desc', 'pregunta')
+
+        $(prefijo_div + '#id_pregunta_button').unbind('click');
+        $(prefijo_div + '#id_pregunta_button').click(function() {
+            loadForeign('pregunta', '#modal02', control_pregunta_list, callbackSearchPregunta);
+            function callbackSearchPregunta(id) {
+                $(prefijo_div + '#modal02').modal('hide');
+                $(prefijo_div + '#modal02').data('modal', null);
+                $(prefijo_div + '#id_pregunta').val($(this).attr('id'));
+                cargaClaveAjena('#id_pregunta', '#id_pregunta_desc', 'pregunta');
+                return false;
+            }
+            return false;
+        });
+        function cargaClaveAjena(lugarID, lugarDesc, objetoClaveAjena) {
+            if ($(prefijo_div + lugarID).val() !== "") {
+                objInfo = objeto(objetoClaveAjena, path).getOne($(prefijo_div + lugarID).val());
+                props = Object.getOwnPropertyNames(objInfo);
+                $(prefijo_div + lugarDesc).empty().html(objInfo[props[1]]);
+            }
+        }
+
+
         //http://jqueryvalidation.org/documentation/
         $('#formulario').validate({
             rules: {
-                enunciado: {
+                descripcion: {
                     required: true,
                     maxlength: 255
                 },
-                evaluacion: {
+                id_pregunta: {
                     required: true,
-                    digits: true
-                },
-                fecha: {
-                    required: true,
-                    date: true
-                },
-                activo: {
-                    required: false
                 }
             },
             messages: {
-                enunciado: {
-                    required: "Introduce un enunciado",
+                descripcion: {
+                    required: "Introduce una descripcion",
                     maxlength: "Tiene que ser menos de 255 caracteres"
                 },
-                evaluacion: {
-                    required: "Introduce una evaluacion"
-                },
-                fecha: {
-                    required: "Introduce una fecha",
-                    date: "Introduze una fecha valida 'dd/MM/yyyy'"
+                id_pregunta: {
+                    required: "Introduce un ID de pregunta",
                 }
+
             },
             highlight: function(element) {
                 $(element).closest('.control-group').removeClass('success').addClass('error');
@@ -92,6 +124,7 @@ var control_actividad_list = function(path) {
                         .closest('.control-group').removeClass('error').addClass('success');
             }
         });
+
 
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
@@ -268,3 +301,4 @@ var control_actividad_list = function(path) {
         }
     };
 };
+

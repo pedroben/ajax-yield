@@ -26,5 +26,8 @@
         <li><a id="lnkEntrega" href="#">Entrega</a></li>
         <li><a id="lnkMetadocumento" href="#">Metadocumento</a></li>
         <li><a id="lnkRepositorio" href="#">Repositorio</a></li>
+        <li><a id="lnkOpcion" href="#">Opcion</a></li>
+        <li><a id="lnkCuestionario" href="#">Cuestionario</a></li>
+        <li><a id="lnkPregunta" href="#">Pregunta</a></li>
     </ul>
 </div>
