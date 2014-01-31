@@ -49,7 +49,7 @@
                     <div class="nav-collapse collapse">
                         <%if (user != null) {%>
                         <jsp:include page="jsp/menuSuperior.jsp" />   
-                        <% } %>
+                        <% }%>
                         <jsp:include page="jsp/usuario/infologin.jsp" />                        
                     </div>
                 </div>
@@ -107,16 +107,19 @@
         <script src="js/util.js" charset="UTF-8"></script>
         <script src="js/main.js" charset="UTF-8"></script>
 
+        <script src="js/control/alumno.js" charset="UTF-8"></script>
+        <script src="js/control/usuario.js" charset="UTF-8"></script>
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
         <script src="js/control/documento.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
-        <script src="js/control/usuario.js" charset="UTF-8"></script>
-        <script src="js/control/hilo.js" charset="UTF-8"></script>
-        <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
         <script src="js/control/actividad.js" charset="UTF-8"></script>
         <script src="js/control/empresa.js" charset="UTF-8"></script>
-
-
+        <script src="js/control/entrada.js" charset="UTF-8"></script>
+        <script src="js/control/hilo.js" charset="UTF-8"></script>
+        <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
+        <script src="js/control/votodocumento.js" charset="UTF-8"></script>
+        <script src="js/control/actividadoffline.js" charset="UTF-8"></script>
+        <script src="js/control/entrega.js" charset="UTF-8"></script>     
 
         <script>
 
@@ -144,6 +147,18 @@
 
                     var documentoControl = control_documento_list('<%=request.getContextPath()%>');
                     documentoControl.inicia(documentoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnkAlumno').unbind('click');
+                $('#lnkAlumno').click(function() {
+                    var alumno = objeto('alumno', '<%=request.getContextPath()%>');
+                    var alumnoView = vista(alumno, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(alumnoView.getEmptyList());
+
+                    var alumnoControl = control_alumno_list('<%=request.getContextPath()%>');
+                    alumnoControl.inicia(alumnoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
                 $('#lnkEntrada').unbind('click');
@@ -184,19 +199,6 @@
                     hiloControl.inicia(hiloView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
-
-                $('#lnkDocumento').unbind('click');
-                $('#lnkDocumento').click(function() {
-                    var documento = objeto('documento', '<%=request.getContextPath()%>');
-                    var documentoView = vista(documento, '<%=request.getContextPath()%>');
-
-                    $('#indexContenidoJsp').empty();
-                    $('#indexContenido').empty().append(documentoView.getEmptyList());
-
-                    var documentoControl = control_documento_list('<%=request.getContextPath()%>');
-                    documentoControl.inicia(documentoView, 1, null, null, 10, null, null, null, null);
-                    return false;
-                });
                 $('#lnkTipodocumento').unbind('click');
                 $('#lnkTipodocumento').click(function() {
                     var tipodocumento = objeto('tipodocumento', '<%=request.getContextPath()%>');
@@ -223,6 +225,19 @@
                     return false;
                 });
 
+                $('#lnkVotodocumento').unbind('click');
+                $('#lnkVotodocumento').click(function() {
+                    var votodocumento = objeto('votodocumento', '<%=request.getContextPath()%>');
+                    var votodocumentoView = vista(votodocumento, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(votodocumentoView.getEmptyList());
+
+                    var votodocumentoControl = control_votodocumento_list('<%=request.getContextPath()%>');
+                    votodocumentoControl.inicia(votodocumentoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+
                 $('#lnkEmpresa').unbind('click');
                 $('#lnkEmpresa').click(function() {
                     var empresa = objeto('empresa', '<%=request.getContextPath()%>');
@@ -233,6 +248,45 @@
 
                     var empresaControl = control_empresa_list('<%=request.getContextPath()%>');
                     empresaControl.inicia(empresaView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+
+                $('#lnkVotodocumento').unbind('click');
+                $('#lnkVotodocumento').click(function() {
+                    var votodocumento = objeto('votodocumento', '<%=request.getContextPath()%>');
+                    var votodocumentoView = vista(votodocumento, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(votodocumentoView.getEmptyList());
+
+                    var votodocumentoControl = control_votodocumento_list('<%=request.getContextPath()%>');
+                    votodocumentoControl.inicia(votodocumentoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                
+                $('#lnkActividadoffline').unbind('click');
+                $('#lnkActividadoffline').click(function() {
+                    var actividadoffline = objeto('actividadoffline', '<%=request.getContextPath()%>');
+                    var actividadofflineView = vista(actividadoffline, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(actividadofflineView.getEmptyList());
+
+                    var actividadofflineControl = control_actividadoffline_list('<%=request.getContextPath()%>');
+                    actividadofflineControl.inicia(actividadofflineView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                
+                $('#lnkEntrega').unbind('click');
+                $('#lnkEntrega').click(function() {
+                    var entrega = objeto('entrega', '<%=request.getContextPath()%>');
+                    var entregaView = vista(entrega, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(entregaView.getEmptyList());
+
+                    var entregaControl = control_entrega_list('<%=request.getContextPath()%>');
+                    entregaControl.inicia(entregaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
 
