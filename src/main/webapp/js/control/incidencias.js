@@ -71,12 +71,78 @@ var control_incidencias_list = function(path) {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             $(prefijo_div + '#nombre').focus();
         }
+        
+         $('#formulario').validate({
+            rules: {
+                resumen: {
+                    required: true,
+                    maxlength: 255
+                },
+                cambios: {
+                    required: true,
+                    maxlength: 255
+                },
+                id_estado: {
+                    required: true,
 
+                },
+                id_repositorio: {
+                    required: true,
 
+                },
+                id_usuario: {
+                    required: true,
 
+                },
+                fechaalta: {
+                    required: true,
 
+                },
+                fecharesolucion: {
+                    required: true,
 
-     
+                }
+            },
+            messages: {
+                resumen: {
+                    required: "Introduce un texto",
+                    maxlength: "Tiene que ser menos de 255 caracteres"
+                },
+                cambios: {
+                    required: "Introduce un texto",
+                    maxlength: "Tiene que ser menos de 255 caracteres"
+                },
+                id_estado: {
+                    required: "Introduce un Estado",
+            
+                },
+                id_repositorio: {
+                    required: "Introduce un Repositorio",
+              
+                },
+                id_usuario: {
+                    required: "Introduce un Usuario",
+               
+                },
+                fechaalta: {
+                    required: "Introduce una fecha",
+                  
+                },
+                fecharesolucion: {
+                    required: "Introduce una fecha",
+                   
+                }
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                        .text('OK!').addClass('valid')
+                        .closest('.control-group').removeClass('error').addClass('success');
+            }
+        });
+
                 //clave ajena estado
                 cargaClaveAjena('#id_estado', '#id_estado_desc', 'estado');
         $(prefijo_div + '#id_estado_button').unbind('click');

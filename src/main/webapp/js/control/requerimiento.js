@@ -50,13 +50,51 @@ var control_requerimiento_list = function(path) {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             //$(prefijo_div + '#nombre').focus();
         }
-        $(prefijo_div + '#submitForm').unbind('click');
+          $('#formulario').validate({
+            rules: {
+
+                enunciado: {
+                    required: true,
+                    maxlength: 255
+
+                },
+                fechaalta: {
+                    required: true,
+
+                },
+
+            },
+            messages: {
+              
+                enunciado: {
+                    required: "Introduce texto",
+                    maxlength: "Tiene que ser menos de 255 caracteres"
+            
+                },
+                fechaalta: {
+                    required: "Introduce una fecha",
+              
+                }
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                        .text('OK!').addClass('valid')
+                        .closest('.control-group').removeClass('error').addClass('success');
+            }
+        });
+        
+       
+           $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view,prefijo_div);
+            if ($('#formulario').valid()) {
+                enviarDatosUpdateForm(view, prefijo_div);
+            }
             return false;
         });
     }
-
     function removeConfirmationModalForm(view, place, id) {
         cabecera = "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>" +
                 "<h3 id=\"myModalLabel\">Borrado de " + view.getObject().getName() + "</h3>";

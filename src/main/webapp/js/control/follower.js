@@ -71,6 +71,41 @@ var control_follower_list = function(path) {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             $(prefijo_div + '#codigo').focus();
         }
+        
+         $('#formulario').validate({
+            rules: {
+
+                id_usuario1: {
+                    required: true,
+
+                },
+                id_usuario2: {
+                    required: true,
+
+                },
+
+            },
+            messages: {
+              
+                id_usuario1: {
+                    required: "Introduce un Usuario",
+            
+                },
+                id_usuario2: {
+                    required: "Introduce un Usuario",
+              
+                }
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                        .text('OK!').addClass('valid')
+                        .closest('.control-group').removeClass('error').addClass('success');
+            }
+        });
+
 
         //clave ajena usuario1
         cargaClaveAjena('#id_usuario1', '#id_usuario1_desc', 'usuario')
@@ -102,10 +137,11 @@ var control_follower_list = function(path) {
             return false;
         });
 
-        $(prefijo_div + '#submitForm').unbind('click');
-        $(prefijo_div + '#submitForm').click(function(event) {
-            //validaciones...
-            enviarDatosUpdateForm(view,prefijo_div);
+           $(prefijo_div + '#submitForm').unbind('click');
+        $(prefijo_div + '#submitForm').click(function() {
+            if ($('#formulario').valid()) {
+                enviarDatosUpdateForm(view, prefijo_div);
+            }
             return false;
         });
     }
