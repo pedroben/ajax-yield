@@ -67,5 +67,28 @@ public class UsuarioDao extends GenericDaoImplementation<UsuarioBean> {
         }
         return oUsuarioBean;
     }
+ 
+    @Override
+    public UsuarioBean get(UsuarioBean oUsuarioBean) throws Exception {
+        if (oUsuarioBean.getId() > 0) {
+            try {
+                oMysql.conexion(enumTipoConexion);
+                if (!oMysql.existsOne("usuario", oUsuarioBean.getId())) {
+                    oUsuarioBean.setId(0);
+                } else {
+                    oUsuarioBean.setLogin(oMysql.getOne("usuario", "login", oUsuarioBean.getId()));
+                    oUsuarioBean.setPassword(oMysql.getOne("usuario", "password", oUsuarioBean.getId()));
+                }
+            } catch (Exception e) {
+                throw new Exception("UsuarioDao.getUsuario: Error: " + e.getMessage());
+            } finally {
+                oMysql.desconexion();
+            }
+        } else {
+            oUsuarioBean.setId(0);
+        }
+        return oUsuarioBean;
+    }
 
+    
 }
