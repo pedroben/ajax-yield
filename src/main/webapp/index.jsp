@@ -49,7 +49,7 @@
                     <div class="nav-collapse collapse">
                         <%if (user != null) {%>
                         <jsp:include page="jsp/menuSuperior.jsp" />   
-                        <% } %>
+                        <% }%>
                         <jsp:include page="jsp/usuario/infologin.jsp" />                        
                     </div>
                 </div>
@@ -107,6 +107,8 @@
         <script src="js/util.js" charset="UTF-8"></script>
         <script src="js/main.js" charset="UTF-8"></script>
 
+        <script src="js/control/alumno.js" charset="UTF-8"></script>
+        <script src="js/control/usuario.js" charset="UTF-8"></script>
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
         <script src="js/control/documento.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
@@ -117,9 +119,7 @@
         <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
         <script src="js/control/votodocumento.js" charset="UTF-8"></script>
         <script src="js/control/actividadoffline.js" charset="UTF-8"></script>
-        <script src="js/control/entrega.js" charset="UTF-8"></script>
-        
-
+        <script src="js/control/entrega.js" charset="UTF-8"></script>     
 
         <script>
 
@@ -147,6 +147,18 @@
 
                     var documentoControl = control_documento_list('<%=request.getContextPath()%>');
                     documentoControl.inicia(documentoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnkAlumno').unbind('click');
+                $('#lnkAlumno').click(function() {
+                    var alumno = objeto('alumno', '<%=request.getContextPath()%>');
+                    var alumnoView = vista(alumno, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(alumnoView.getEmptyList());
+
+                    var alumnoControl = control_alumno_list('<%=request.getContextPath()%>');
+                    alumnoControl.inicia(alumnoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
                 $('#lnkEntrada').unbind('click');
@@ -212,7 +224,7 @@
                     actividadControl.inicia(actividadView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
-                
+
                 $('#lnkVotodocumento').unbind('click');
                 $('#lnkVotodocumento').click(function() {
                     var votodocumento = objeto('votodocumento', '<%=request.getContextPath()%>');
@@ -238,7 +250,7 @@
                     empresaControl.inicia(empresaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
-                
+
                 $('#lnkVotodocumento').unbind('click');
                 $('#lnkVotodocumento').click(function() {
                     var votodocumento = objeto('votodocumento', '<%=request.getContextPath()%>');
