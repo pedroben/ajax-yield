@@ -124,8 +124,6 @@
         <script src="js/control/entrega.js" charset="UTF-8"></script>    
         <script src="js/control/metadocumento.js" charset="UTF-8"></script>
         <script src="js/control/repositorio.js" charset="UTF-8"></script>
-
-
         <script>
 
             $(document).ready(function() {
@@ -152,6 +150,18 @@
 
                     var documentoControl = control_documento_list('<%=request.getContextPath()%>');
                     documentoControl.inicia(documentoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnkAlumno').unbind('click');
+                $('#lnkAlumno').click(function() {
+                    var alumno = objeto('alumno', '<%=request.getContextPath()%>');
+                    var alumnoView = vista(alumno, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(alumnoView.getEmptyList());
+
+                    var alumnoControl = control_alumno_list('<%=request.getContextPath()%>');
+                    alumnoControl.inicia(alumnoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
                 $('#lnkAlumno').unbind('click');
