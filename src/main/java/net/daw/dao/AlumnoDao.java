@@ -9,7 +9,7 @@ import net.daw.helper.Conexion;
 
 /**
  *
- * @author José
+ * @author Sergio Martín Tárraga
  */
 public class AlumnoDao extends GenericDaoImplementation<AlumnoBean> {
 
