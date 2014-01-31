@@ -29,5 +29,8 @@
         <li><a id="lnkOpcion" href="#">Opcion</a></li>
         <li><a id="lnkCuestionario" href="#">Cuestionario</a></li>
         <li><a id="lnkPregunta" href="#">Pregunta</a></li>
+        <li><a id="lnkFollower" href="#">Follower</a></li>
+        <li><a id="lnkRequerimiento" href="#">Requerimiento</a></li>
+        <li><a id="lnkIncidencias" href="#">Incidencias</a></li>
     </ul>
 </div>

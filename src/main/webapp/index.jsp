@@ -127,6 +127,9 @@
         <script src="js/control/opcion.js" charset="UTF-8"></script>    
         <script src="js/control/cuestionario.js" charset="UTF-8"></script>
         <script src="js/control/pregunta.js" charset="UTF-8"></script>
+        <script src="js/control/follower.js" charset="UTF-8"></script>
+        <script src="js/control/incidencias.js" charset="UTF-8"></script>
+        <script src="js/control/requerimiento.js" charset="UTF-8"></script>
         <script>
 
             $(document).ready(function() {
@@ -395,6 +398,43 @@
 
                     var preguntaControl = control_pregunta_list('<%=request.getContextPath()%>');
                     preguntaControl.inicia(preguntaView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+
+                $('#lnkFollower').unbind('click');
+                $('#lnkFollower').click(function() {
+                    var follower = objeto('follower', '<%=request.getContextPath()%>');
+                    var followerView = vista(follower, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(followerView.getEmptyList());
+
+                    var followerControl = control_follower_list('<%=request.getContextPath()%>');
+                    followerControl.inicia(followerView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnkIncidencias').unbind('click');
+                $('#lnkIncidencias').click(function() {
+                    var incidencias = objeto('incidencias', '<%=request.getContextPath()%>');
+                    var incidenciasView = vista(incidencias, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(incidenciasView.getEmptyList());
+
+                    var incidenciasControl = control_incidencias_list('<%=request.getContextPath()%>');
+                    incidenciasControl.inicia(incidenciasView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnkRequerimiento').unbind('click');
+                $('#lnkRequerimiento').click(function() {
+                    var requerimiento = objeto('requerimiento', '<%=request.getContextPath()%>');
+                    var requerimientoView = vista(requerimiento, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(requerimientoView.getEmptyList());
+
+                    var requerimientoControl = control_requerimiento_list('<%=request.getContextPath()%>');
+                    requerimientoControl.inicia(requerimientoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
 
