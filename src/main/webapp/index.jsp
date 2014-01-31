@@ -118,11 +118,12 @@
         <script src="js/control/hilo.js" charset="UTF-8"></script>
         <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
         <script src="js/control/votodocumento.js" charset="UTF-8"></script>
+        <script src="js/control/estado.js" charset="UTF-8"></script>
+        <script src="js/control/comentario.js" charset="UTF-8"></script>
         <script src="js/control/actividadoffline.js" charset="UTF-8"></script>
         <script src="js/control/entrega.js" charset="UTF-8"></script>    
         <script src="js/control/metadocumento.js" charset="UTF-8"></script>
         <script src="js/control/repositorio.js" charset="UTF-8"></script>
-
         <script>
 
             $(document).ready(function() {
@@ -163,6 +164,18 @@
                     alumnoControl.inicia(alumnoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
+                $('#lnkAlumno').unbind('click');
+                $('#lnkAlumno').click(function() {
+                    var alumno = objeto('alumno', '<%=request.getContextPath()%>');
+                    var alumnoView = vista(alumno, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(alumnoView.getEmptyList());
+
+                    var alumnoControl = control_alumno_list('<%=request.getContextPath()%>');
+                    alumnoControl.inicia(alumnoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
                 $('#lnkEntrada').unbind('click');
                 $('#lnkEntrada').click(function() {
                     var entrada = objeto('entrada', '<%=request.getContextPath()%>');
@@ -175,6 +188,20 @@
                     entradaControl.inicia(entradaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
+
+                $('#lnkEstado').unbind('click');
+                $('#lnkEstado').click(function() {
+                    var estado = objeto('estado', '<%=request.getContextPath()%>');
+                    var estadoView = vista(estado, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(estadoView.getEmptyList());
+
+                    var estadoControl = control_estado_list('<%=request.getContextPath()%>');
+                    estadoControl.inicia(estadoView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+
 
                 $('#lnkUsuario').unbind('click');
                 $('#lnkUsuario').click(function() {
@@ -315,6 +342,20 @@
 
                     var repositorioControl = control_repositorio_list('<%=request.getContextPath()%>');
                     repositorioControl.inicia(repositorioView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+
+
+                $('#lnkComentario').unbind('click');
+                $('#lnkComentario').click(function() {
+                    var comentario = objeto('comentario', '<%=request.getContextPath()%>');
+                    var comentarioView = vista(comentario, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(comentarioView.getEmptyList());
+
+                    var comentarioControl = control_comentario_list('<%=request.getContextPath()%>');
+                    comentarioControl.inicia(comentarioView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
 
