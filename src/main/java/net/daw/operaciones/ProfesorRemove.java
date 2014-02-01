@@ -18,7 +18,7 @@ import net.daw.helper.Conexion;
 
 /**
  *
- * @author rafa
+ * @author Pedro Benito
  */
 public class ProfesorRemove implements GenericOperation {
     @Override

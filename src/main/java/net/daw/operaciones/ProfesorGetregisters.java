@@ -15,7 +15,7 @@ import net.daw.helper.FilterBean;
 
 /**
  *
- * @author rafa
+ * @author Pedro Benito
  */
 public class ProfesorGetregisters implements GenericOperation {
 

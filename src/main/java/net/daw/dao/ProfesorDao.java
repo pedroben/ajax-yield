@@ -13,7 +13,7 @@ import net.daw.helper.Conexion;
 
 /**
  *
- * @author AntonioNP
+ * @author Pedro Benito
  */
 public class ProfesorDao extends GenericDaoImplementation<ProfesorBean>{
     

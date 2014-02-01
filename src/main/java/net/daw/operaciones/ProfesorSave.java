@@ -18,7 +18,7 @@ import net.daw.helper.EncodingUtil;
 
 /**
  *
- * @author rafa
+ * @author Pedro Benito
  */
 public class ProfesorSave implements GenericOperation {
 

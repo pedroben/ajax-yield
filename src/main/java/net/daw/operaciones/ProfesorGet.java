@@ -6,7 +6,7 @@ package net.daw.operaciones;
 
 /**
  *
- * @author rafa
+ * @author Pedro Benito
  */
 
 import javax.servlet.ServletException;
