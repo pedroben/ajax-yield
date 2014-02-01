@@ -16,7 +16,6 @@
         <li><a id="lnkUsuario" href="#">Usuario</a></li>
         <li><a id="lnkHilo" href="#">Hilo</a></li>
         <li><a id="lnkDocumento" href="#">Documento</a></li> 
-        <li><a id="lnkProfesor" href="#">Profesor</a></li>
         <li><a id="lnkTipodocumento" href="#">Tipodocumento</a></li>
         <li><a id="lnkActividad" href="#">Actividad</a></li>
         <li><a id="lnkEmpresa" href="#">Empresa</a></li>
@@ -33,5 +32,6 @@
         <li><a id="lnkFollower" href="#">Follower</a></li>
         <li><a id="lnkRequerimiento" href="#">Requerimiento</a></li>
         <li><a id="lnkIncidencias" href="#">Incidencias</a></li>
+        <li><a id="lnkProfesor" href="#">Profesor</a></li>
     </ul>
 </div>

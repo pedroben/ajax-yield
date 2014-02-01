@@ -130,7 +130,7 @@
         <script src="js/control/follower.js" charset="UTF-8"></script>
         <script src="js/control/incidencias.js" charset="UTF-8"></script>
         <script src="js/control/requerimiento.js" charset="UTF-8"></script>
-                <script src="js/control/profesor.js" charset="UTF-8"></script>
+        <script src="js/control/profesor.js" charset="UTF-8"></script>
 
         <script>
 
