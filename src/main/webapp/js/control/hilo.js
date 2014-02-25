@@ -83,6 +83,7 @@ var control_hilo_list = function(path) {
                         .closest('.control-group').removeClass('error').addClass('success');
             }
         });
+        
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
             if ($("#formulario").valid()) {
@@ -114,6 +115,7 @@ var control_hilo_list = function(path) {
         pie = "<button class=\"btn btn-primary\" data-dismiss=\"modal\" aria-hidden=\"true\">Cerrar</button>";
         loadForm(place, cabecera, view.getObjectTable(id), pie, true);
     }
+    
     function cargaEntradas(id) {
 
         var entrada = objeto('entrada', path);
